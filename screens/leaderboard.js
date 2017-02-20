@@ -7,6 +7,7 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Orientation from '@drivetribe/react-native-orientation';
 
 import { styles } from '../styles/style';
 
@@ -18,10 +19,36 @@ export class LeaderboardScreen extends React.Component {
     })
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      year: '2017',
+      orientation: 'UNKNOWN'
+    };
+    this._updateOrientation = this._updateOrientation.bind(this);
+  }
+
+  _updateOrientation(or) {
+    this.setState({orientation: or});
+    this.render();
+  }
+
+  componentWillMount() {
+    this.setState({orientation: Orientation.getInitialOrientation()});
+  }
+
+  componentDidMount() {
+    Orientation.addOrientationListener(this._updateOrientation);
+  }
+
+  componentWillUnmount() {
+    Orientation.removeOrientationListener(this._updateOrientation);
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
-    const width = Dimensions.get('window').width;
+    var width = Dimensions.get('window').width;
 
     return (
       <View style={styles.container}>
@@ -38,11 +65,13 @@ export class LeaderboardScreen extends React.Component {
           <Text style={[styles.headerText, styles.lbSelect]}>Round 4</Text>
         </View>
         <ScrollView>
-          <Image
-            source={require('../img/twelve.png')}
-            style={{height: 175, width: width}}
-            resizeMode='cover'
-          />
+          {this.state.orientation == 'PORTRAIT' &&
+           <Image
+             source={require('../img/twelve.png')}
+             style={{height: 175, width: width}}
+             resizeMode='cover'
+           />
+          }
         </ScrollView>
       </View>
     );
