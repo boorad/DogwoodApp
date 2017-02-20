@@ -31,12 +31,16 @@ export class LeaderboardScreen extends React.Component {
             size={24}
             color="#fff"
             onPress={() => navigate('DrawerOpen')} />
+          <Image
+            source={require('../img/dogwood-logo.png')}
+            style={styles.headerLogo}
+          />
           <Text style={[styles.headerText, styles.lbSelect]}>Round 4</Text>
         </View>
         <ScrollView>
           <Image
             source={require('../img/twelve.png')}
-            style={{height: 190, width: width}}
+            style={{height: 175, width: width}}
             resizeMode='cover'
           />
         </ScrollView>

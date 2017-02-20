@@ -5,6 +5,12 @@ import {
 } from './color.js';
 
 export const styles = StyleSheet.create({
+  headerLogo: {
+    height: 22,
+    width: 29,
+    marginTop: 2,
+    marginLeft: 10
+  },
   c: {
     textAlign: 'center'
   },
