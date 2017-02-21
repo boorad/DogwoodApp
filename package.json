@@ -12,7 +12,8 @@
     "react-native": "0.41.2",
     "@drivetribe/react-native-orientation": "git+https://github.com/drivetribe/react-native-orientation",
     "react-native-vector-icons": "^4.0.0",
-    "react-navigation": "^1.0.0-beta.3"
+    "react-navigation": "^1.0.0-beta.3",
+    "react-native-grid-component": "1.0.4"
   },
   "devDependencies": {
     "babel-jest": "18.0.0",

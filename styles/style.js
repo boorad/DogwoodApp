@@ -28,5 +28,20 @@ export const styles = StyleSheet.create({
   },
   lbSelect: {
     marginLeft: 15
+  },
+  lbRow: {
+    flexDirection: 'row'
+  },
+  lbExpanded: {
+    flexDirection: 'row'
+  },
+  lbCell: {
+    flex: 1,
+    flexWrap: 'nowrap'
+  },
+  lbCellName: {
+    flex: 5,
+    alignSelf: 'stretch',
+    flexWrap: 'nowrap'
   }
 });
