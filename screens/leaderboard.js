@@ -32,8 +32,8 @@ export class LeaderboardScreen extends React.Component {
          r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
         {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
          r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
+        {pos: 'T4', name: "Casey", today: '-5', thru: 'F', tot: '-1', fav: 0,
+         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 287},
         {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
          r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
         {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
@@ -94,6 +94,10 @@ export class LeaderboardScreen extends React.Component {
     this.render();
   }
 
+  _renderLBHeader() {
+
+  };
+
   _renderScoreRow(data, i) {
     return (
       <View style={[styles.lbRow, {flex: 6}]}>
@@ -108,7 +112,7 @@ export class LeaderboardScreen extends React.Component {
             <Text style={[styles.lbCell]}>{data.r2}</Text>
             <Text style={[styles.lbCell]}>{data.r3}</Text>
             <Text style={[styles.lbCell]}>{data.r4}</Text>
-            <Text style={[styles.lbCell]}>{data.totscore}</Text>
+            <Text style={[styles.lbCell,styles.lbCellTot]}>{data.totscore}</Text>
           </View>
         }
         <Text style={[styles.lbCell]}>{data.fav}</Text>

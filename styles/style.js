@@ -6,9 +6,9 @@ import {
 
 export const styles = StyleSheet.create({
   headerLogo: {
-    height: 22,
-    width: 29,
-    marginTop: 2,
+    height: 25,
+    width: 35,
+    marginTop: 1,
     marginLeft: 10
   },
   c: {
@@ -20,7 +20,9 @@ export const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    paddingLeft: 10
+    paddingTop: 2,
+    paddingLeft: 10,
+    height: 32
   },
   headerText: {
     color: headerColor,
@@ -37,11 +39,23 @@ export const styles = StyleSheet.create({
   },
   lbCell: {
     flex: 1,
-    flexWrap: 'nowrap'
+    flexWrap: 'nowrap',
+    textAlign: 'center',
+    backgroundColor: '#eee',
+    borderColor: '#aaa',
+    borderWidth: 0.5,
+    padding: 5
   },
   lbCellName: {
     flex: 5,
     alignSelf: 'stretch',
-    flexWrap: 'nowrap'
+    flexWrap: 'nowrap',
+    backgroundColor: '#eee',
+    borderColor: '#aaa',
+    borderWidth: 0.5,
+    padding: 5
+  },
+  lbCellTot: {
+    flex: 2
   }
 });
