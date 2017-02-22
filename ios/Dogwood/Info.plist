@@ -50,6 +50,9 @@
           <true/>
         </dict>
       </dict>
+      <dict>
+        <key>NSAllowsArbitraryLoads</key><true/>
+      </dict>
     </dict>
     <key>UIAppFonts</key>
     <array>
