@@ -4,11 +4,13 @@ import {
   Image,
   ScrollView,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Orientation from '@drivetribe/react-native-orientation';
 import Grid from 'react-native-grid-component';
+import TPP from '../data/tpp.js';
 
 import { styles } from '../styles/style';
 
@@ -25,103 +27,84 @@ export class LeaderboardScreen extends React.Component {
     this.state = {
       year: '2017',
       orientation: 'UNKNOWN',
-      data: [
-        {pos: '1', name: "Willett", today: '-5', thru: 'F', tot: '-5', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 283},
-        {pos: 'T2', name: "Westwood", today: '-3', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T4', name: "Casey", today: '-5', thru: 'F', tot: '-1', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 287},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-        {pos: 'T2', name: "Spieth", today: '+1', thru: 'F', tot: '-2', fav: 0,
-         r1: 70, r2: 74, r3: 72, r4: 67, totscore: 286},
-      ]
+      tpp_tourney: '124850',
+      data: []
     };
 
     this._updateOrientation = this._updateOrientation.bind(this);
-    this._renderScoreRow = this._renderScoreRow.bind(this);
+    this._renderTableRow = this._renderTableRow.bind(this);
+    this._renderTableHeader = this._renderTableHeader.bind(this);
+    this._fetchData = this._fetchData.bind(this);
+    this._updateData = this._updateData.bind(this);
   }
 
-  _updateOrientation(or) {
-    this.setState({orientation: or});
+  _fetchData() {
+    var tpp = new TPP(this.state.tpp_tourney);
+    tpp.getData(this._updateData);
+  }
+
+  _updateData(data) {
+    this.setState({ data: data });
     this.render();
   }
 
-  _renderLBHeader() {
+  _updateOrientation(or) {
+    this.setState({ orientation: or});
+    this.render();
+  }
 
-  };
-
-  _renderScoreRow(data, i) {
+  _renderTableHeader() {
     return (
       <View style={[styles.lbRow, {flex: 6}]}>
-        <Text style={[styles.lbCell]}>{data.pos}</Text>
-        <Text style={[styles.lbCellName]}>{data.name}</Text>
-        <Text style={[styles.lbCell]}>{data.today}</Text>
-        <Text style={[styles.lbCell]}>{data.thru}</Text>
-        <Text style={[styles.lbCell]}>{data.tot}</Text>
+        <Text style={[styles.lbCell,styles.lbHead]}>POS</Text>
+        <Text style={[styles.lbCellName,styles.lbHead, styles.lbHeadName]}>PLAYER</Text>
+        <Text style={[styles.lbCell,styles.lbHead]}>TODAY</Text>
+        <Text style={[styles.lbCell,styles.lbHead]}>THRU</Text>
+        <Text style={[styles.lbCell,styles.lbHead]}>TOTAL</Text>
         { this.state.orientation != 'PORTRAIT' &&
           <View style={[styles.lbExpanded, {flex: 5}]}>
-            <Text style={[styles.lbCell]}>{data.r1}</Text>
-            <Text style={[styles.lbCell]}>{data.r2}</Text>
-            <Text style={[styles.lbCell]}>{data.r3}</Text>
-            <Text style={[styles.lbCell]}>{data.r4}</Text>
-            <Text style={[styles.lbCell,styles.lbCellTot]}>{data.totscore}</Text>
+            <Text style={[styles.lbCell,styles.lbHead]}>R1</Text>
+            <Text style={[styles.lbCell,styles.lbHead]}>R2</Text>
+            <Text style={[styles.lbCell,styles.lbHead]}>R3</Text>
+            <Text style={[styles.lbCell,styles.lbHead]}>R4</Text>
+            <Text style={[styles.lbCell,styles.lbCellTot,styles.lbHead]}>TOTAL</Text>
           </View>
         }
-        <Text style={[styles.lbCell]}>{data.fav}</Text>
+        <Text style={[styles.lbCell,styles.lbHead]}>FAV</Text>
+      </View>
+    );
+  };
+
+  _renderTableRow(data, i) {
+    return (
+      <View style={[styles.lbRow, {flex: 6}]}>
+        <Text style={[styles.lbCell,styles.lbData]}>{data.pos}</Text>
+        <Text style={[styles.lbData,styles.lbCellName]}>{data.name}</Text>
+        <Text style={[styles.lbCell,styles.lbData]}>{data.today}</Text>
+        <Text style={[styles.lbCell,styles.lbData]}>{data.thru}</Text>
+        <Text style={[styles.lbCell,styles.lbData]}>{data.tot}</Text>
+        { this.state.orientation != 'PORTRAIT' &&
+          <View style={[styles.lbExpanded, {flex: 5}]}>
+            <Text style={[styles.lbCell,styles.lbData]}>{data.r1}</Text>
+            <Text style={[styles.lbCell,styles.lbData]}>{data.r2}</Text>
+            <Text style={[styles.lbCell,styles.lbData]}>{data.r3}</Text>
+            <Text style={[styles.lbCell,styles.lbData]}>{data.r4}</Text>
+            <Text style={[styles.lbCell,styles.lbCellTot,styles.lbData]}>{data.totscore}</Text>
+          </View>
+        }
+        <TouchableOpacity
+          style={[styles.lbCell]}
+          key={data.id}
+        >
+          <Text style={[styles.lbData]}>{data.fav}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
   componentWillMount() {
     this.setState({orientation: Orientation.getInitialOrientation()});
+    this._fetchData();
   }
 
   componentDidMount() {
@@ -163,7 +146,8 @@ export class LeaderboardScreen extends React.Component {
           style={styles.lbGrid}
           data={this.state.data}
           itemsPerRow={1}
-          renderItem={this._renderScoreRow}
+          renderItem={this._renderTableRow}
+          renderHeader={this._renderTableHeader}
         />
         </ScrollView>
       </View>
