@@ -18,7 +18,14 @@ import { styles } from '../styles/style';
 export class LeaderboardScreen extends React.Component {
   static navigationOptions = {
     drawer: () => ({
-      label: 'Leaderboard'
+      label: 'Leaderboard',
+      icon: ({tintColor}) => (
+        <Icon
+          name="monitor"
+          size={20}
+          color={tintColor}
+        />
+      )
     })
   };
 

@@ -9,6 +9,10 @@ const fontSize = 13;
 const fontPad = 7;
 
 export const styles = StyleSheet.create({
+  drawer: {
+    backgroundColor: '#000',
+    marginVertical: 0
+  },
   headerLogo: {
     height: 25,
     width: 35,

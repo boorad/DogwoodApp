@@ -7,16 +7,16 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { styles } from '../styles/style';
 
-export class ScheduleScreen extends React.Component {
+export class AboutScreen extends React.Component {
   static navigationOptions = {
     drawer: () => ({
-      label: 'Schedule',
+      label: 'About',
       icon: ({tintColor}) => (
-          <Icon
-            name="timetable"
-            size={20}
-            color={tintColor}
-          />
+        <Icon
+          name="help-circle"
+          size={20}
+          color={tintColor}
+        />
       )
     })
   };
@@ -28,7 +28,7 @@ export class ScheduleScreen extends React.Component {
       <View style={[styles.container]}>
         <View style={styles.header}>
           <Icon name="menu" size={24} color="#fff" onPress={() => navigate('DrawerOpen')} />
-          <Text style={[styles.headerText, styles.lbSelect]}>Schedule</Text>
+          <Text style={[styles.headerText, styles.lbSelect]}>About</Text>
         </View>
       </View>
     );
