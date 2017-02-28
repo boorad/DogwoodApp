@@ -25,7 +25,7 @@ const routeConfig = {
 };
 
 const drawerNavigatorConfig = {
-  drawerWidth: 180,
+  drawerWidth: 200,
   contentOptions: {
     style: styles.drawer,
     activeTintColor: '#eee',

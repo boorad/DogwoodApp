@@ -33,7 +33,7 @@ export default class TPP {
         cb(this._transform(response.d.Results));
       })
       .catch((e) => {
-        console.error('raw data', e);
+        console.error('TPP getData', e);
       });
   };
 
@@ -55,10 +55,11 @@ export default class TPP {
         r4: raw[i].RoundScore[3] || 0,
         totscore: raw[i].Total,
         cut: raw[i].Cut,
-        teetime: raw[i].time
+        teetime: raw[i].time,
+        hbh: raw[i].HBH[0].Score
       });
     }
-    return d;
+    return {'0': d};
   };
 
 };

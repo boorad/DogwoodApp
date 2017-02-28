@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Orientation from '@drivetribe/react-native-orientation';
-import Grid from 'react-native-grid-component';
 import TPP from '../data/tpp.js';
 
+import Table from '../table/index.js'; // TODO: make its own component
 import { styles } from '../styles/style';
 
 
@@ -46,8 +46,12 @@ export class LeaderboardScreen extends React.Component {
   }
 
   _fetchData() {
-    var tpp = new TPP(this.state.tpp_tourney);
-    tpp.getData(this._updateData);
+    //    var tpp = new TPP(this.state.tpp_tourney);
+    //    tpp.getData(this._updateData);
+
+    // for DEV, just load this file:
+    var d = require('../data/dogwood_2016.json');
+    this._updateData({'section1': d});
   }
 
   _updateData(data) {
@@ -126,6 +130,7 @@ export class LeaderboardScreen extends React.Component {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
     var width = Dimensions.get('window').width;
+    const headerIndex = this.state.orientation == 'PORTRAIT' ? 1 : 0;
 
     return (
       <View style={styles.container}>
@@ -141,7 +146,8 @@ export class LeaderboardScreen extends React.Component {
           />
           <Text style={[styles.headerText, styles.lbSelect]}>Round 4</Text>
         </View>
-        <ScrollView>
+        <ScrollView
+          stickyHeaderIndices={[headerIndex]}>
           {this.state.orientation == 'PORTRAIT' &&
            <Image
              source={require('../img/twelve.png')}
@@ -149,13 +155,12 @@ export class LeaderboardScreen extends React.Component {
              resizeMode='cover'
            />
           }
-        <Grid
-          style={styles.lbGrid}
+          {this._renderTableHeader()}
+        <Table
+          style={styles.lbTable}
           data={this.state.data}
-          itemsPerRow={1}
-          renderItem={this._renderTableRow}
-          renderHeader={this._renderTableHeader}
-        />
+          sections={true}
+          renderRow={this._renderTableRow} />
         </ScrollView>
       </View>
     );
