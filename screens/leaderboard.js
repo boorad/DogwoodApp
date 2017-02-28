@@ -60,8 +60,7 @@ export class LeaderboardScreen extends React.Component {
   }
 
   _updateOrientation(or) {
-    this.setState({ orientation: or});
-    this.render();
+    this.setState({ orientation: or });
   }
 
   _renderTableHeader() {
@@ -86,7 +85,7 @@ export class LeaderboardScreen extends React.Component {
     );
   };
 
-  _renderTableRow(data, i) {
+  _renderTableRow(data) {
     return (
       <View style={[styles.lbRow, {flex: 6}]}>
         <Text style={[styles.lbCell,styles.lbData]}>{data.pos}</Text>
@@ -105,8 +104,7 @@ export class LeaderboardScreen extends React.Component {
         }
         <TouchableOpacity
           style={[styles.lbCell]}
-          key={data.id}
-        >
+          key={data.id}>
           <Text style={[styles.lbData]}>{data.fav}</Text>
         </TouchableOpacity>
       </View>
@@ -114,7 +112,7 @@ export class LeaderboardScreen extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({orientation: Orientation.getInitialOrientation()});
+    this.setState({ orientation: Orientation.getInitialOrientation() });
     this._fetchData();
   }
 
@@ -127,10 +125,10 @@ export class LeaderboardScreen extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
-    const { params } = this.props.navigation.state;
+    var navigate = this.props.navigation;
+    var params = this.props.navigation.state;
     var width = Dimensions.get('window').width;
-    const headerIndex = this.state.orientation == 'PORTRAIT' ? 1 : 0;
+    var headerIndex = this.state.orientation == 'PORTRAIT' ? 1 : 0;
 
     return (
       <View style={styles.container}>
@@ -156,11 +154,12 @@ export class LeaderboardScreen extends React.Component {
            />
           }
           {this._renderTableHeader()}
-        <Table
-          style={styles.lbTable}
-          data={this.state.data}
-          sections={true}
-          renderRow={this._renderTableRow} />
+          <Table
+            style={styles.lbTable}
+            data={this.state.data}
+            sections={true}
+            renderRow={this._renderTableRow}
+          />
         </ScrollView>
       </View>
     );

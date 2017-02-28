@@ -37,7 +37,7 @@ export default class Table extends Component {
     renderSectionHeader: React.PropTypes.func,
     renderFooter: React.PropTypes.func,
     onEndReached: React.PropTypes.func,
-    rowHasChanged: React.PropTypes.func,
+    rowHasChanged: React.PropTypes.func
   };
 
   static defaultProps = {
@@ -57,7 +57,7 @@ export default class Table extends Component {
     super(props);
 
     const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1.some((e, i) => props.rowHasChanged(e, r2[i])),
+      rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (s1, s2) => s1 !== s2
     });
     if (props.sections === true) {
@@ -75,19 +75,6 @@ export default class Table extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.sections === true) {
-      this.state = {
-        dataSource: this.state.dataSource
-                        .cloneWithRowsAndSections(nextProps.data)
-      };
-    } else {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(nextProps.data)
-      });
-    }
-  }
-
   _prepareSectionedData = data => {
     const preparedData = mapValues(data, (vals) => vals);
     return preparedData;
@@ -96,11 +83,6 @@ export default class Table extends Component {
   _renderPlaceholder = i =>
     <View key={i} style={{ width: width }} />;
 
-  _renderRow = rowData =>
-    <View style={styles.row}>
-      { this.props.renderRow(rowData) }
-    </View>;
-
   render() {
     return (
       <View style={styles.container}>
@@ -108,8 +90,7 @@ export default class Table extends Component {
           {...this.props}
           style={styles.list}
           dataSource={this.state.dataSource}
-          renderRow={this._renderRow}
-          enableEmptySections
+          renderRow={this.props.renderRow}
           onEndReached={this.props.onEndReached}
           onEndReachedThreshold={height}
           refreshControl={this.props.refreshControl}
