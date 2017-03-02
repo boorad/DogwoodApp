@@ -125,8 +125,8 @@ export class LeaderboardScreen extends React.Component {
   }
 
   render() {
-    var navigate = this.props.navigation;
-    var params = this.props.navigation.state;
+    const { navigate }= this.props.navigation;
+    const { params } = this.props.navigation.state;
     var width = Dimensions.get('window').width;
     var headerIndex = this.state.orientation == 'PORTRAIT' ? 1 : 0;
 
