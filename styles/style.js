@@ -26,6 +26,9 @@ export const styles = StyleSheet.create({
     marginTop: Platform.OS === 'ios' ? 20 : 0,
     backgroundColor: primaryColor
   },
+  tabContainer: {
+    backgroundColor: primaryColor
+  },
   header: {
     flexDirection: 'row',
     paddingTop: 2,
@@ -82,6 +85,36 @@ export const styles = StyleSheet.create({
   },
   lbCellTot: {
     flex: 2
+  },
+  title: {
+    alignItems: 'center',
+    paddingTop: 15,
+    paddingBottom: 15
+  },
+  titleText: {
+    fontSize: fontSize+6,
+    fontFamily: fontFamily,
+    color: headerColor
+  },
+  tabView: {
+  },
+  tab: {
+    flex: 1,
+    width: 50,
+    minWidth: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  activeTab: {
+    backgroundColor: '#00b0d6'
+  },
+  tabText: {
+    width: 50,
+    minWidth: 50,
+    color: "#eee",
+    textAlign: 'center',
+    fontSize: fontSize+3,
+    fontFamily: fontFamily
   }
 
 });

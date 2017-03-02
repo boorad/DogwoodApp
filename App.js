@@ -33,7 +33,8 @@ const drawerNavigatorConfig = {
     inactiveTintColor: '#eee',
     inactiveBackgroundColor: '#000'
   },
-  initialRouteName: 'Leaderboard'
+  // initialRouteName: 'Leaderboard'
+  initialRouteName: 'Schedule'
 };
 
 const Dogwood = DrawerNavigator(routeConfig, drawerNavigatorConfig);

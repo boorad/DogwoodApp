@@ -56,7 +56,6 @@ export class LeaderboardScreen extends React.Component {
 
   _updateData(data) {
     this.setState({ data: data });
-    this.render();
   }
 
   _updateOrientation(or) {

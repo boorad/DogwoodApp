@@ -1,0 +1,117 @@
+{
+  "year":"2017",
+  "days": [
+    {
+      "date": "6/26/2017",
+      "shortdate":"6/26",
+      "longdate": "June 26, 2017",
+      "dow": "Mon",
+      "events" : [
+        {
+          "start":"7:30 am",
+          "descr":"Qualifier - First Tee Time",
+          "notes":"100 players - threesomes"
+        }
+      ]
+    },
+    {
+      "date":"6/27/2017",
+      "shortdate":"6/27",
+      "longdate": "June 27, 2017",
+      "dow": "Tue",
+      "events" : [
+        {
+          "start":"7:00 am",
+          "end":"10:30 am",
+          "descr":"Breakfast Biscuits"
+        },
+        {
+          "start":"8:00 am",
+          "end":"1:15 pm",
+          "descr":"Am-Am",
+          "notes":"Tee Times"
+        },
+        {
+          "start":"8:00 am",
+          "end":"1:15 pm",
+          "descr":"Registration",
+          "notes":"All day at tee time check-in"
+        },
+        {
+          "start":"12:00 pm",
+          "end":"3:00 pm",
+          "descr":"Cart Lunch"
+        },
+        {
+          "start":"7:00 pm",
+          "descr":"Player & Sponsor Dinner"
+        }
+      ]
+    },
+    {
+      "date":"6/28/2017",
+      "shortdate":"6/28",
+      "longdate": "June 28, 2017",
+      "dow": "Wed",
+      "events" : [
+        {
+          "start":"7:15 am",
+          "descr":"Honorary Start"
+        },
+        {
+          "start":"7:30 am",
+          "descr":"Dogwood Invitational Round One"
+        },
+        {
+          "start":"5:00 pm",
+          "descr":"Long Drive Contest & Food Festival"
+        }
+      ]
+    },
+    {
+      "date":"6/29/2017",
+      "shortdate":"6/29",
+      "longdate": "June 29, 2017",
+      "dow": "Thu",
+      "events" : [
+        {
+          "start":"7:30 am",
+          "descr":"Dogwood Invitational Round Two",
+          "notes":"36-Hole Cut"
+        },
+        {
+          "start":"4:00 pm",
+          "descr":"Junior Clinic"
+        }
+      ]
+    },
+    {
+      "date":"6/30/2017",
+      "shortdate":"6/30",
+      "longdate": "June 30, 2017",
+      "dow": "Fri",
+      "events" : [
+        {
+          "start":"7:30 am",
+          "descr":"Dogwood Invitational Round Three"
+        }
+      ]
+    },
+    {
+      "date":"7/1/2017",
+      "shortdate":"7/1",
+      "longdate": "July 1, 2017",
+      "dow": "Sat",
+      "events" : [
+        {
+          "start":"7:30 am",
+          "descr":"Dogwood Invitational Final Round"
+        },
+        {
+          "start":"2:30 pm",
+          "descr":"Awards Ceremony"
+        }
+      ]
+    }
+  ]
+}
