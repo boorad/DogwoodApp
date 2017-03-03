@@ -119,6 +119,9 @@ export const styles = StyleSheet.create({
   tabContent: {
     height: 300,
     backgroundColor: primaryColor
+  },
+  tabContentText: {
+    color: "black"
   }
 
 });

@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
 import { styles } from '../styles/style';
 
@@ -18,6 +18,7 @@ class Day extends React.Component {
     return(
       <Text
         key={i}
+        tablabel={day.longdate}
         style={[styles.tabContentText]}
       >
         {day.longdate}
@@ -79,6 +80,8 @@ export class ScheduleScreen extends React.Component {
     );
   }
 
+  _handleChangeTab({i, ref, from}) {}
+
   render() {
     const { navigate } = this.props.navigation;
     const { params } = this.props.navigation.state;
@@ -100,13 +103,14 @@ export class ScheduleScreen extends React.Component {
           </Text>
         </View>
         <ScrollableTabView
+          initialPage={1}
           renderTabBar={() =>
-            <DefaultTabBar
+            <ScrollableTabBar
               style={styles.tabContainer}
               underlineStyle={{backgroundColor: "yellow"}}
               renderTab={this._renderTab}
-            />
-          }
+            />}
+          onChangeTab={this._handleChangeTab}
         >
           {days.map((day, i) => {
              var label = day.dow + '\n' + day.shortdate;
