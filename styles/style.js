@@ -115,6 +115,10 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: fontSize+3,
     fontFamily: fontFamily
+  },
+  tabContent: {
+    height: 300,
+    backgroundColor: primaryColor
   }
 
 });
