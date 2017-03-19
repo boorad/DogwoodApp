@@ -8,9 +8,10 @@
       "dow": "Mon",
       "events" : [
         {
-          "start":"7:30 am",
-          "descr":"Qualifier - First Tee Time",
-          "notes":"100 players - threesomes"
+          "key": 0,
+          "start":"8:00 am",
+          "descr":"Dogwood Open Qualifier",
+          "notes":"Check in at Golf Shop"
         }
       ]
     },
@@ -21,30 +22,35 @@
       "dow": "Tue",
       "events" : [
         {
+          "key": 0,
           "start":"7:00 am",
           "end":"10:30 am",
           "descr":"Breakfast Biscuits"
         },
         {
+          "key": 1,
           "start":"8:00 am",
-          "end":"1:15 pm",
-          "descr":"Am-Am",
-          "notes":"Tee Times"
-        },
-        {
-          "start":"8:00 am",
-          "end":"1:15 pm",
-          "descr":"Registration",
+          "end":"1:30 pm",
+          "descr":"Invited and Qualified Player Registration",
           "notes":"All day at tee time check-in"
         },
         {
+          "key": 2,
+          "start":"8:00 am",
+          "end":"1:30 pm",
+          "descr":"Dogwood Am-Am",
+          "notes":"All Invited Players are asked to play as this is your practice round. The format is 2 Sponsors and 2 Invited Players in a Modified Stableford tournament."
+        },
+        {
+          "key": 3,
           "start":"12:00 pm",
           "end":"3:00 pm",
           "descr":"Cart Lunch"
         },
         {
           "start":"7:00 pm",
-          "descr":"Player & Sponsor Dinner"
+          "descr":"Dogwood Am-Am Reception and Awards",
+          "notes":"The Reception and Awards, & Tournament Kickoff will be held following the conclusion of the Am-Am. All Invited players and Sponsors may attend."
         }
       ]
     },
@@ -56,6 +62,7 @@
       "events" : [
         {
           "start":"7:15 am",
+          "end"  :"7:30 am",
           "descr":"Honorary Start"
         },
         {
@@ -63,7 +70,7 @@
           "descr":"Dogwood Invitational Round One"
         },
         {
-          "start":"5:00 pm",
+          "start":"6:00 pm",
           "descr":"Long Drive Contest & Food Festival"
         }
       ]
@@ -80,8 +87,8 @@
           "notes":"36-Hole Cut"
         },
         {
-          "start":"4:00 pm",
-          "descr":"Junior Clinic"
+          "start":"5:00 pm",
+          "descr":"Dogwood Junior Golf Exhibition"
         }
       ]
     },

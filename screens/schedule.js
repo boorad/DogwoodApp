@@ -8,24 +8,9 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
+import { Day } from './day';
 import { styles } from '../styles/style';
 
-
-class Day extends React.Component {
-  render() {
-    const { i, day } = this.props;
-
-    return(
-      <Text
-        key={i}
-        tablabel={day.longdate}
-        style={[styles.tabContentText]}
-      >
-        {day.longdate}
-      </Text>
-    );
-  }
-}
 
 
 export class ScheduleScreen extends React.Component {
@@ -57,7 +42,10 @@ export class ScheduleScreen extends React.Component {
   }
 
   _updateData(data) {
-    this.setState({ data: data });
+    this.setState((prevState, props) => {
+      prevState.data = data;
+      return prevState;
+    });
   }
 
   componentWillMount() {
@@ -84,7 +72,7 @@ export class ScheduleScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    const { params } = this.props.navigation.state;
+    // const { params } = this.props.navigation.state;
 
     const { year, days } = this.state.data;
 
@@ -103,24 +91,22 @@ export class ScheduleScreen extends React.Component {
           </Text>
         </View>
         <ScrollableTabView
-          initialPage={1}
+          initialPage={0}
           renderTabBar={() =>
             <ScrollableTabBar
               style={styles.tabContainer}
               underlineStyle={{backgroundColor: "yellow"}}
-              renderTab={this._renderTab}
-            />}
-          onChangeTab={this._handleChangeTab}
+              renderTab={this._renderTab} />}
         >
           {days.map((day, i) => {
              var label = day.dow + '\n' + day.shortdate;
-             return <Day
-                      ref={(ref) => (this.children[i] = ref)}
-                      tabLabel={label}
-                      i={i}
-                      key={i}
-                      day={day}
-                    />;
+             return (
+               <Day
+                 tabLabel={label}
+                 i={i}
+                 key={i}
+                 day={day}
+               />);
            })}
         </ScrollableTabView>
       </View>

@@ -24,10 +24,8 @@ export const styles = StyleSheet.create({
   },
   container: {
     marginTop: Platform.OS === 'ios' ? 20 : 0,
-    backgroundColor: primaryColor
-  },
-  tabContainer: {
-    backgroundColor: primaryColor
+    backgroundColor: primaryColor,
+    flex: 1
   },
   header: {
     flexDirection: 'row',
@@ -96,8 +94,6 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily,
     color: headerColor
   },
-  tabView: {
-  },
   tab: {
     flex: 1,
     width: 50,
@@ -108,6 +104,9 @@ export const styles = StyleSheet.create({
   activeTab: {
     backgroundColor: '#00b0d6'
   },
+  tabContainer: {
+    backgroundColor: primaryColor
+  },
   tabText: {
     width: 50,
     minWidth: 50,
@@ -117,11 +116,40 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily
   },
   tabContent: {
-    height: 300,
-    backgroundColor: primaryColor
+    backgroundColor: "#fff"
   },
-  tabContentText: {
-    color: "black"
+  tabContentTitle: {
+    fontSize: fontSize+2,
+    fontFamily: fontFamily,
+    color: "#333",
+    textAlign: "center",
+    padding: 10
+  },
+  eventContainer: {
+    padding: 5
+  },
+  eventRow: {
+    flexDirection: 'row',
+    flex: 6
+  },
+  eventStart: {
+    flex: 1,
+    fontSize: fontSize-1
+  },
+  eventEnd: {
+    flex: 1,
+    fontSize: fontSize-1
+  },
+  eventDescr: {
+    flex: 4,
+    fontSize: fontSize-1,
+    fontWeight: 'bold'
+  },
+  eventBlank: {
+    flex: 2
+  },
+  eventNotes: {
+    flex: 4,
+    fontSize: fontSize-1
   }
-
 });
