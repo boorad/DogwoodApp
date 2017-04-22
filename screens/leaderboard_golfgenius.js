@@ -29,8 +29,10 @@ export class LeaderboardScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    // TODO: get config values from api call to site
     this.state = {
       year: '2017',
+      gg_page: '2982843452317774279',
       orientation: 'UNKNOWN'
     };
 
@@ -56,7 +58,27 @@ export class LeaderboardScreen extends React.Component {
   render() {
     const { navigate }= this.props.navigation;
     const { params } = this.props.navigation.state;
-    var width = Dimensions.get('window').width;
+    var { height, width } = Dimensions.get('window');
+    height = height - 20;
+    var iframe = "<iframe frameBorder='0' height='" + height + "' "
+          + "mozallowfullscreen "
+          + "name='page_iframe' scrolling='auto' "
+          + "src='https://www.golfgenius.com/pages/" + this.state.gg_page
+          + "?no_header=no_nav_bar&banner=false' webkitallowfullscreen='true' "
+          + "width='" + width + "'></iframe>";
+    const html = `
+<!DOCTYPE html>\n
+<html>
+  <head>
+    <style type="text/css">
+      body { margin: 0; padding: 0; }
+    </style>
+  </head>
+  <body>
+` + iframe + `
+  </body>
+</html>
+`;
 
     return (
       <View style={styles.container}>
@@ -73,7 +95,8 @@ export class LeaderboardScreen extends React.Component {
           <Text style={[styles.headerText, styles.lbSelect]}>Leaderboard</Text>
         </View>
         <WebView
-          source={{uri: 'http://druidgolf.com'}}
+          source={{html: html}}
+          style={styles.gglb}
         />
       </View>
     );

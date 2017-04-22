@@ -2,6 +2,7 @@ import React from 'react';
 import { AppRegistry } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
 
+//import { LeaderboardScreen } from './screens/leaderboard';
 import { LeaderboardScreen } from './screens/leaderboard_golfgenius';
 import { ScheduleScreen } from './screens/schedule';
 import { AboutScreen } from './screens/about';

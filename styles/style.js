@@ -84,6 +84,10 @@ export const styles = StyleSheet.create({
   lbCellTot: {
     flex: 2
   },
+  gglb: {
+    margin: 0,
+    padding: 0
+  },
   title: {
     alignItems: 'center',
     paddingTop: 15,
