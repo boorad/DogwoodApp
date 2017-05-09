@@ -11,6 +11,7 @@ import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab
 import { Day } from './day';
 import { styles } from '../styles/style';
 
+const url = "https://api.druid.golf/dogwood/schedule";
 
 
 export class ScheduleScreen extends React.Component {
@@ -29,16 +30,18 @@ export class ScheduleScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      data: {}
-    };
     this.children = [];
   }
 
-  _fetchData() {
-    // for DEV, just load this file:
-    var d = require('../data/schedule_2017.json');
-    this._updateData(d);
+  async _fetchData() {
+    try {
+      let response = await fetch(url);
+      let responseJson = await response.json();
+      this._updateData(responseJson);
+    } catch(error) {
+      console.error(error);
+    }
+
   }
 
   _updateData(data) {
@@ -72,32 +75,26 @@ export class ScheduleScreen extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    // const { params } = this.props.navigation.state;
+    var title, content;
 
-    const { year, days } = this.state.data;
-
-    return (
-      <View style={[styles.container]}>
-        <View style={styles.header}>
-          <Icon name="menu"
-            size={24}
-            color="#fff"
-            onPress={() => navigate('DrawerOpen')} />
-          <Text style={[styles.headerText, styles.lbSelect]}>Schedule</Text>
-        </View>
+    if( this.state && this.state.data ) {
+      const { year, days } = this.state.data;
+      title = (
         <View style={[styles.title]}>
           <Text style={[styles.titleText]}>
             {year} Dogwood Invitational Week
           </Text>
         </View>
+      );
+      content = (
         <ScrollableTabView
           initialPage={0}
-          renderTabBar={() =>
+          renderTabBar={ () =>
             <ScrollableTabBar
               style={styles.tabContainer}
               underlineStyle={{backgroundColor: "yellow"}}
-              renderTab={this._renderTab} />}
-        >
+              renderTab={this._renderTab} />
+                       }>
           {days.map((day, i) => {
              var label = day.dow + '\n' + day.shortdate;
              return (
@@ -109,7 +106,27 @@ export class ScheduleScreen extends React.Component {
                />);
            })}
         </ScrollableTabView>
+      );
+    } else {
+      title = <Text>Dogwood Invitational Week</Text>;
+      content = (
+        <Text>Loading...</Text>
+      );
+    }
+
+    return (
+      <View style={[styles.container]}>
+        <View style={styles.header}>
+          <Icon name="menu"
+            size={24}
+            color="#fff"
+            onPress={() => navigate('DrawerOpen')} />
+          <Text style={[styles.headerText, styles.lbSelect]}>Schedule</Text>
+        </View>
+        {title}
+        {content}
       </View>
     );
   }
+
 };

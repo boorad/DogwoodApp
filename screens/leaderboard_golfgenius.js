@@ -12,6 +12,8 @@ import Orientation from '@drivetribe/react-native-orientation';
 
 import { styles } from '../styles/style';
 
+const url = "https://api.druid.golf/dogwood/config";
+
 
 export class LeaderboardScreen extends React.Component {
   static navigationOptions = {
@@ -29,10 +31,8 @@ export class LeaderboardScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    // TODO: get config values from api call to site
+
     this.state = {
-      year: '2017',
-      gg_page: '2982843452317774279',
       orientation: 'UNKNOWN'
     };
 
@@ -43,7 +43,27 @@ export class LeaderboardScreen extends React.Component {
     this.setState({ orientation: or });
   }
 
+  async _fetchData() {
+    try {
+      let response = await fetch(url);
+      let responseJson = await response.json();
+      this._updateData(responseJson);
+    } catch(error) {
+      console.error(error);
+    }
+
+  }
+
+  _updateData(data) {
+    this.setState((prevState, props) => {
+      prevState.year    = data.year;
+      prevState.gg_page = data.gg_page;
+      return prevState;
+    });
+  }
+
   componentWillMount() {
+    this._fetchData();
     this.setState({ orientation: Orientation.getInitialOrientation() });
   }
 
@@ -60,13 +80,16 @@ export class LeaderboardScreen extends React.Component {
     const { params } = this.props.navigation.state;
     var { height, width } = Dimensions.get('window');
     height = height - 20;
-    var iframe = "<iframe frameBorder='0' height='" + height + "' "
-          + "mozallowfullscreen "
-          + "name='page_iframe' scrolling='auto' "
-          + "src='https://www.golfgenius.com/pages/" + this.state.gg_page
-          + "?no_header=no_nav_bar&banner=false' webkitallowfullscreen='true' "
-          + "width='" + width + "'></iframe>";
-    const html = `
+    var content;
+
+    if( this.state && this.state.gg_page ) {
+      var iframe = "<iframe frameBorder='0' height='" + height + "' "
+                 + "mozallowfullscreen "
+                 + "name='page_iframe' scrolling='auto' "
+                 + "src='https://www.golfgenius.com/pages/" + this.state.gg_page
+                 + "?no_header=no_nav_bar&banner=false' webkitallowfullscreen='true' "
+                 + "width='" + width + "'></iframe>";
+      const html = `
 <!DOCTYPE html>\n
 <html>
   <head>
@@ -79,6 +102,17 @@ export class LeaderboardScreen extends React.Component {
   </body>
 </html>
 `;
+      content = (
+        <WebView
+          source={{html: html}}
+          style={styles.gglb}
+        />
+      );
+    } else {
+      content = (
+        <Text>Loading...</Text>
+      );
+    }
 
     return (
       <View style={styles.container}>
@@ -94,10 +128,7 @@ export class LeaderboardScreen extends React.Component {
           />
           <Text style={[styles.headerText, styles.lbSelect]}>Leaderboard</Text>
         </View>
-        <WebView
-          source={{html: html}}
-          style={styles.gglb}
-        />
+        {content}
       </View>
     );
   }
