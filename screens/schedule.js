@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   ScrollView,
   Text,
   TouchableHighlight,
@@ -121,6 +122,10 @@ export class ScheduleScreen extends React.Component {
             size={24}
             color="#fff"
             onPress={() => navigate('DrawerOpen')} />
+          <Image
+            source={require('../img/dogwood-logo.png')}
+            style={styles.headerLogo}
+          />
           <Text style={[styles.headerText, styles.lbSelect]}>Schedule</Text>
         </View>
         {title}

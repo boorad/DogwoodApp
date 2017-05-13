@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Image,
   Text,
   View
 } from 'react-native';
@@ -28,6 +29,10 @@ export class AboutScreen extends React.Component {
       <View style={[styles.container]}>
         <View style={styles.header}>
           <Icon name="menu" size={24} color="#fff" onPress={() => navigate('DrawerOpen')} />
+          <Image
+            source={require('../img/dogwood-logo.png')}
+            style={styles.headerLogo}
+          />
           <Text style={[styles.headerText, styles.lbSelect]}>About</Text>
         </View>
       </View>
