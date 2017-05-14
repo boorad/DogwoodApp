@@ -8,7 +8,6 @@ import {
   WebView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Orientation from '@drivetribe/react-native-orientation';
 
 import { styles } from '../styles/style';
 
@@ -32,15 +31,7 @@ export class LeaderboardScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      orientation: 'UNKNOWN'
-    };
-
-    this._updateOrientation = this._updateOrientation.bind(this);
-  }
-
-  _updateOrientation(or) {
-    this.setState({ orientation: or });
+    this.state = {};
   }
 
   async _fetchData() {
@@ -64,15 +55,6 @@ export class LeaderboardScreen extends React.Component {
 
   componentWillMount() {
     this._fetchData();
-    this.setState({ orientation: Orientation.getInitialOrientation() });
-  }
-
-  componentDidMount() {
-    Orientation.addOrientationListener(this._updateOrientation);
-  }
-
-  componentWillUnmount() {
-    Orientation.removeOrientationListener(this._updateOrientation);
   }
 
   render() {
@@ -87,7 +69,8 @@ export class LeaderboardScreen extends React.Component {
                  + "mozallowfullscreen "
                  + "name='page_iframe' scrolling='auto' "
                  + "src='https://www.golfgenius.com/pages/" + this.state.gg_page
-                 + "?no_header=no_nav_bar&banner=false' webkitallowfullscreen='true' "
+                 + "?no_header=no_nav_bar&banner=false' "
+                 + "webkitallowfullscreen='true' "
                  + "width='" + width + "'></iframe>";
       const html = `
 <!DOCTYPE html>\n

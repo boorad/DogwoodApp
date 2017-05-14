@@ -8,7 +8,6 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Orientation from '@drivetribe/react-native-orientation';
 import TPP from '../data/tpp.js';
 
 import Table from '../table/index.js'; // TODO: make its own component
@@ -33,12 +32,10 @@ export class LeaderboardScreen extends React.Component {
     super(props);
     this.state = {
       year: '2017',
-      orientation: 'UNKNOWN',
       tpp_tourney: '124850',
       data: []
     };
 
-    this._updateOrientation = this._updateOrientation.bind(this);
     this._renderTableRow = this._renderTableRow.bind(this);
     this._renderTableHeader = this._renderTableHeader.bind(this);
     this._fetchData = this._fetchData.bind(this);
@@ -58,10 +55,6 @@ export class LeaderboardScreen extends React.Component {
     this.setState({ data: data });
   }
 
-  _updateOrientation(or) {
-    this.setState({ orientation: or });
-  }
-
   _renderTableHeader() {
     return (
       <View style={[styles.lbRow, {flex: 6}]}>
@@ -70,6 +63,7 @@ export class LeaderboardScreen extends React.Component {
         <Text style={[styles.lbCell,styles.lbHead]}>TODAY</Text>
         <Text style={[styles.lbCell,styles.lbHead]}>THRU</Text>
         <Text style={[styles.lbCell,styles.lbHead]}>TOTAL</Text>
+/*
         { this.state.orientation != 'PORTRAIT' &&
           <View style={[styles.lbExpanded, {flex: 5}]}>
             <Text style={[styles.lbCell,styles.lbHead]}>R1</Text>
@@ -79,6 +73,7 @@ export class LeaderboardScreen extends React.Component {
             <Text style={[styles.lbCell,styles.lbCellTot,styles.lbHead]}>TOTAL</Text>
           </View>
         }
+*/
         <Text style={[styles.lbCell,styles.lbHead]}>FAV</Text>
       </View>
     );
@@ -92,6 +87,7 @@ export class LeaderboardScreen extends React.Component {
         <Text style={[styles.lbCell,styles.lbData]}>{data.today}</Text>
         <Text style={[styles.lbCell,styles.lbData]}>{data.thru}</Text>
         <Text style={[styles.lbCell,styles.lbData]}>{data.tot}</Text>
+/*
         { this.state.orientation != 'PORTRAIT' &&
           <View style={[styles.lbExpanded, {flex: 5}]}>
             <Text style={[styles.lbCell,styles.lbData]}>{data.r1}</Text>
@@ -101,6 +97,7 @@ export class LeaderboardScreen extends React.Component {
             <Text style={[styles.lbCell,styles.lbCellTot,styles.lbData]}>{data.totscore}</Text>
           </View>
         }
+*/
         <TouchableOpacity
           style={[styles.lbCell]}
           key={data.id}>
@@ -111,23 +108,14 @@ export class LeaderboardScreen extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({ orientation: Orientation.getInitialOrientation() });
     this._fetchData();
-  }
-
-  componentDidMount() {
-    Orientation.addOrientationListener(this._updateOrientation);
-  }
-
-  componentWillUnmount() {
-    Orientation.removeOrientationListener(this._updateOrientation);
   }
 
   render() {
     const { navigate }= this.props.navigation;
     const { params } = this.props.navigation.state;
     var width = Dimensions.get('window').width;
-    var headerIndex = this.state.orientation == 'PORTRAIT' ? 1 : 0;
+    var headerIndex = 1; //this.state.orientation == 'PORTRAIT' ? 1 : 0;
 
     return (
       <View style={styles.container}>
@@ -145,6 +133,7 @@ export class LeaderboardScreen extends React.Component {
         </View>
         <ScrollView
           stickyHeaderIndices={[headerIndex]}>
+/*
           {this.state.orientation == 'PORTRAIT' &&
            <Image
              source={require('../img/twelve.png')}
@@ -152,6 +141,7 @@ export class LeaderboardScreen extends React.Component {
              resizeMode='cover'
            />
           }
+*/
           {this._renderTableHeader()}
           <Table
             style={styles.lbTable}

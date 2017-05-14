@@ -7,7 +7,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@drivetribe/react-native-orientation": "git+https://github.com/drivetribe/react-native-orientation",
     "react": "15.4.2",
     "react-native": "0.42.0-rc.3",
     "react-native-scrollable-tab-view": "^0.7.3",

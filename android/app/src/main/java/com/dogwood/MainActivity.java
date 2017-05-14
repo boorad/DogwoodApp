@@ -1,8 +1,6 @@
 package com.dogwood;
 
-import android.content.res.Configuration;
 import com.facebook.react.ReactActivity;
-import com.github.yamill.orientation.ConfigurationChangeManager;
 
 public class MainActivity extends ReactActivity {
 
@@ -14,11 +12,4 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "Dogwood";
     }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        ConfigurationChangeManager.getInstance().onConfigurationChanged(newConfig);
-    }
-
 }
