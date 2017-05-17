@@ -140,15 +140,17 @@ export const styles = StyleSheet.create({
   },
   eventStart: {
     flex: 1,
+    paddingTop: 3,
     fontSize: fontSize-2
   },
   eventEnd: {
     flex: 1,
+    paddingTop: 3,
     fontSize: fontSize-2
   },
   eventDescr: {
     flex: 4,
-    fontSize: fontSize,
+    fontSize: fontSize+1,
     fontWeight: 'bold'
   },
   eventBlank: {
@@ -156,6 +158,6 @@ export const styles = StyleSheet.create({
   },
   eventNotes: {
     flex: 4,
-    fontSize: fontSize-1
+    fontSize: fontSize+1
   }
 });
