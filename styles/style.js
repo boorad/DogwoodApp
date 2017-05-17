@@ -5,7 +5,7 @@ import {
 } from './color.js';
 
 const fontFamily = 'HelveticaNeue';
-const fontSize = 13;
+const fontSize = 15;
 const fontPad = 7;
 
 export const styles = StyleSheet.create({
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     marginVertical: 0
   },
   headerLogo: {
-    height: 25,
+    height: 35,
     width: 35,
     marginTop: 1,
     marginLeft: 10
@@ -31,12 +31,14 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 2,
     paddingLeft: 10,
-    height: 32
+    height: 40
   },
   headerText: {
     color: headerColor,
     lineHeight: 24,
-    fontFamily: fontFamily
+    fontFamily: fontFamily,
+    fontSize: fontSize + 3,
+    paddingTop: 5
   },
   lbSelect: {
     marginLeft: 15
@@ -94,7 +96,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 15
   },
   titleText: {
-    fontSize: fontSize+6,
+    fontSize: fontSize+4,
     fontFamily: fontFamily,
     color: headerColor
   },
@@ -116,7 +118,7 @@ export const styles = StyleSheet.create({
     minWidth: 50,
     color: "#eee",
     textAlign: 'center',
-    fontSize: fontSize+3,
+    fontSize: fontSize+2,
     fontFamily: fontFamily
   },
   tabContent: {
@@ -138,15 +140,15 @@ export const styles = StyleSheet.create({
   },
   eventStart: {
     flex: 1,
-    fontSize: fontSize-1
+    fontSize: fontSize-2
   },
   eventEnd: {
     flex: 1,
-    fontSize: fontSize-1
+    fontSize: fontSize-2
   },
   eventDescr: {
     flex: 4,
-    fontSize: fontSize-1,
+    fontSize: fontSize,
     fontWeight: 'bold'
   },
   eventBlank: {

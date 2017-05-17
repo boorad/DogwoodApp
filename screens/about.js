@@ -28,7 +28,11 @@ export class AboutScreen extends React.Component {
     return (
       <View style={[styles.container]}>
         <View style={styles.header}>
-          <Icon name="menu" size={24} color="#fff" onPress={() => navigate('DrawerOpen')} />
+          <Icon
+            name="menu"
+            size={30}
+            color="#fff"
+            onPress={() => navigate('DrawerOpen')} />
           <Image
             source={require('../img/dogwood-logo.png')}
             style={styles.headerLogo}

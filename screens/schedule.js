@@ -119,7 +119,7 @@ export class ScheduleScreen extends React.Component {
       <View style={[styles.container]}>
         <View style={styles.header}>
           <Icon name="menu"
-            size={24}
+            size={30}
             color="#fff"
             onPress={() => navigate('DrawerOpen')} />
           <Image
