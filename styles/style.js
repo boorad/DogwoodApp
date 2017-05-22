@@ -159,5 +159,28 @@ export const styles = StyleSheet.create({
   eventNotes: {
     flex: 4,
     fontSize: fontSize+1
+  },
+  chSubTitle: {
+    fontSize: fontSize-2,
+    fontFamily: fontFamily,
+    color: "#fff",
+    flex: 7,
+    paddingLeft: 10
+  },
+  chRow: {
+    flexDirection: 'row',
+    flex: 8
+  },
+  chYear: {
+    flex: 1,
+    fontSize: fontSize+1,
+    color: "#fff",
+    paddingLeft: 10
+  },
+  chName: {
+    flex: 7,
+    fontSize: fontSize+1,
+    color: "#fff",
+    paddingLeft: 10
   }
 });
