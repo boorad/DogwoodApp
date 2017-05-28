@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Image,
   ScrollView,
   Text,
   TouchableHighlight,
@@ -9,6 +8,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
+import { Header } from './header';
 import { Day } from './day';
 import { styles } from '../styles/style';
 
@@ -75,7 +75,6 @@ export class ScheduleScreen extends React.Component {
   _handleChangeTab({i, ref, from}) {}
 
   render() {
-    const { navigate } = this.props.navigation;
     var title, content;
 
     if( this.state && this.state.data ) {
@@ -117,17 +116,10 @@ export class ScheduleScreen extends React.Component {
 
     return (
       <View style={[styles.container]}>
-        <View style={styles.header}>
-          <Icon name="menu"
-            size={30}
-            color="#fff"
-            onPress={() => navigate('DrawerOpen')} />
-          <Image
-            source={require('../img/dogwood-logo.png')}
-            style={styles.headerLogo}
-          />
-          <Text style={[styles.headerText, styles.lbSelect]}>Schedule</Text>
-        </View>
+        <Header
+          label="Schedule"
+          nav={this.props.navigation}
+        />
         {title}
         {content}
       </View>

@@ -33,7 +33,7 @@ export class Day extends React.Component {
     const { i, day } = this.props;
     const label = day.dow + '\n' + day.shortdate;
 
-    return(
+    return (
       <ScrollView style={[styles.tabContent]}>
         <Text
           key={i}

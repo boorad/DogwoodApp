@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Dimensions,
-  Image,
   ScrollView,
   Text,
   View,
@@ -9,6 +8,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { Header } from './header';
 import { styles } from '../styles/style';
 
 const url = "https://api.druid.golf/dogwood/config";
@@ -58,8 +58,6 @@ export class LeaderboardScreen extends React.Component {
   }
 
   render() {
-    const { navigate }= this.props.navigation;
-    const { params } = this.props.navigation.state;
     var { height, width } = Dimensions.get('window');
     height = height - 20;
     var content;
@@ -99,18 +97,10 @@ export class LeaderboardScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Icon
-            name="menu"
-            size={30}
-            color="#fff"
-            onPress={() => navigate('DrawerOpen')} />
-          <Image
-            source={require('../img/dogwood-logo.png')}
-            style={styles.headerLogo}
-          />
-          <Text style={[styles.headerText, styles.lbSelect]}>Leaderboard</Text>
-        </View>
+        <Header
+          label="Leaderboard"
+          nav={this.props.navigation}
+        />
         {content}
       </View>
     );

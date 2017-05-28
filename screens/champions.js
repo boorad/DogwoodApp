@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { Header } from './header';
 import { Champion } from './champion';
 import { styles } from '../styles/style';
 
@@ -59,7 +60,6 @@ export class ChampionsScreen extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     var title, sub, content;
 
     title = (
@@ -106,17 +106,10 @@ export class ChampionsScreen extends React.Component {
 
     return (
       <View style={[styles.container]}>
-        <View style={styles.header}>
-          <Icon name="menu"
-            size={30}
-            color="#fff"
-            onPress={() => navigate('DrawerOpen')} />
-          <Image
-            source={require('../img/dogwood-logo.png')}
-            style={styles.headerLogo}
-          />
-          <Text style={[styles.headerText, styles.lbSelect]}>Champions</Text>
-        </View>
+        <Header
+          label="Champions"
+          nav={this.props.navigation}
+        />
         {title}
         {content}
       </View>

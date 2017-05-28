@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { Header } from './header';
 import { styles } from '../styles/style';
 
 export class AboutScreen extends React.Component {
@@ -23,22 +24,12 @@ export class AboutScreen extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-    const { params } = this.props.navigation.state;
     return (
       <View style={[styles.container]}>
-        <View style={styles.header}>
-          <Icon
-            name="menu"
-            size={30}
-            color="#fff"
-            onPress={() => navigate('DrawerOpen')} />
-          <Image
-            source={require('../img/dogwood-logo.png')}
-            style={styles.headerLogo}
-          />
-          <Text style={[styles.headerText, styles.lbSelect]}>About</Text>
-        </View>
+        <Header
+          label="About"
+          nav={this.props.navigation}
+        />
       </View>
     );
   }
