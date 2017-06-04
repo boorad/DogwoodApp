@@ -13,12 +13,6 @@ export const styles = StyleSheet.create({
     backgroundColor: '#000',
     marginVertical: 0
   },
-  headerLogo: {
-    height: 35,
-    width: 35,
-    marginTop: 1,
-    marginLeft: 10
-  },
   c: {
     textAlign: 'center'
   },
@@ -29,16 +23,24 @@ export const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    paddingTop: 2,
-    paddingLeft: 10,
-    height: 40
+    height: 55
+  },
+  headerHamburger: {
+    paddingTop: 8,
+    marginLeft: 10
+  },
+  headerLogo: {
+    height: 50,
+    width: 50,
+    marginTop: 3,
+    marginLeft: 20
   },
   headerText: {
     color: headerColor,
     lineHeight: 24,
     fontFamily: fontFamily,
-    fontSize: fontSize + 3,
-    paddingTop: 5
+    fontSize: fontSize + 4,
+    paddingTop: 15
   },
   lbSelect: {
     marginLeft: 15
@@ -182,5 +184,23 @@ export const styles = StyleSheet.create({
     fontSize: fontSize+1,
     color: "#fff",
     paddingLeft: 10
+  },
+  aboutContainer: {
+    backgroundColor: "#fff",
+    flex: 1,
+    alignItems: 'center'
+  },
+  aboutDILogo: {
+    height: 125,
+    width: 125
+  },
+  aboutDHGCLogo: {
+    height: 125,
+    width: 113,
+    marginBottom: 10
+  },
+  aboutBy: {
+    marginTop: 10
   }
+
 });

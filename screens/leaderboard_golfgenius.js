@@ -63,13 +63,16 @@ export class LeaderboardScreen extends React.Component {
     var content;
 
     if( this.state && this.state.gg_page ) {
-      var iframe = "<iframe frameBorder='0' height='" + height + "' "
+      var iframe = "<iframe frameBorder='0' "
                  + "mozallowfullscreen "
-                 + "name='page_iframe' scrolling='auto' "
+                 + "name='page_iframe' "
+                 + "scrolling='auto' "
                  + "src='https://www.golfgenius.com/pages/" + this.state.gg_page
                  + "?no_header=no_nav_bar&banner=false' "
                  + "webkitallowfullscreen='true' "
-                 + "width='" + width + "'></iframe>";
+                 + "height='" + height + "' "
+                 + "width='" + width + "'>"
+                 + "</iframe>";
       const html = `
 <!DOCTYPE html>\n
 <html>

@@ -19,8 +19,9 @@ export class Header extends React.Component {
       <View style={styles.header}>
         <Icon
           name="menu"
-          size={30}
+          size={40}
           color="#fff"
+          style={styles.headerHamburger}
           onPress={() => navigate('DrawerOpen')}
         />
         <Image
