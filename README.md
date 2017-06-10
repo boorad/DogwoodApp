@@ -1,5 +1,7 @@
 # The Dogwood Invitational App
 
+This is the open source code for the Dogwood mobile application.
+
 ## Development
 
 ### Mac OS X
@@ -10,6 +12,10 @@
  * in top level of this project, type `react-native run-android`
 
 ## Deployment
+
+If ready for deploy, perform a version bump commit:
+
+    npm version [ major | minor | patch ]
 
 ### Android
 
