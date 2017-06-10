@@ -6,6 +6,7 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import DeviceInfo from 'react-native-device-info';
 
 import { Header } from './header';
 import { styles } from '../styles/style';
@@ -26,6 +27,7 @@ export class AboutScreen extends React.Component {
 
   render() {
     var { height, width } = Dimensions.get('window');
+    var version = DeviceInfo.getReadableVersion();
 
     bg_height = width * 0.56;
 
@@ -45,7 +47,8 @@ export class AboutScreen extends React.Component {
             source={require('../img/dhgc-logo.jpg')}
             style={styles.aboutDHGCLogo}
           />
-          <Text style={styles.aboutBy}>App by Brad Anderson</Text>
+          <Text style={styles.aboutBy}>App v{version}</Text>
+          <Text style={styles.aboutBy}>by Brad Anderson</Text>
           <Image
             source={require('../img/eleven.png')}
             style={{
