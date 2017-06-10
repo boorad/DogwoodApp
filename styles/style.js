@@ -199,8 +199,16 @@ export const styles = StyleSheet.create({
     width: 113,
     marginBottom: 10
   },
-  aboutBy: {
+  aboutHosted: {
+    marginTop: 10,
+    marginBottom: 5
+  },
+  aboutVersion: {
     marginTop: 10
+  },
+  aboutBy: {
+    marginTop: 5,
+    color: "blue"
   }
 
 });
