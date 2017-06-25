@@ -1,37 +1,24 @@
 import React from 'react';
 import {
+  Image,
   ScrollView,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
 import { Header } from './header';
-import { Day } from './day';
+import { GolfGenius } from './golfgenius';
 import { styles } from '../styles/style';
 
-const url = "https://api.druid.golf/dogwood/schedule";
+const url = "https://api.druid.golf/dogwood/config";
 
 
-export class ScheduleScreen extends React.Component {
-  static navigationOptions = {
-    drawer: () => ({
-      label: 'Schedule of Events',
-      icon: ({tintColor}) => (
-        <Icon
-          name="timetable"
-          size={20}
-          color={tintColor}
-        />
-      )
-    })
-  };
+export class ScoresTees extends React.Component {
 
   constructor(props) {
     super(props);
-    this.children = [];
   }
 
   async _fetchData() {
@@ -46,8 +33,11 @@ export class ScheduleScreen extends React.Component {
   }
 
   _updateData(data) {
+    const { type } = this.props;
+
     this.setState((prevState, props) => {
-      prevState.data = data;
+      prevState.tt = data[type].teetimes;
+      prevState.lb = data[type].leaderboard;
       return prevState;
     });
   }
@@ -67,7 +57,7 @@ export class ScheduleScreen extends React.Component {
         onLayout={onLayoutHandler}
         style={st}
       >
-        <Text style={[styles.schTabText, styles.tabText]}>{name}</Text>
+        <Text style={[styles.tabText]}>{name}</Text>
       </TouchableHighlight>
     );
   }
@@ -75,55 +65,37 @@ export class ScheduleScreen extends React.Component {
   _handleChangeTab({i, ref, from}) {}
 
   render() {
-    var title, content;
+    var content;
 
-    if( this.state && this.state.data ) {
-      const { year, days } = this.state.data;
-      title = (
-        <View style={[styles.title]}>
-          <Text style={[styles.titleText]}>
-            {year} Dogwood Invitational Week
-          </Text>
-        </View>
-      );
+    if( this.state && this.state.tt && this.state.lb ) {
+
       content = (
         <ScrollableTabView
-          initialPage={0}
-          renderTabBar={ () =>
+          renderTabBar={() =>
             <ScrollableTabBar
               style={styles.tabContainer}
               underlineStyle={{backgroundColor: "yellow"}}
               renderTab={this._renderTab} />
                        }>
-          {days.map((day, i) => {
-             var label = day.dow + '\n' + day.shortdate;
-             return (
-               <Day
-                 tabLabel={label}
-                 i={i}
-                 key={i}
-                 day={day}
-               />);
-           })}
+          <GolfGenius
+            gg_num={this.state.lb}
+            type="leaderboard"
+            tabLabel="Leaderboard"
+          />
+          <GolfGenius
+            gg_num={this.state.tt}
+            type="teetime"
+            tabLabel="Tee Times"
+          />
         </ScrollableTabView>
       );
     } else {
-      title = <Text>Dogwood Invitational Week</Text>;
       content = (
         <Text>Loading...</Text>
       );
     }
 
-    return (
-      <View style={[styles.container]}>
-        <Header
-          label="Schedule"
-          nav={this.props.navigation}
-        />
-        {title}
-        {content}
-      </View>
-    );
+    return content;
   }
 
 };

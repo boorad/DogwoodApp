@@ -2,8 +2,9 @@ import React from 'react';
 import { AppRegistry } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
 
-//import { LeaderboardScreen } from './screens/leaderboard';
-import { LeaderboardScreen } from './screens/leaderboard_golfgenius';
+import { TournamentScreen } from './screens/tournament';
+import { QualifierScreen } from './screens/qualifier';
+import { AmAmScreen } from './screens/am-am';
 import { ScheduleScreen } from './screens/schedule';
 import { ChampionsScreen } from './screens/champions';
 import { AboutScreen } from './screens/about';
@@ -12,9 +13,17 @@ import { styles } from './styles/style';
 
 
 const routeConfig = {
-  Leaderboard: {
-    path: '/leaderboard',
-    screen: LeaderboardScreen
+  Tournament: {
+    path: '/tournament',
+    screen: TournamentScreen
+  },
+  Qualifier: {
+    path: '/qualifier',
+    screen: QualifierScreen
+  },
+  AmAm: {
+    path: '/amam',
+    screen: AmAmScreen
   },
   Schedule: {
     path: '/schedule',
@@ -31,7 +40,7 @@ const routeConfig = {
 };
 
 const drawerNavigatorConfig = {
-  drawerWidth: 200,
+  drawerWidth: 320,
   contentOptions: {
     style: styles.drawer,
     activeTintColor: '#eee',
@@ -39,7 +48,7 @@ const drawerNavigatorConfig = {
     inactiveTintColor: '#eee',
     inactiveBackgroundColor: '#000'
   },
-  initialRouteName: 'Leaderboard'
+  initialRouteName: 'Tournament'
 };
 
 const Dogwood = DrawerNavigator(routeConfig, drawerNavigatorConfig);

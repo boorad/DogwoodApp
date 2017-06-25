@@ -115,9 +115,11 @@ export const styles = StyleSheet.create({
   tabContainer: {
     backgroundColor: primaryColor
   },
-  tabText: {
+  schTabText: {
     width: 50,
     minWidth: 50,
+  },
+  tabText: {
     color: "#eee",
     textAlign: 'center',
     fontSize: fontSize+2,

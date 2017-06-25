@@ -17,7 +17,7 @@ const url = "https://api.druid.golf/dogwood/champions";
 export class ChampionsScreen extends React.Component {
   static navigationOptions = {
     drawer: () => ({
-      label: 'Champions',
+      label: 'Past Champions',
       icon: ({tintColor}) => (
         <Icon
           name="trophy"
