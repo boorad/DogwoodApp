@@ -57,7 +57,7 @@ export class ScheduleScreen extends React.Component {
   }
 
   _renderTab(name, page, isTabActive, onPressHandler, onLayoutHandler) {
-    var st = [styles.tab];
+    var st = [styles.tab, styles.schTab];
     if( isTabActive ) st.push(styles.activeTab);
 
     return (
@@ -67,7 +67,7 @@ export class ScheduleScreen extends React.Component {
         onLayout={onLayoutHandler}
         style={st}
       >
-        <Text style={[styles.schTabText, styles.tabText]}>{name}</Text>
+        <Text style={[styles.schTab, styles.tabText]}>{name}</Text>
       </TouchableHighlight>
     );
   }

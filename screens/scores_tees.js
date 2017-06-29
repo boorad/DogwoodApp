@@ -1,12 +1,10 @@
 import React from 'react';
 import {
   Image,
-  ScrollView,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
-import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
 import { Header } from './header';
 import { GolfGenius } from './golfgenius';
@@ -19,6 +17,7 @@ export class ScoresTees extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = { "page": "lb" };
   }
 
   async _fetchData() {
@@ -46,15 +45,20 @@ export class ScoresTees extends React.Component {
     this._fetchData();
   }
 
-  _renderTab(name, page, isTabActive, onPressHandler, onLayoutHandler) {
+  _switch(page) {
+      this.setState((prevState, props) => {
+        prevState.page = page;
+        return prevState;
+      });
+  }
+
+  _renderTab(name, page, isTabActive) {
     var st = [styles.tab];
     if( isTabActive ) st.push(styles.activeTab);
 
     return (
       <TouchableHighlight
-        key={`${name}_${page}`}
-        onPress={() => onPressHandler(page)}
-        onLayout={onLayoutHandler}
+        onPress={() => this._switch(page)}
         style={st}
       >
         <Text style={[styles.tabText]}>{name}</Text>
@@ -62,40 +66,59 @@ export class ScoresTees extends React.Component {
     );
   }
 
-  _handleChangeTab({i, ref, from}) {}
+  _renderTabs() {
+    return (
+      <View
+        style={[styles.tabRow]}
+      >
+        { this._renderTab("Leaderboard", "lb", this.state.page === "lb") }
+        { this._renderTab("Tee Times", "tt", this.state.page === "tt") }
+      </View>
+    );
+  }
 
   render() {
-    var content;
+    var tabs = null;
+    var lb = null;
+    var tt = null;
 
     if( this.state && this.state.tt && this.state.lb ) {
 
-      content = (
-        <ScrollableTabView
-          renderTabBar={() =>
-            <ScrollableTabBar
-              style={styles.tabContainer}
-              underlineStyle={{backgroundColor: "yellow"}}
-              renderTab={this._renderTab} />
-                       }>
+      tabs = this._renderTabs();
+
+      if( this.state.page === 'lb' ) {
+        lb = (
           <GolfGenius
             gg_num={this.state.lb}
             type="leaderboard"
             tabLabel="Leaderboard"
           />
+        );
+      }
+
+      if( this.state.page === 'tt' ) {
+        tt = (
           <GolfGenius
             gg_num={this.state.tt}
             type="teetime"
             tabLabel="Tee Times"
           />
-        </ScrollableTabView>
-      );
+        );
+      }
+
     } else {
       content = (
         <Text>Loading...</Text>
       );
     }
 
-    return content;
+    return (
+      <View style={{flex:1}}>
+        {tabs}
+        {lb}
+        {tt}
+      </View>
+    );
   }
 
 };

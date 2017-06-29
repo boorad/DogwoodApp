@@ -104,20 +104,29 @@ export const styles = StyleSheet.create({
   },
   tab: {
     flex: 1,
-    width: 50,
-    minWidth: 50,
+    height: 49,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderBottomWidth: 4,
+    borderColor: primaryColor
   },
   activeTab: {
-    backgroundColor: '#00b0d6'
+    backgroundColor: '#00b0d6',
+    borderColor: "yellow",
+    borderBottomWidth: 4
   },
   tabContainer: {
-    backgroundColor: primaryColor
+    backgroundColor: primaryColor,
+    height: 50
   },
-  schTabText: {
+  schTab: {
     width: 50,
-    minWidth: 50,
+    minWidth: 50
+  },
+  tabRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 49
   },
   tabText: {
     color: "#eee",
