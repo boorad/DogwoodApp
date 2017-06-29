@@ -19,4 +19,20 @@ If ready for deploy, perform a version bump commit:
 
 ### Android
 
+After version bump, follow instructions here: [https://facebook.github.io/react-native/docs/signed-apk-android.html](https://facebook.github.io/react-native/docs/signed-apk-android.html).  Basically, when everything is set up, do:
+
+    cd android && ./gradlew assembleRelease
+
+Then go to Release Management in the Play Store.
 ### iOS
+
+After version bump, in the root of this project, type:
+
+    npm run build:ios
+
+In XCode, select Product -> Archive
+
+ * Validate
+ * Upload to App Store
+
+In iTunes Connect, under My Apps, Dogwood, select "+ Version or Platform", type new version number in, and continue through to submit for review.
