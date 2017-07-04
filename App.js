@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Text } from 'react-native';
 import { DrawerNavigator } from 'react-navigation';
 
 import { TournamentScreen } from './screens/tournament';
@@ -53,3 +53,7 @@ const drawerNavigatorConfig = {
 
 const Dogwood = DrawerNavigator(routeConfig, drawerNavigatorConfig);
 AppRegistry.registerComponent('Dogwood', () => Dogwood);
+
+// lock font sizes for better rendering
+// https://githubcom/facebook/react-native/issues/2519
+Text.defaultProps.allowFontScaling=false;
