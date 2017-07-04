@@ -23,7 +23,7 @@ After version bump, follow instructions here: [https://facebook.github.io/react-
 
     cd android && ./gradlew assembleRelease
 
-Then go to Release Management in the Play Store.
+Then go to [App Releases](https://play.google.com/apps/publish/?dev_acc=00137341438711124394#ManageReleasesPlace:p=com.dogwood) in the Play Store.
 ### iOS
 
 After version bump, in the root of this project, type:
@@ -35,4 +35,4 @@ In XCode, select Product -> Archive
  * Validate
  * Upload to App Store
 
-In iTunes Connect, under My Apps, Dogwood, select "+ Version or Platform", type new version number in, and continue through to submit for review.
+In [iTunes Connect](itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1250184426), under My Apps, Dogwood, select "+ Version or Platform", type new version number in, and continue through to submit for review.
