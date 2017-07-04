@@ -69,6 +69,8 @@ export class GolfGenius extends React.Component {
       <WebView
         source={{html: html}}
         style={styles.gglb}
+//        attempt to get ios to zoom, but this makes entire page show up small
+//        scalesPageToFit={true}
       />
     );
 
