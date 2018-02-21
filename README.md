@@ -6,6 +6,11 @@ This is the open source code for the Dogwood mobile application.
 
 ### Mac OS X
 
+#### iOS
+
+ * start up an Apple simulator, choose a device
+ * in top level of this project, type `react-native run-ios`
+
 #### Android
 
  * run Android Studio, open SDK Manager, start up an Android emulator

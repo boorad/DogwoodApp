@@ -6,14 +6,15 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "postversion": "react-native-version",
-    "build:ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.ios.js' --bundle-output='./ios/Dogwood/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'"
+    "build:ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.ios.js' --bundle-output='./ios/Dogwood/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
+    "postinstall": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
   },
   "dependencies": {
     "react": "^16.2.0",
     "react-native": "^0.53.2",
     "react-native-device-info": "^0.10.2",
     "react-native-scrollable-tab-view": "^0.7.3",
-    "react-native-vector-icons": "^4.0.0",
+    "react-native-vector-icons": "^4.5.0",
     "react-native-version": "^2.3.1",
     "react-navigation": "^1.0.0-beta.3"
   },
