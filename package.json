@@ -6,17 +6,19 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "postversion": "react-native-version",
-    "build:ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.ios.js' --bundle-output='./ios/Dogwood/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
-    "postinstall": "rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json"
+    "build:ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./ios/Dogwood/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'"
   },
   "dependencies": {
     "react": "^16.2.0",
-    "react-native": "^0.53.2",
-    "react-native-device-info": "^0.10.2",
-    "react-native-scrollable-tab-view": "^0.7.3",
+    "react-native": "^0.53.3",
+    "react-native-device-info": "^0.15.3",
+    "react-native-router-flux": "^4.0.0-beta.28",
     "react-native-vector-icons": "^4.5.0",
     "react-native-version": "^2.3.1",
-    "react-navigation": "^1.0.0-beta.3"
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-jest": "18.0.0",

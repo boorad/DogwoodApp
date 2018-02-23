@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Dimensions,
   Image,
   ScrollView,
   Text,
@@ -114,7 +113,6 @@ export class LeaderboardScreen extends React.Component {
   render() {
     const { navigate }= this.props.navigation;
     const { params } = this.props.navigation.state;
-    var width = Dimensions.get('window').width;
     var headerIndex = 1; //this.state.orientation == 'PORTRAIT' ? 1 : 0;
 
     return (
@@ -137,7 +135,7 @@ export class LeaderboardScreen extends React.Component {
           {this.state.orientation == 'PORTRAIT' &&
            <Image
              source={require('../img/twelve.png')}
-             style={{height: 175, width: width}}
+             style={{height: 175, width: '100%'}}
              resizeMode='cover'
            />
           }

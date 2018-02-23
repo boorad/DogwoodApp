@@ -1,11 +1,10 @@
 import React from 'react';
 import {
-  Dimensions,
   Text,
   WebView
 } from 'react-native';
 
-import { styles } from '../styles/style';
+import { styles } from 'common/styles/style';
 
 
 export class GolfGenius extends React.Component {
@@ -37,8 +36,6 @@ export class GolfGenius extends React.Component {
   }
 
   render() {
-    var { height, width } = Dimensions.get('window');
-    height = height - 20;
 
     var content;
 
@@ -48,8 +45,8 @@ export class GolfGenius extends React.Component {
                + "scrolling='auto' "
                + this._get_src()
                + "webkitallowfullscreen='true' "
-               + "height='" + height + "' "
-               + "width='" + width + "' "
+//               + "height='" + height + "' "
+//               + "width='" + width + "' "
                + ">"
                + "</iframe>";
     const html = `

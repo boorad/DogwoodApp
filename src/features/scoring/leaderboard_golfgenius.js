@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Dimensions,
   ScrollView,
   Text,
   View,
@@ -58,8 +57,6 @@ export class LeaderboardScreen extends React.Component {
   }
 
   render() {
-    var { height, width } = Dimensions.get('window');
-    height = height - 20;
     var content;
 
     if( this.state && this.state.gg_page ) {
@@ -70,8 +67,8 @@ export class LeaderboardScreen extends React.Component {
                  + "src='https://www.golfgenius.com/pages/" + this.state.gg_page
                  + "?no_header=no_nav_bar&banner=false' "
                  + "webkitallowfullscreen='true' "
-                 + "height='" + height + "' "
-                 + "width='" + width + "'>"
+//                 + "height='" + height + "' "
+//                 + "width='" + width + "'>"
                  + "</iframe>";
       const html = `
 <!DOCTYPE html>\n

@@ -4,7 +4,7 @@ import {
   View
 } from 'react-native';
 
-import { styles } from '../styles/style';
+import { styles } from 'common/styles/style';
 
 
 export class Champion extends React.Component {

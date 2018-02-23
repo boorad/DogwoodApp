@@ -8,7 +8,7 @@ const fontFamily = 'HelveticaNeue';
 const fontSize = 15;
 const fontPad = 7;
 
-export const styles = StyleSheet.create({
+export default styles = StyleSheet.create({
   drawer: {
     backgroundColor: '#000',
     marginVertical: 0

@@ -5,16 +5,16 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Header } from './header';
+import { Header } from 'common/header';
 import { ScoresTees } from './scores_tees';
-import { styles } from '../styles/style';
+import { styles } from 'common/styles/style';
 
 
 
-export class TournamentScreen extends React.Component {
+export class AmAmScreen extends React.Component {
   static navigationOptions = {
     drawer: () => ({
-      label: 'Tournament Scores & Tee Times',
+      label: 'Am-Am Scores & Tee Times',
       icon: ({tintColor}) => (
         <Icon
           name="monitor"
@@ -34,11 +34,11 @@ export class TournamentScreen extends React.Component {
     return (
       <View style={[styles.container]}>
         <Header
-          label="Tournament"
+          label="Dogwood Am-Am"
           nav={this.props.navigation}
         />
         <ScoresTees
-          type="tournament"
+          type="am-am"
         />
       </View>
     );

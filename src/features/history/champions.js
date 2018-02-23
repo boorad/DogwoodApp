@@ -7,9 +7,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Header } from './header';
+import { Header } from 'common/header';
 import { Champion } from './champion';
-import { styles } from '../styles/style';
+import { styles } from 'common/styles/style';
 
 const url = "https://api.druid.golf/dogwood/champions";
 

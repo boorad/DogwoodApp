@@ -6,9 +6,9 @@ import {
   View
 } from 'react-native';
 
-import { Header } from './header';
+import { Header } from 'common/header';
 import { GolfGenius } from './golfgenius';
-import { styles } from '../styles/style';
+import { styles } from 'common/styles/style';
 
 const url = "https://api.druid.golf/dogwood/config";
 

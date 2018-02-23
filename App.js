@@ -1,59 +1,19 @@
-import React from 'react';
-import { AppRegistry, Text } from 'react-native';
-import { DrawerNavigator } from 'react-navigation';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { Provider } from 'react-redux';
 
-import { TournamentScreen } from './screens/tournament';
-import { QualifierScreen } from './screens/qualifier';
-import { AmAmScreen } from './screens/am-am';
-import { ScheduleScreen } from './screens/schedule';
-import { ChampionsScreen } from './screens/champions';
-import { AboutScreen } from './screens/about';
-
-import { styles } from './styles/style';
+import configureStore from 'app/store/configureStore';
+import TabsContainer from 'features/tabs/TabsContainer';
 
 
-const routeConfig = {
-  Tournament: {
-    path: '/tournament',
-    screen: TournamentScreen
-  },
-  Qualifier: {
-    path: '/qualifier',
-    screen: QualifierScreen
-  },
-  AmAm: {
-    path: '/amam',
-    screen: AmAmScreen
-  },
-  Schedule: {
-    path: '/schedule',
-    screen: ScheduleScreen
-  },
-  Champions: {
-    path: '/champions',
-    screen: ChampionsScreen
-  },
-  About: {
-    path: '/about',
-    screen: AboutScreen
+const store = configureStore();
+
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <TabsContainer />
+      </Provider>
+    );
   }
 };
-
-const drawerNavigatorConfig = {
-  drawerWidth: 320,
-  contentOptions: {
-    style: styles.drawer,
-    activeTintColor: '#eee',
-    activeBackgroundColor: '#666',
-    inactiveTintColor: '#eee',
-    inactiveBackgroundColor: '#000'
-  },
-  initialRouteName: 'Tournament'
-};
-
-const Dogwood = DrawerNavigator(routeConfig, drawerNavigatorConfig);
-AppRegistry.registerComponent('Dogwood', () => Dogwood);
-
-// lock font sizes for better rendering
-// https://githubcom/facebook/react-native/issues/2519
-Text.defaultProps.allowFontScaling=false;

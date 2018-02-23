@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { styles } from '../styles/style';
+import { styles } from 'common/styles/style';
 
 
 export class Header extends React.Component {
@@ -25,7 +25,7 @@ export class Header extends React.Component {
           onPress={() => navigate('DrawerOpen')}
         />
         <Image
-          source={require('../img/dogwood-logo.png')}
+          source={require('common/img/dogwood-logo.png')}
           style={styles.headerLogo}
         />
         <Text style={[styles.headerText, styles.lbSelect]}>{label}</Text>
