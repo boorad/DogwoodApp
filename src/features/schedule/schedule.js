@@ -6,11 +6,11 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-//import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
-import { Header } from './header';
+import { Header } from 'common/header';
 import { Day } from './day';
-import { styles } from '../styles/style';
+import { styles } from 'common/styles/style';
 
 const url = "https://api.druid.golf/dogwood/schedule";
 
@@ -31,7 +31,7 @@ export class ScheduleScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    this.children = [];
+    this.state = {};
   }
 
   async _fetchData() {

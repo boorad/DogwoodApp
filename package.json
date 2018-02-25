@@ -13,6 +13,7 @@
     "react-native": "^0.53.3",
     "react-native-device-info": "^0.15.3",
     "react-native-router-flux": "^4.0.0-beta.28",
+    "react-native-scrollable-tab-view": "^0.8.0",
     "react-native-vector-icons": "^4.5.0",
     "react-native-version": "^2.3.1",
     "react-redux": "^5.0.7",

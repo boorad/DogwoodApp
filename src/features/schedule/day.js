@@ -5,7 +5,7 @@ import {
   View
 } from 'react-native';
 
-import { styles } from '../styles/style';
+import { styles } from 'common/styles/style';
 
 
 class Event extends React.Component {
