@@ -12,18 +12,10 @@ import { styles } from 'common/styles/style';
 export class Header extends React.Component {
 
   render() {
-    const { label, nav } = this.props;
-    const { navigate } = nav;
+    const { label } = this.props;
 
     return (
       <View style={styles.header}>
-        <Icon
-          name="menu"
-          size={40}
-          color="#fff"
-          style={styles.headerHamburger}
-          onPress={() => navigate('DrawerOpen')}
-        />
         <Image
           source={require('common/img/dogwood-logo.png')}
           style={styles.headerLogo}

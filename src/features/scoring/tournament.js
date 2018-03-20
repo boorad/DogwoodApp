@@ -12,18 +12,6 @@ import { styles } from 'common/styles/style';
 
 
 export class TournamentScreen extends React.Component {
-  static navigationOptions = {
-    drawer: () => ({
-      label: 'Tournament Scores & Tee Times',
-      icon: ({tintColor}) => (
-        <Icon
-          name="monitor"
-          size={20}
-          color={tintColor}
-        />
-      )
-    })
-  };
 
   constructor(props) {
     super(props);
@@ -35,7 +23,6 @@ export class TournamentScreen extends React.Component {
       <View style={[styles.container]}>
         <Header
           label="Tournament"
-          nav={this.props.navigation}
         />
         <ScoresTees
           type="tournament"

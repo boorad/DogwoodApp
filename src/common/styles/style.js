@@ -25,10 +25,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 55
   },
-  headerHamburger: {
-    paddingTop: 8,
-    marginLeft: 10
-  },
   headerLogo: {
     height: 50,
     width: 50,

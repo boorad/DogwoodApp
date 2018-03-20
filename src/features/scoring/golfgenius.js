@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Dimensions,
   Text,
   WebView
 } from 'react-native';
@@ -36,19 +37,26 @@ export class GolfGenius extends React.Component {
   }
 
   render() {
+    var { height, width } = Dimensions.get('window');
+    console.log('height', height);
+    console.log('width', width);
+
+    //height = height - 20;
 
     var content;
 
-    var iframe = "<iframe frameBorder='0' "
-               + "mozallowfullscreen "
-               + "name='page_iframe' "
-               + "scrolling='auto' "
-               + this._get_src()
-               + "webkitallowfullscreen='true' "
-//               + "height='" + height + "' "
-//               + "width='" + width + "' "
-               + ">"
-               + "</iframe>";
+    const iframe = `
+<iframe frameBorder='0'
+  mozallowfullscreen='true'
+  webkitallowfullscreen='true'
+  name='page_iframe'
+  scrolling='auto'
+  ` + this._get_src() + `
+  height='` + height + `'
+  width='` + width + `'
+  >
+</iframe>
+`;
     const html = `
 <!DOCTYPE html>\n
 <html>
@@ -66,8 +74,7 @@ export class GolfGenius extends React.Component {
       <WebView
         source={{html: html}}
         style={styles.gglb}
-//        attempt to get ios to zoom, but this makes entire page show up small
-//        scalesPageToFit={true}
+        scalesPageToFit={false}
       />
     );
 

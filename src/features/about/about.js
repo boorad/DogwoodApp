@@ -49,7 +49,7 @@ export class AboutScreen extends React.Component {
             />
             <Text style={styles.aboutHosted}>Hosted by:</Text>
             <Image
-              source={require('common/img/dhgc-logo.jpg')}
+              source={require('common/img/dhgc_trans_bg.png')}
               style={styles.aboutDHGCLogo}
             />
             <Text style={styles.aboutVersion}>App v{version}</Text>
@@ -62,7 +62,6 @@ export class AboutScreen extends React.Component {
           source={require('common/img/eleven.png')}
           style={{
             width: '100%',
-            height: '56%',
             position: 'absolute',
             bottom: 0}}
         />

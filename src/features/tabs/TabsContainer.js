@@ -49,36 +49,53 @@ class TabsContainer extends Component  {
               inactiveTintColor={tabInactive}
               activeTintColor={tabInactive}
             >
-      <Tabs
-      key='scoring_tabs'
-      tabBarLabel='Scoring'
-      >
-      <Scene
-      key='tourney'
-      component={TournamentScreen}
-      />
-      </Tabs>
-      <Scene
-      key='schedule'
-      component={ScheduleScreen}
-      icon={() => <TabIcon color={blue} name='message'/>}
-      tabBarLabel='Schedule'
-      hideNavBar
-      />
-      <Tabs
-      key='history_tabs'
-      tabBarLabel='History'
-      >
-      <Scene
-      key='champions'
-      component={ChampionsScreen}
-      tabBarLabel='Champions'
-      />
-      </Tabs>
-      <Scene
-      key='about'
-      component={AboutScreen}
-      icon={() => <TabIcon color={blue} name='message'/>}
+              <Tabs
+                key='scoring_tabs'
+                tabBarLabel='Scoring'
+                hideNavBar
+              >
+                <Scene
+                  key='tourney'
+                  component={TournamentScreen}
+                  tabBarLabel='Tournament'
+                  hideNavBar
+                />
+                <Scene
+                  key='am-am'
+                  component={AmAmScreen}
+                  tabBarLabel='Am-Am'
+                  hideNavBar
+                />
+                <Scene
+                  key='qualifier'
+                  component={QualifierScreen}
+                  tabBarLabel="Qualifier"
+                  hideNavBar
+                />
+              </Tabs>
+              <Scene
+                key='schedule'
+                component={ScheduleScreen}
+                icon={() => <TabIcon color={blue} name='message'/>}
+                tabBarLabel='Schedule'
+                hideNavBar
+              />
+              <Tabs
+                key='history_tabs'
+                tabBarLabel='History'
+                hideNavBar
+              >
+                <Scene
+                  key='champions'
+                  component={ChampionsScreen}
+                  tabBarLabel='Champions'
+                  hideNavBar
+                />
+              </Tabs>
+              <Scene
+                key='about'
+                component={AboutScreen}
+                icon={() => <TabIcon color={blue} name='message'/>}
                 tabBarLabel='About'
                 hideNavBar
               />
