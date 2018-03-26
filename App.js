@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import {
+  Text,
+  View
+} from 'react-native';
 import { Provider } from 'react-redux';
 
 import configureStore from 'app/store/configureStore';

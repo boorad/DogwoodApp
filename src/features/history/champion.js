@@ -1,10 +1,11 @@
 import React from 'react';
 import {
+  StyleSheet,
   Text,
   View
 } from 'react-native';
 
-import { styles } from 'common/styles/style';
+import { fontSize } from 'common/styles/style';
 
 
 export class Champion extends React.Component {
@@ -22,3 +23,22 @@ export class Champion extends React.Component {
   }
 
 };
+
+const styles = StyleSheet.create({
+  chRow: {
+    flexDirection: 'row',
+    flex: 8
+  },
+  chYear: {
+    flex: 1,
+    fontSize: fontSize+1,
+    color: "#fff",
+    paddingLeft: 10
+  },
+  chName: {
+    flex: 7,
+    fontSize: fontSize+1,
+    color: "#fff",
+    paddingLeft: 10
+  }
+});

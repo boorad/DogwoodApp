@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ScrollView,
+  StyleSheet,
   Text,
   TouchableHighlight,
   View
@@ -8,9 +9,19 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
+import {
+  fontFamily,
+  fontSize
+} from 'common/styles/style';
+
+import {
+  headerColor,
+  primaryColor
+} from 'common/styles/color';
+
 import { Header } from 'common/header';
 import { Day } from './day';
-import { styles } from 'common/styles/style';
+
 
 const url = "https://api.druid.golf/dogwood/schedule";
 
@@ -118,7 +129,6 @@ export class ScheduleScreen extends React.Component {
       <View style={[styles.container]}>
         <Header
           label="Schedule"
-          nav={this.props.navigation}
         />
         {title}
         {content}
@@ -127,3 +137,53 @@ export class ScheduleScreen extends React.Component {
   }
 
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: primaryColor,
+    flex: 1
+  },
+  title: {
+    alignItems: 'center',
+    paddingTop: 15,
+    paddingBottom: 15
+  },
+  titleText: {
+    fontSize: fontSize+4,
+    fontFamily: fontFamily,
+    color: headerColor
+  },
+  tab: {
+    flex: 1,
+    height: 49,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 4,
+    borderColor: primaryColor
+  },
+  activeTab: {
+    backgroundColor: '#00b0d6',
+    borderColor: "yellow",
+    borderBottomWidth: 4
+  },
+  tabContainer: {
+    backgroundColor: primaryColor,
+    height: 50
+  },
+  schTab: {
+    width: 50,
+    minWidth: 50
+  },
+  tabRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 49
+  },
+  tabText: {
+    color: "#eee",
+    textAlign: 'center',
+    fontSize: fontSize+2,
+    fontFamily: fontFamily
+  }
+});

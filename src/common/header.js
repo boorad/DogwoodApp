@@ -1,13 +1,15 @@
 import React from 'react';
 import {
-  Image,
-  Text,
+  Platform,
+  StyleSheet,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ifIphoneX } from 'react-native-iphone-x-helper';
 
-import { styles } from 'common/styles/style';
 
+const paddingTopIphoneX = ifIphoneX(14, 0);
+const paddingTopiOS = Platform.OS  === 'ios' ? 20 : 0;
 
 export class Header extends React.Component {
 
@@ -15,14 +17,17 @@ export class Header extends React.Component {
     const { label } = this.props;
 
     return (
-      <View style={styles.header}>
-        <Image
-          source={require('common/img/dogwood-logo.png')}
-          style={styles.headerLogo}
-        />
-        <Text style={[styles.headerText, styles.lbSelect]}>{label}</Text>
-      </View>
+      <View style={styles.header} />
     );
   }
 
 };
+
+
+const styles = StyleSheet.create({
+  header: {
+    paddingTop: paddingTopiOS + paddingTopIphoneX,
+    justifyContent: 'center',
+    alignItems: 'flex-start'
+  }
+});

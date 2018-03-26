@@ -38,8 +38,8 @@ export class GolfGenius extends React.Component {
 
   render() {
     var { height, width } = Dimensions.get('window');
-    console.log('height', height);
-    console.log('width', width);
+    //console.log('height', height);
+    //console.log('width', width);
 
     //height = height - 20;
 

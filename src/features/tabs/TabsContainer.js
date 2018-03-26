@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import {
+  StyleSheet,
+  Text
+} from 'react-native';
 
 import {
   Router,
@@ -8,13 +11,17 @@ import {
   Tabs
 } from 'react-native-router-flux';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import {
-  tabActive,
-  tabInactive,
-  green,
-  red,
-  blue
+  green
 } from 'common/styles/color';
+
+import {
+  fontFamily,
+  fontSize
+} from 'common/styles/style';
+
 
 import { createTabsReducer } from './TabsReducer';
 
@@ -25,12 +32,11 @@ import { ScheduleScreen } from 'features/schedule/schedule';
 import { ChampionsScreen } from 'features/history/champions';
 import { AboutScreen } from 'features/about/about';
 
-import { styles } from 'common/styles/style';
 
 
 const TabIcon = ({name, color}) => {
   return (
-    <Icon size={24} color={color} name={name} />
+    <Icon size={18} color={color} name={name} />
   );
 };
 
@@ -43,62 +49,75 @@ class TabsContainer extends Component  {
         createReducer={createTabsReducer}
       >
         <Stack key='root'>
-          <Scene key='main' hideNavBar panHandlers={null}>
+          <Scene
+            key='main'
+            hideNavBar
+            panHandlers={null}
+          >
             <Tabs
               key='main_tabs'
-              inactiveTintColor={tabInactive}
-              activeTintColor={tabInactive}
+              inactiveTintColor='#ccc'
+              inactiveBackgroundColor='#666'
+              activeTintColor='white'
+              activeBackgroundColor={green}
+              labelStyle={styles.maintabslabel}
+              allowFontScaling={false}
+              tabBarStyle={styles.tabbar}
             >
-              <Tabs
-                key='scoring_tabs'
-                tabBarLabel='Scoring'
-                hideNavBar
+              <Stack
+                key='scoring_stack'
+                tabBarLabel='Leaderboard'
+                icon={() => <TabIcon color='white' name='lead-pencil'/>}
+                initial
               >
                 <Scene
                   key='tourney'
                   component={TournamentScreen}
-                  tabBarLabel='Tournament'
                   hideNavBar
                 />
                 <Scene
                   key='am-am'
                   component={AmAmScreen}
-                  tabBarLabel='Am-Am'
-                  hideNavBar
                 />
                 <Scene
                   key='qualifier'
                   component={QualifierScreen}
-                  tabBarLabel="Qualifier"
+                />
+              </Stack>
+              <Stack
+                key='schedule_stack'
+                tabBarLabel='Schedule'
+                icon={() => <TabIcon color='white' name='calendar-clock'/>}
+              >
+                <Scene
+                  key='schedule'
+                  component={ScheduleScreen}
                   hideNavBar
                 />
-              </Tabs>
-              <Scene
-                key='schedule'
-                component={ScheduleScreen}
-                icon={() => <TabIcon color={blue} name='message'/>}
-                tabBarLabel='Schedule'
-                hideNavBar
-              />
-              <Tabs
+              </Stack>
+              <Stack
                 key='history_tabs'
                 tabBarLabel='History'
-                hideNavBar
+                icon={() => <TabIcon color='white' name='trophy'/>}
               >
                 <Scene
                   key='champions'
                   component={ChampionsScreen}
-                  tabBarLabel='Champions'
                   hideNavBar
                 />
-              </Tabs>
-              <Scene
-                key='about'
-                component={AboutScreen}
-                icon={() => <TabIcon color={blue} name='message'/>}
+              </Stack>
+              <Stack
+                key='about_stack'
                 tabBarLabel='About'
-                hideNavBar
-              />
+                icon={() => <TabIcon color='white' name='help-circle'/>}
+              >
+                <Scene
+                  key='about'
+                  component={AboutScreen}
+                  icon={() => <TabIcon color={blue} name='message'/>}
+                  hideNavBar
+                />
+              </Stack>
             </Tabs>
           </Scene>
         </Stack>
@@ -109,50 +128,17 @@ class TabsContainer extends Component  {
 
 export default TabsContainer;
 
-/*
 
-
-const routeConfig = {
-  Tournament: {
-    path: '/tournament',
-    screen: TournamentScreen
+const styles = StyleSheet.create({
+  maintabslabel: {
+    fontSize: fontSize-3
   },
-  Qualifier: {
-    path: '/qualifier',
-    screen: QualifierScreen
-  },
-  AmAm: {
-    path: '/amam',
-    screen: AmAmScreen
-  },
-  Schedule: {
-    path: '/schedule',
-    screen: ScheduleScreen
-  },
-  Champions: {
-    path: '/champions',
-    screen: ChampionsScreen
-  },
-  About: {
-    path: '/about',
-    screen: AboutScreen
+  tabbar: {
+    backgroundColor: green
   }
-};
+});
 
-const drawerNavigatorConfig = {
-  drawerWidth: 320,
-  contentOptions: {
-    style: styles.drawer,
-    activeTintColor: '#eee',
-    activeBackgroundColor: '#666',
-    inactiveTintColor: '#eee',
-    inactiveBackgroundColor: '#000'
-  },
-  initialRouteName: 'Tournament'
-};
 
-export default DrawerNavigator(routeConfig, drawerNavigatorConfig);
-*/
 
 // lock font sizes for better rendering
 // https://githubcom/facebook/react-native/issues/2519

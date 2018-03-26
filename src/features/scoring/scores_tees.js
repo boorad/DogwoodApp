@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Image,
+  StyleSheet,
   Text,
   TouchableHighlight,
   View
@@ -8,10 +9,17 @@ import {
 
 import { Header } from 'common/header';
 import { GolfGenius } from './golfgenius';
-import { styles } from 'common/styles/style';
+import {
+  headerColor,
+  primaryColor
+} from 'common/styles/color';
+import {
+  fontFamily,
+  fontSize
+} from 'common/styles/style';
+
 
 const url = "https://api.druid.golf/dogwood/config";
-
 
 export class ScoresTees extends React.Component {
 
@@ -122,3 +130,59 @@ export class ScoresTees extends React.Component {
   }
 
 };
+
+
+const styles = StyleSheet.create({
+  title: {
+    alignItems: 'center',
+    paddingTop: 15,
+    paddingBottom: 15
+  },
+  titleText: {
+    fontSize: fontSize+4,
+    fontFamily: fontFamily,
+    color: headerColor
+  },
+  tab: {
+    flex: 1,
+    height: 49,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 4,
+    borderColor: primaryColor
+  },
+  activeTab: {
+    backgroundColor: '#00b0d6',
+    borderColor: "yellow",
+    borderBottomWidth: 4
+  },
+  tabContainer: {
+    backgroundColor: primaryColor,
+    height: 50
+  },
+  schTab: {
+    width: 50,
+    minWidth: 50
+  },
+  tabRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 49
+  },
+  tabText: {
+    color: "#eee",
+    textAlign: 'center',
+    fontSize: fontSize+2,
+    fontFamily: fontFamily
+  },
+  tabContent: {
+    backgroundColor: "#fff"
+  },
+  tabContentTitle: {
+    fontSize: fontSize+2,
+    fontFamily: fontFamily,
+    color: "#333",
+    textAlign: "center",
+    padding: 10
+  }
+});

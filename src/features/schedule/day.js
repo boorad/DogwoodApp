@@ -1,11 +1,15 @@
 import React from 'react';
 import {
   ScrollView,
+  StyleSheet,
   Text,
   View
 } from 'react-native';
 
-import { styles } from 'common/styles/style';
+import {
+  fontFamily,
+  fontSize
+} from 'common/styles/style';
 
 
 class Event extends React.Component {
@@ -50,3 +54,46 @@ export class Day extends React.Component {
   }
 
 };
+
+
+const styles = StyleSheet.create({
+  tabContent: {
+    backgroundColor: "#fff"
+  },
+  tabContentTitle: {
+    fontSize: fontSize+2,
+    fontFamily: fontFamily,
+    color: "#333",
+    textAlign: "center",
+    padding: 10
+  },
+  eventContainer: {
+    padding: 5
+  },
+  eventRow: {
+    flexDirection: 'row',
+    flex: 6
+  },
+  eventStart: {
+    flex: 1,
+    paddingTop: 3,
+    fontSize: fontSize-2
+  },
+  eventEnd: {
+    flex: 1,
+    paddingTop: 3,
+    fontSize: fontSize-2
+  },
+  eventDescr: {
+    flex: 4,
+    fontSize: fontSize+1,
+    fontWeight: 'bold'
+  },
+  eventBlank: {
+    flex: 2
+  },
+  eventNotes: {
+    flex: 4,
+    fontSize: fontSize+1
+  }
+});

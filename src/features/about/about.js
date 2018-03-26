@@ -3,6 +3,7 @@ import {
   Image,
   Linking,
   ScrollView,
+  StyleSheet,
   Text,
   TouchableOpacity,
   View
@@ -11,7 +12,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DeviceInfo from 'react-native-device-info';
 
 import { Header } from 'common/header';
-import { styles } from 'common/styles/style';
+import { primaryColor } from 'common/styles/color';
+
 
 export class AboutScreen extends React.Component {
   static navigationOptions = {
@@ -39,7 +41,6 @@ export class AboutScreen extends React.Component {
       <View style={[styles.container]}>
         <Header
           label="About"
-          nav={this.props.navigation}
         />
         <ScrollView contentContainerStyle={{flex:1}}>
           <View style={styles.aboutContainer}>
@@ -69,3 +70,36 @@ export class AboutScreen extends React.Component {
     );
   }
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: primaryColor,
+    flex: 1
+  },
+  aboutContainer: {
+    backgroundColor: "#fff",
+    flex: 1,
+    alignItems: 'center'
+  },
+  aboutDILogo: {
+    height: 125,
+    width: 125
+  },
+  aboutDHGCLogo: {
+    height: 125,
+    width: 113,
+    marginBottom: 10
+  },
+  aboutHosted: {
+    marginTop: 10,
+    marginBottom: 5
+  },
+  aboutVersion: {
+    marginTop: 10
+  },
+  aboutBy: {
+    marginTop: 5,
+    color: "blue"
+  }
+});

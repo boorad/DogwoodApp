@@ -2,17 +2,27 @@ import React from 'react';
 import {
   Image,
   ScrollView,
+  StyleSheet,
   Text,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {
+  fontFamily,
+  fontSize
+} from 'common/styles/style';
+
+import {
+  headerColor,
+  primaryColor
+} from 'common/styles/color';
+
 import { Header } from 'common/header';
 import { Champion } from './champion';
-import { styles } from 'common/styles/style';
+
 
 const url = "https://api.druid.golf/dogwood/champions";
-
 
 export class ChampionsScreen extends React.Component {
   static navigationOptions = {
@@ -106,10 +116,9 @@ export class ChampionsScreen extends React.Component {
     }
 
     return (
-      <View style={[styles.container]}>
+      <View style={styles.container}>
         <Header
           label="Champions"
-          nav={this.props.navigation}
         />
         {title}
         {content}
@@ -118,3 +127,43 @@ export class ChampionsScreen extends React.Component {
   }
 
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: primaryColor,
+    flex: 1
+  },
+  title: {
+    alignItems: 'center',
+    paddingTop: 15,
+    paddingBottom: 15
+  },
+  titleText: {
+    fontSize: fontSize+4,
+    fontFamily: fontFamily,
+    color: headerColor
+  },
+  chSubTitle: {
+    fontSize: fontSize-2,
+    fontFamily: fontFamily,
+    color: "#fff",
+    flex: 7,
+    paddingLeft: 10
+  },
+  chRow: {
+    flexDirection: 'row',
+    flex: 8
+  },
+  chYear: {
+    flex: 1,
+    fontSize: fontSize+1,
+    color: "#fff",
+    paddingLeft: 10
+  },
+  chName: {
+    flex: 7,
+    fontSize: fontSize+1,
+    color: "#fff",
+    paddingLeft: 10
+  }
+});
