@@ -13,7 +13,7 @@ This is the open source code for the Dogwood mobile application.
 
 #### Android
 
- * run Android Studio, open SDK Manager, start up an Android emulator
+ * run Android Studio, Tools | Android | AVD Manager, start up an Android emulator
  * in top level of this project, type `react-native run-android`
 
 ## Deployment
