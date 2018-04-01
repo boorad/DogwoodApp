@@ -14,6 +14,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
+  blue,
   green
 } from 'common/styles/color';
 
@@ -29,7 +30,9 @@ import { TournamentScreen } from 'features/scoring/tournament';
 import { QualifierScreen } from 'features/scoring/qualifier';
 import { AmAmScreen } from 'features/scoring/am-am';
 import { ScheduleScreen } from 'features/schedule/schedule';
-import { ChampionsScreen } from 'features/history/champions';
+import { Champions } from 'features/history/champions';
+import { Alumni } from 'features/history/alumni';
+import { Story } from 'features/history/story';
 import { AboutScreen } from 'features/about/about';
 
 
@@ -68,7 +71,6 @@ class TabsContainer extends Component  {
                 key='scoring_stack'
                 tabBarLabel='Leaderboard'
                 icon={() => <TabIcon color='white' name='lead-pencil'/>}
-                initial
               >
                 <Scene
                   key='tourney'
@@ -95,17 +97,40 @@ class TabsContainer extends Component  {
                   hideNavBar
                 />
               </Stack>
-              <Stack
+              <Tabs
                 key='history_tabs'
                 tabBarLabel='History'
                 icon={() => <TabIcon color='white' name='trophy'/>}
+                inactiveTintColor='#ccc'
+                inactiveBackgroundColor={green}
+                activeTintColor='white'
+                activeBackgroundColor={blue}
+                labelStyle={styles.subtabslabel}
+                allowFontScaling={false}
+                tabBarStyle={[styles.tabbar, styles.subtabbar]}
+                indicatorStyle={styles.subtabbarIndicator}
+                showIcon={false}
+                initial
               >
                 <Scene
-                  key='champions'
-                  component={ChampionsScreen}
+                  key='champs'
+                  tabBarLabel='Past Champions'
+                  component={Champions}
                   hideNavBar
                 />
-              </Stack>
+                <Scene
+                  key='alum'
+                  tabBarLabel='PGA Alumni'
+                  component={Alumni}
+                  hideNavBar
+                />
+                <Scene
+                  key='story'
+                  tabBarLabel='Dogwood History'
+                  component={Story}
+                  hideNavBar
+                />
+              </Tabs>
               <Stack
                 key='about_stack'
                 tabBarLabel='About'
@@ -135,6 +160,13 @@ const styles = StyleSheet.create({
   },
   tabbar: {
     backgroundColor: green
+  },
+  subtabbar: {
+    height: 30
+  },
+  subtabslabel: {
+    fontSize: fontSize-3,
+    paddingBottom: 5
   }
 });
 

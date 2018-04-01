@@ -1,11 +1,10 @@
 import React from 'react';
 import {
   Dimensions,
+  StyleSheet,
   Text,
   WebView
 } from 'react-native';
-
-import { styles } from 'common/styles/style';
 
 
 export class GolfGenius extends React.Component {
@@ -81,3 +80,10 @@ export class GolfGenius extends React.Component {
     return content;
   }
 };
+
+const styles = StyleSheet.create({
+  gglb: {
+    margin: 0,
+    padding: 0
+  }
+});

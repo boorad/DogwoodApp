@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-  Image,
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Header } from 'common/header';
 import { GolfGenius } from './golfgenius';
 import {
   headerColor,
@@ -25,7 +24,7 @@ export class ScoresTees extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { "page": "lb" };
+    this.state = {page: 'lb'};
   }
 
   async _fetchData() {
@@ -53,64 +52,52 @@ export class ScoresTees extends React.Component {
     this._fetchData();
   }
 
-  _switch(page) {
-      this.setState((prevState, props) => {
-        prevState.page = page;
-        return prevState;
-      });
-  }
-
-  _renderTab(name, page, isTabActive) {
-    var st = [styles.tab];
-    if( isTabActive ) st.push(styles.activeTab);
-
+  _renderHdr(label) {
     return (
-      <TouchableHighlight
-        onPress={() => this._switch(page)}
-        style={st}
-      >
-        <Text style={[styles.tabText]}>{name}</Text>
-      </TouchableHighlight>
-    );
-  }
-
-  _renderTabs() {
-    return (
-      <View
-        style={[styles.tabRow]}
-      >
-        { this._renderTab("Leaderboard", "lb", this.state.page === "lb") }
-        { this._renderTab("Tee Times", "tt", this.state.page === "tt") }
+      <View style={styles.hdr}>
+        <View style={styles.hdrLabel}>
+          <Text style={styles.hdrLabelText}>{label}</Text>
+        </View>
+        <View style={styles.hdrMore}>
+          <TouchableOpacity >
+            <Icon
+              size={24}
+              color='#eee'
+              name='dots-vertical'
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 
   render() {
-    var tabs = null;
-    var lb = null;
-    var tt = null;
+    var hdr = null;
+    var gg = null;
 
     if( this.state && this.state.tt && this.state.lb ) {
 
-      tabs = this._renderTabs();
+      hdr = this._renderHdr(this.props.label);
 
       if( this.state.page === 'lb' ) {
-        lb = (
-          <GolfGenius
-            gg_num={this.state.lb}
-            type="leaderboard"
-            tabLabel="Leaderboard"
-          />
+        gg = (
+          <View style={styles.gg}>
+            <GolfGenius
+              gg_num={this.state.lb}
+              type="leaderboard"
+            />
+          </View>
         );
       }
 
       if( this.state.page === 'tt' ) {
-        tt = (
-          <GolfGenius
-            gg_num={this.state.tt}
-            type="teetime"
-            tabLabel="Tee Times"
-          />
+        gg = (
+          <View style={styles.gg}>
+            <GolfGenius
+              gg_num={this.state.tt}
+              type="teetime"
+            />
+          </View>
         );
       }
 
@@ -121,10 +108,9 @@ export class ScoresTees extends React.Component {
     }
 
     return (
-      <View style={{flex:1}}>
-        {tabs}
-        {lb}
-        {tt}
+      <View style={styles.container}>
+        {hdr}
+        {gg}
       </View>
     );
   }
@@ -133,56 +119,29 @@ export class ScoresTees extends React.Component {
 
 
 const styles = StyleSheet.create({
-  title: {
-    alignItems: 'center',
-    paddingTop: 15,
-    paddingBottom: 15
+  container: {
+    flex: 1
   },
-  titleText: {
-    fontSize: fontSize+4,
-    fontFamily: fontFamily,
-    color: headerColor
+  hdr: {
   },
-  tab: {
-    flex: 1,
-    height: 49,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 4,
-    borderColor: primaryColor
+  hdrLabel: {
+    alignItems: 'center'
   },
-  activeTab: {
-    backgroundColor: '#00b0d6',
-    borderColor: "yellow",
-    borderBottomWidth: 4
+  hdrMore: {
+    position: 'absolute',
+    right: 15,
+    paddingTop: 10,
+    paddingBottom: 10
   },
-  tabContainer: {
-    backgroundColor: primaryColor,
-    height: 50
-  },
-  schTab: {
-    width: 50,
-    minWidth: 50
-  },
-  tabRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    height: 49
-  },
-  tabText: {
+  hdrLabelText: {
     color: "#eee",
     textAlign: 'center',
-    fontSize: fontSize+2,
-    fontFamily: fontFamily
-  },
-  tabContent: {
-    backgroundColor: "#fff"
-  },
-  tabContentTitle: {
-    fontSize: fontSize+2,
+    fontSize: fontSize+4,
     fontFamily: fontFamily,
-    color: "#333",
-    textAlign: "center",
-    padding: 10
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  gg: {
+    flex: 1
   }
 });

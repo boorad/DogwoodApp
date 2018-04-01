@@ -6,7 +6,6 @@ import {
   Text,
   View
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
   fontFamily,
@@ -18,25 +17,12 @@ import {
   primaryColor
 } from 'common/styles/color';
 
-import { Header } from 'common/header';
 import { Champion } from './champion';
 
 
 const url = "https://api.druid.golf/dogwood/champions";
 
-export class ChampionsScreen extends React.Component {
-  static navigationOptions = {
-    drawer: () => ({
-      label: 'Past Champions',
-      icon: ({tintColor}) => (
-        <Icon
-          name="trophy"
-          size={20}
-          color={tintColor}
-        />
-      )
-    })
-  };
+export class Champions extends React.Component {
 
   constructor(props) {
     super(props);
@@ -117,9 +103,6 @@ export class ChampionsScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Header
-          label="Champions"
-        />
         {title}
         {content}
       </View>
@@ -130,7 +113,7 @@ export class ChampionsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: primaryColor,
+    backgroundColor: '#eee',
     flex: 1
   },
   title: {

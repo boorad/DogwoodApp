@@ -21,11 +21,10 @@ export class TournamentScreen extends React.Component {
   render() {
     return (
       <View style={[styles.container]}>
-        <Header
-          label="Tournament"
-        />
+        <Header />
         <ScoresTees
           type="tournament"
+          label="Tournament"
         />
       </View>
     );
