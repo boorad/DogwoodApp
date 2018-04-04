@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
   chYear: {
     flex: 1,
     fontSize: fontSize+1,
-    color: "#fff",
+    color: "#222",
     paddingLeft: 10
   },
   chName: {
     flex: 7,
     fontSize: fontSize+1,
-    color: "#fff",
+    color: "#222",
     paddingLeft: 10
   }
 });

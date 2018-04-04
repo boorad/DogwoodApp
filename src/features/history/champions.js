@@ -14,9 +14,11 @@ import {
 
 import {
   headerColor,
-  primaryColor
+  primaryColor,
+  green
 } from 'common/styles/color';
 
+import { Header } from 'common/header';
 import { Champion } from './champion';
 
 
@@ -81,7 +83,7 @@ export class Champions extends React.Component {
       champions = this._sort(champions);
 
       content = (
-        <ScrollView>
+        <ScrollView style={styles.scroll}>
           {sub}
           {champions.map((champ, i) => {
              return (
@@ -103,6 +105,7 @@ export class Champions extends React.Component {
 
     return (
       <View style={styles.container}>
+        <Header />
         {title}
         {content}
       </View>
@@ -113,7 +116,7 @@ export class Champions extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#eee',
+    backgroundColor: green,
     flex: 1
   },
   title: {
@@ -124,12 +127,15 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: fontSize+4,
     fontFamily: fontFamily,
-    color: headerColor
+    color: 'white'
+  },
+  scroll: {
+    backgroundColor: 'white'
   },
   chSubTitle: {
     fontSize: fontSize-2,
     fontFamily: fontFamily,
-    color: "#fff",
+    color: "#222",
     flex: 7,
     paddingLeft: 10
   },
@@ -140,13 +146,13 @@ const styles = StyleSheet.create({
   chYear: {
     flex: 1,
     fontSize: fontSize+1,
-    color: "#fff",
+    color: "#222",
     paddingLeft: 10
   },
   chName: {
     flex: 7,
     fontSize: fontSize+1,
-    color: "#fff",
+    color: "#222",
     paddingLeft: 10
   }
 });

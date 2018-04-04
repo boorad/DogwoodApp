@@ -107,8 +107,7 @@ class TabsContainer extends Component  {
                 activeBackgroundColor={blue}
                 labelStyle={styles.subtabslabel}
                 allowFontScaling={false}
-                tabBarStyle={[styles.tabbar, styles.subtabbar]}
-                indicatorStyle={styles.subtabbarIndicator}
+                tabBarStyle={styles.subtabbar}
                 showIcon={false}
                 initial
               >
