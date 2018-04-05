@@ -30,9 +30,7 @@ import { TournamentScreen } from 'features/scoring/tournament';
 import { QualifierScreen } from 'features/scoring/qualifier';
 import { AmAmScreen } from 'features/scoring/am-am';
 import { ScheduleScreen } from 'features/schedule/schedule';
-import { Champions } from 'features/history/champions';
-import { Alumni } from 'features/history/alumni';
-import { Story } from 'features/history/story';
+import { HistoryScreen } from 'features/history/history';
 import { AboutScreen } from 'features/about/about';
 
 
@@ -97,39 +95,18 @@ class TabsContainer extends Component  {
                   hideNavBar
                 />
               </Stack>
-              <Tabs
-                key='history_tabs'
+              <Stack
+                key='history_stack'
                 tabBarLabel='History'
                 icon={() => <TabIcon color='white' name='trophy'/>}
-                inactiveTintColor='#ccc'
-                inactiveBackgroundColor={green}
-                activeTintColor='white'
-                activeBackgroundColor={blue}
-                labelStyle={styles.subtabslabel}
-                allowFontScaling={false}
-                tabBarStyle={styles.subtabbar}
-                showIcon={false}
                 initial
               >
                 <Scene
-                  key='champs'
-                  tabBarLabel='Past Champions'
-                  component={Champions}
+                  key='history'
+                  component={HistoryScreen}
                   hideNavBar
                 />
-                <Scene
-                  key='alum'
-                  tabBarLabel='PGA Alumni'
-                  component={Alumni}
-                  hideNavBar
-                />
-                <Scene
-                  key='story'
-                  tabBarLabel='Dogwood History'
-                  component={Story}
-                  hideNavBar
-                />
-              </Tabs>
+              </Stack>
               <Stack
                 key='about_stack'
                 tabBarLabel='About'
@@ -159,13 +136,6 @@ const styles = StyleSheet.create({
   },
   tabbar: {
     backgroundColor: green
-  },
-  subtabbar: {
-    height: 30
-  },
-  subtabslabel: {
-    fontSize: fontSize-3,
-    paddingBottom: 5
   }
 });
 

@@ -18,7 +18,6 @@ import {
   green
 } from 'common/styles/color';
 
-import { Header } from 'common/header';
 import { Champion } from './champion';
 
 
@@ -105,7 +104,6 @@ export class Champions extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Header />
         {title}
         {content}
       </View>

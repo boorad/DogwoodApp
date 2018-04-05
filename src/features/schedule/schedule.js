@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -88,6 +89,8 @@ export class ScheduleScreen extends React.Component {
   render() {
     var title, content;
 
+    let tabBarPosition = Platform.OS  === 'ios' ? 'bottom' : 'top';
+
     if( this.state && this.state.data ) {
       const { year, days } = this.state.data;
       title = (
@@ -100,6 +103,7 @@ export class ScheduleScreen extends React.Component {
       content = (
         <ScrollableTabView
           initialPage={0}
+          tabBarPosition={tabBarPosition}
           renderTabBar={ () =>
             <ScrollableTabBar
               style={styles.tabContainer}

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -21,6 +22,8 @@ import {
 
 import { Header } from 'common/header';
 import { Champions } from 'features/history/champions';
+import { Alumni } from 'features/history/alumni';
+import { Story } from 'features/history/story';
 
 export class HistoryScreen extends React.Component {
 
@@ -34,9 +37,7 @@ export class HistoryScreen extends React.Component {
         style={styles.tabContainer}
         underlineStyle={{backgroundColor: "yellow"}}
         renderTab={this._renderTab}
-      >
-        <Champions />
-      </ScrollableTabBar>
+      />
     );
   }
 
@@ -51,7 +52,7 @@ export class HistoryScreen extends React.Component {
         onLayout={onLayoutHandler}
         style={st}
       >
-        <Text style={[styles.histTab, styles.tabText]}>{name}</Text>
+        <Text style={[styles.tabText]}>{name}</Text>
       </TouchableHighlight>
     );
   }
@@ -59,11 +60,16 @@ export class HistoryScreen extends React.Component {
   _handleChangeTab({i, ref, from}) {}
 
   render() {
+    let tabBarPosition = Platform.OS  === 'ios' ? 'bottom' : 'top';
     let content = (
       <ScrollableTabView
         initialPage={0}
+        tabBarPosition={tabBarPosition}
+        renderTabBar={() => this._renderTabBar()}
       >
         <Champions tabLabel="Past Champions" />
+        <Alumni tabLabel="PGA Alumni" />
+        <Story tabLabel="Dogwood History" />
       </ScrollableTabView>
     );
 
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
   },
   tab: {
     flex: 1,
-    height: 49,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 4,
@@ -106,23 +112,23 @@ const styles = StyleSheet.create({
     borderColor: "yellow",
     borderBottomWidth: 4
   },
-  tabContainer: {
-    backgroundColor: primaryColor,
-    height: 50
-  },
   histTab: {
     width: 50,
     minWidth: 50
   },
+  tabContainer: {
+    backgroundColor: primaryColor,
+    height: 40
+  },
   tabRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    height: 49
+    height: 40
   },
   tabText: {
     color: "#eee",
     textAlign: 'center',
-    fontSize: fontSize+2,
+    fontSize: fontSize-2,
     fontFamily: fontFamily
   }
 });
