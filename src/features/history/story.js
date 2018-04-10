@@ -14,18 +14,39 @@ import {
 export class Story extends React.Component {
 
   render() {
+    let title, content;
+
+    title = (
+      <View style={[styles.title]}>
+        <Text style={[styles.titleText]}>
+          Dogwood History
+        </Text>
+      </View>
+    );
+
     return (
       <View style={styles.container}>
-        <Text>Dogwood History</Text>
+        {title}
+        {content}
       </View>
     );
   }
 
-}
+};
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  title: {
+    alignItems: 'center',
+    paddingTop: 15,
+    paddingBottom: 15
+  },
+  titleText: {
+    fontSize: fontSize+4,
+    fontFamily: fontFamily,
+    color: 'white'
   }
 });
