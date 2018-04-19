@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   FlatList,
+  Linking,
   StyleSheet,
   Text,
   View
@@ -32,7 +33,10 @@ export class Alumni extends React.Component {
   }
 
   _itemPressed(item) {
-    console.log(item);
+    const id = item.id;
+    const name = item.name.toLowerCase().replace(' ', '-');
+    const url = `https://www.pgatour.com/players/player.${id}.${name}.html`;
+    Linking.openURL(url);
   }
 
   _renderItem( { item } ) {
