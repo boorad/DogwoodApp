@@ -63,12 +63,12 @@ export class HistoryScreen extends React.Component {
     let tabBarPosition = Platform.OS  === 'ios' ? 'bottom' : 'top';
     let content = (
       <ScrollableTabView
-        initialPage={0}
+        initialPage={1}
         tabBarPosition={tabBarPosition}
         renderTabBar={() => this._renderTabBar()}
       >
         <Champions tabLabel="Past Champions" />
-        <Alumni tabLabel="PGA Alumni" />
+        <Alumni tabLabel="Alumni" />
         <Story tabLabel="Dogwood History" />
       </ScrollableTabView>
     );
