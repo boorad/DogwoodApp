@@ -17,8 +17,10 @@ import {
   fontSize
 } from 'common/styles/style';
 
+import { baseUrl } from 'common/config';
 
-const url = "https://api.druid.golf/dogwood/config";
+
+const url = `${baseUrl}/config`;
 
 export class ScoresTees extends React.Component {
 

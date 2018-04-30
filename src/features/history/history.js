@@ -63,7 +63,7 @@ export class HistoryScreen extends React.Component {
     let tabBarPosition = Platform.OS  === 'ios' ? 'bottom' : 'top';
     let content = (
       <ScrollableTabView
-        initialPage={1}
+        initialPage={0}
         tabBarPosition={tabBarPosition}
         renderTabBar={() => this._renderTabBar()}
       >

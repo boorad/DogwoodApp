@@ -20,8 +20,10 @@ import {
 
 import { Champion } from './champion';
 
+import { baseUrl } from 'common/config';
 
-const url = "https://api.druid.golf/dogwood/champions";
+
+const url = `${baseUrl}/champions`;
 
 export class Champions extends React.Component {
 

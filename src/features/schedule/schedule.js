@@ -22,10 +22,10 @@ import {
 
 import { Header } from 'common/header';
 import { Day } from './day';
+import { baseUrl } from 'common/config';
 
 
-const url = "https://api.druid.golf/dogwood/schedule";
-
+const url = `${baseUrl}/schedule`;
 
 export class ScheduleScreen extends React.Component {
   static navigationOptions = {
@@ -48,6 +48,7 @@ export class ScheduleScreen extends React.Component {
 
   async _fetchData() {
     try {
+      console.log('url', url);
       let response = await fetch(url);
       let responseJson = await response.json();
       this._updateData(responseJson);
