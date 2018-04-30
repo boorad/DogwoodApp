@@ -48,7 +48,6 @@ export class ScheduleScreen extends React.Component {
 
   async _fetchData() {
     try {
-      console.log('url', url);
       let response = await fetch(url);
       let responseJson = await response.json();
       this._updateData(responseJson);
