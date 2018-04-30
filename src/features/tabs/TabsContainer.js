@@ -69,6 +69,7 @@ class TabsContainer extends Component  {
                 key='scoring_stack'
                 tabBarLabel='Leaderboard'
                 icon={() => <TabIcon color='white' name='lead-pencil'/>}
+                initial
               >
                 <Scene
                   key='tourney'
@@ -99,7 +100,6 @@ class TabsContainer extends Component  {
                 key='history_stack'
                 tabBarLabel='History'
                 icon={() => <TabIcon color='white' name='trophy'/>}
-                initial
               >
                 <Scene
                   key='history'

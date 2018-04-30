@@ -12,18 +12,6 @@ import { styles } from 'common/styles/style';
 
 
 export class QualifierScreen extends React.Component {
-  static navigationOptions = {
-    drawer: () => ({
-      label: 'Qualifier Scores & Tee Times',
-      icon: ({tintColor}) => (
-        <Icon
-          name="monitor"
-          size={20}
-          color={tintColor}
-        />
-      )
-    })
-  };
 
   constructor(props) {
     super(props);
