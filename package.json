@@ -11,8 +11,8 @@
     "build:ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./ios/Dogwood/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "react-native": "^0.53.3",
+    "react": "16.3.1",
+    "react-native": "0.55.3",
     "react-native-device-info": "^0.15.3",
     "react-native-elements": "^0.19.1",
     "react-native-iphone-x-helper": "^1.0.2",
