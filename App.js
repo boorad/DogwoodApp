@@ -4,6 +4,7 @@ import {
   View
 } from 'react-native';
 import { Provider } from 'react-redux';
+import { MenuProvider } from 'react-native-popup-menu';
 
 import configureStore from 'app/store/configureStore';
 import TabsContainer from 'features/tabs/TabsContainer';
@@ -15,7 +16,9 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <TabsContainer />
+        <MenuProvider>
+          <TabsContainer />
+        </MenuProvider>
       </Provider>
     );
   }

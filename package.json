@@ -16,6 +16,7 @@
     "react-native-device-info": "^0.15.3",
     "react-native-elements": "^0.19.1",
     "react-native-iphone-x-helper": "^1.0.2",
+    "react-native-popup-menu": "^0.13.0",
     "react-native-router-flux": "^4.0.0-beta.28",
     "react-native-scrollable-tab-view": "^0.8.0",
     "react-native-vector-icons": "^4.5.0",
