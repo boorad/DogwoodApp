@@ -21,25 +21,13 @@ import {
 } from 'common/styles/color';
 
 import { Header } from 'common/header';
-import { Day } from './day';
 import { baseUrl } from 'common/config';
+import { Day } from './day';
 
 
 const url = `${baseUrl}/schedule`;
 
 export class ScheduleScreen extends React.Component {
-  static navigationOptions = {
-    drawer: () => ({
-      label: 'Schedule of Events',
-      icon: ({tintColor}) => (
-        <Icon
-          name="timetable"
-          size={20}
-          color={tintColor}
-        />
-      )
-    })
-  };
 
   constructor(props) {
     super(props);
@@ -48,7 +36,11 @@ export class ScheduleScreen extends React.Component {
 
   async _fetchData() {
     try {
-      let response = await fetch(url);
+      let response = await fetch(url, {
+        headers: {
+          'Cache-Control': 'no-cache'
+        }
+      });
       let responseJson = await response.json();
       this._updateData(responseJson);
     } catch(error) {
