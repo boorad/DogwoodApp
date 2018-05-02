@@ -6,6 +6,12 @@ import {
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 
 import { GolfGenius } from './golfgenius';
 import {
@@ -54,6 +60,14 @@ export class ScoresTees extends React.Component {
     this._fetchData();
   }
 
+  _setYear(year) {
+    console.log(year);
+  }
+
+  _setTourney(tourney) {
+    console.log(tourney);
+  }
+
   _renderHdr(label) {
     return (
       <View style={styles.hdr}>
@@ -61,21 +75,34 @@ export class ScoresTees extends React.Component {
           <Text style={styles.hdrLabelText}>{label}</Text>
         </View>
         <View style={styles.hdrMore}>
-          <TouchableOpacity >
-            <Icon
-              size={24}
-              color='#eee'
-              name='dots-vertical'
-            />
-          </TouchableOpacity>
+          <Menu>
+            <MenuTrigger>
+              <Icon
+                size={24}
+                color='#eee'
+                name='dots-vertical'
+              />
+            </MenuTrigger>
+            <MenuOptions>
+              <MenuOption onSelect={() => this._setYear('2018')} text='2018' />
+              <MenuOption onSelect={() => this._setYear('2017')} text='2017' />
+              <View style={{borderBottomColor: '#999',borderBottomWidth:1}} />
+              <MenuOption
+                onSelect={() => this._setTourney('q')} text='Qualifier' />
+              <MenuOption
+                onSelect={() => this._setTourney('a')} text='Am-Am' />
+              <MenuOption
+                onSelect={() => this._setTourney('t')} text='Tournament' />
+            </MenuOptions>
+          </Menu>
         </View>
       </View>
     );
   }
 
   render() {
-    var hdr = null;
-    var gg = null;
+    let hdr = null;
+    let gg = null;
 
     if( this.state && this.state.tt && this.state.lb ) {
 
