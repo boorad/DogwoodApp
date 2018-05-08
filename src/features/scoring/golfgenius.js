@@ -7,27 +7,18 @@ import {
 } from 'react-native';
 
 
-export class GolfGenius extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      type: props.type,
-      gg_num: props.gg_num
-    };
-  }
+export class GolfGenius extends React.PureComponent {
 
   _get_src() {
-    var src = "";
-    const { type, gg_num } = this.state;
+    let src = "";
+    const { type, gg_num } = this.props;
 
-    if( type === 'leaderboard' ) {
+    if( type === 'lb' ) {
       src = "src='https://www.golfgenius.com/pages/" + gg_num
           + "?no_header=no_nav_bar&banner=false' ";
     }
 
-    if( type === 'teetime' ) {
+    if( type === 'tt' ) {
       src = "src='https://www.golfgenius.com/leagues/" + gg_num
           + "/widgets/next_round?teesheet_mobile=true' ";
     }
@@ -36,13 +27,8 @@ export class GolfGenius extends React.Component {
   }
 
   render() {
-    var { height, width } = Dimensions.get('window');
-    //console.log('height', height);
-    //console.log('width', width);
-
-    //height = height - 20;
-
-    var content;
+    let { height, width } = Dimensions.get('window');
+    let content;
 
     const iframe = `
 <iframe frameBorder='0'

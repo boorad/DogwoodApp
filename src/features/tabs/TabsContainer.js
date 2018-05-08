@@ -37,7 +37,12 @@ import { AboutScreen } from 'features/about/about';
 
 const TabIcon = ({name, color}) => {
   return (
-    <Icon size={18} color={color} name={name} />
+    <Icon
+      style={{ width: 18, height: 18 }}
+      size={18}
+      color={color}
+      name={name}
+    />
   );
 };
 
@@ -59,7 +64,7 @@ class TabsContainer extends Component  {
               key='main_tabs'
               inactiveTintColor='#ccc'
               inactiveBackgroundColor='#666'
-              activeTintColor='white'
+              activeTintColor='#fff'
               activeBackgroundColor={green}
               labelStyle={styles.maintabslabel}
               allowFontScaling={false}
@@ -68,7 +73,7 @@ class TabsContainer extends Component  {
               <Stack
                 key='scoring_stack'
                 tabBarLabel='Leaderboard'
-                icon={() => <TabIcon color='white' name='lead-pencil'/>}
+                icon={() => <TabIcon color='#fff' name='lead-pencil'/>}
                 initial
               >
                 <Scene
@@ -88,7 +93,7 @@ class TabsContainer extends Component  {
               <Stack
                 key='schedule_stack'
                 tabBarLabel='Schedule'
-                icon={() => <TabIcon color='white' name='calendar-clock'/>}
+                icon={() => <TabIcon color='#fff' name='calendar-clock'/>}
               >
                 <Scene
                   key='schedule'
@@ -99,7 +104,7 @@ class TabsContainer extends Component  {
               <Stack
                 key='history_stack'
                 tabBarLabel='History'
-                icon={() => <TabIcon color='white' name='trophy'/>}
+                icon={() => <TabIcon color='#fff' name='trophy'/>}
               >
                 <Scene
                   key='history'
@@ -110,12 +115,12 @@ class TabsContainer extends Component  {
               <Stack
                 key='about_stack'
                 tabBarLabel='About'
-                icon={() => <TabIcon color='white' name='help-circle'/>}
+                icon={() => <TabIcon color='#fff' name='help-circle'/>}
               >
                 <Scene
                   key='about'
                   component={AboutScreen}
-                  icon={() => <TabIcon color={blue} name='message'/>}
+                  icon={() => <TabIcon color='#fff' name='message'/>}
                   hideNavBar
                 />
               </Stack>

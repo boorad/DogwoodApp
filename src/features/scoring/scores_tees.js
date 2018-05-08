@@ -12,6 +12,7 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import { find } from 'lodash';
 
 import { GolfGenius } from './golfgenius';
 import {
@@ -26,13 +27,26 @@ import {
 import { baseUrl } from 'common/config';
 
 
-const url = `${baseUrl}/config`;
+const url = `${baseUrl}/golfgenius`;
+
+const years = ['2018', '2017'];
+
+const tourneys = [
+  {id: 'q', key: 'qualifier', label:'Qualifier'},
+  {id: 'a', key: 'am-am', label:'Am-Am'},
+  {id: 't', key: 'tournament', label:'Tournament'}
+];
 
 export class ScoresTees extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {page: 'lb'};
+    this.state = {
+      data: [],
+      page: 'lb',
+      year: '2018',
+      tourney: 't'
+    };
   }
 
   async _fetchData() {
@@ -47,11 +61,11 @@ export class ScoresTees extends React.Component {
   }
 
   _updateData(data) {
-    const { type } = this.props;
-
+    const type = find(tourneys, {id: this.state.tourney}).key;
     this.setState((prevState, props) => {
-      prevState.tt = data[type].teetimes;
-      prevState.lb = data[type].leaderboard;
+      prevState.data = data;
+      prevState.tt = find(data, {year: this.state.year})[type].teetimes;
+      prevState.lb = find(data, {year: this.state.year})[type].leaderboard;
       return prevState;
     });
   }
@@ -60,15 +74,47 @@ export class ScoresTees extends React.Component {
     this._fetchData();
   }
 
+  shouldComponentUpdate
   _setYear(year) {
-    console.log(year);
+    const type = find(tourneys, {id: this.state.tourney}).key;
+    this.setState((prevState, props) => {
+      prevState.year = year;
+      prevState.tt = find(this.state.data, {year: year})[type].teetimes;
+      prevState.lb = find(this.state.data, {year: year})[type].leaderboard;
+      return prevState;
+    });
   }
 
   _setTourney(tourney) {
-    console.log(tourney);
+    const type = find(tourneys, {id: tourney}).key;
+    this.setState((prevState, props) => {
+      prevState.tourney = tourney;
+      prevState.tt = find(this.state.data, {year: this.state.year})[type].teetimes;
+      prevState.lb = find(this.state.data, {year: this.state.year})[type].leaderboard;
+      return prevState;
+    });
+    this.setState((prevState, props) => {
+      return prevState;
+    });
   }
 
   _renderHdr(label) {
+    const yearOptions = years.map(y => (
+      <MenuOption
+        onSelect={() => this._setYear(y)}
+        text={y}
+        key={y}
+      />
+    ));
+
+    const tourneyOptions = tourneys.map(t => (
+      <MenuOption
+        onSelect={() => this._setTourney(t.id)}
+        text={t.label}
+        key={t.id}
+      />
+    ));
+
     return (
       <View style={styles.hdr}>
         <View style={styles.hdrLabel}>
@@ -83,16 +129,12 @@ export class ScoresTees extends React.Component {
                 name='dots-vertical'
               />
             </MenuTrigger>
-            <MenuOptions>
-              <MenuOption onSelect={() => this._setYear('2018')} text='2018' />
-              <MenuOption onSelect={() => this._setYear('2017')} text='2017' />
+            <MenuOptions
+              customStyles={{optionsContainer: styles.optionsContainer}}
+            >
+              {yearOptions}
               <View style={{borderBottomColor: '#999',borderBottomWidth:1}} />
-              <MenuOption
-                onSelect={() => this._setTourney('q')} text='Qualifier' />
-              <MenuOption
-                onSelect={() => this._setTourney('a')} text='Am-Am' />
-              <MenuOption
-                onSelect={() => this._setTourney('t')} text='Tournament' />
+              {tourneyOptions}
             </MenuOptions>
           </Menu>
         </View>
@@ -104,34 +146,24 @@ export class ScoresTees extends React.Component {
     let hdr = null;
     let gg = null;
 
-    if( this.state && this.state.tt && this.state.lb ) {
+    if( this.state &&
+        (this.state.tt !== undefined) &&
+        (this.state.lb !== undefined) &&
+        this.state.tourney &&
+        this.state.year) {
+      let label = find(tourneys, {id: this.state.tourney}).label;
+      hdr = this._renderHdr(this.state.year + ' ' + label);
 
-      hdr = this._renderHdr(this.props.label);
-
-      if( this.state.page === 'lb' ) {
-        gg = (
-          <View style={styles.gg}>
-            <GolfGenius
-              gg_num={this.state.lb}
-              type="leaderboard"
-            />
-          </View>
-        );
-      }
-
-      if( this.state.page === 'tt' ) {
-        gg = (
-          <View style={styles.gg}>
-            <GolfGenius
-              gg_num={this.state.tt}
-              type="teetime"
-            />
-          </View>
-        );
-      }
-
+      gg = (
+        <View style={styles.gg}>
+          <GolfGenius
+            gg_num={this.state.lb}
+            type={this.state.page}
+          />
+        </View>
+      );
     } else {
-      content = (
+      gg = (
         <Text>Loading...</Text>
       );
     }
@@ -172,5 +204,8 @@ const styles = StyleSheet.create({
   },
   gg: {
     flex: 1
+  },
+  optionsContainer: {
+    width: '40%'
   }
 });
