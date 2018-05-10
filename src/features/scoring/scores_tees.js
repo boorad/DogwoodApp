@@ -41,12 +41,34 @@ export class ScoresTees extends React.Component {
 
   constructor(props) {
     super(props);
+    let { y, t } = this._initialYearTourney();
     this.state = {
       data: [],
       page: 'lb',
-      year: '2018',
-      tourney: 't'
+      year: y,
+      tourney: t
     };
+  }
+
+  // TODO: this is hardcoded as fuck
+  //       get tournament dates and maybe use month and date below, plus math
+  _initialYearTourney() {
+    const now = new Date();
+    const year = now.getUTCFullYear();
+    //const month = now.getUTCMonth();
+    //const date = now.getUTCDate();
+
+    let y = year;
+    let t = 't';
+
+    if( now < new Date(2018, 5, 4, 12, 0, 0) ) {
+      y = 2017;
+    } else if( now < new Date(2018, 5, 5, 12, 0, 0)) {
+      t = 'q';
+    } else if( now < new Date(2018, 5, 6, 12, 0, 0)) {
+      t = 'a';
+    }
+    return {y: y.toString(), t: t};
   }
 
   async _fetchData() {
@@ -62,6 +84,7 @@ export class ScoresTees extends React.Component {
 
   _updateData(data) {
     const type = find(tourneys, {id: this.state.tourney}).key;
+    console.log('data', data, 'type', type, 'year', this.state.year);
     this.setState((prevState, props) => {
       prevState.data = data;
       prevState.tt = find(data, {year: this.state.year})[type].teetimes;
@@ -74,46 +97,37 @@ export class ScoresTees extends React.Component {
     this._fetchData();
   }
 
-  shouldComponentUpdate
-  _setYear(year) {
-    const type = find(tourneys, {id: this.state.tourney}).key;
+  _setSelection(year, tourney) {
+    const type = find(tourneys, {id: tourney}).key;
     this.setState((prevState, props) => {
       prevState.year = year;
+      prevState.tourney = tourney;
       prevState.tt = find(this.state.data, {year: year})[type].teetimes;
       prevState.lb = find(this.state.data, {year: year})[type].leaderboard;
       return prevState;
     });
   }
 
-  _setTourney(tourney) {
-    const type = find(tourneys, {id: tourney}).key;
-    this.setState((prevState, props) => {
-      prevState.tourney = tourney;
-      prevState.tt = find(this.state.data, {year: this.state.year})[type].teetimes;
-      prevState.lb = find(this.state.data, {year: this.state.year})[type].leaderboard;
-      return prevState;
-    });
-    this.setState((prevState, props) => {
-      return prevState;
-    });
-  }
-
+  // TODO: separate components, plz
   _renderHdr(label) {
-    const yearOptions = years.map(y => (
-      <MenuOption
-        onSelect={() => this._setYear(y)}
-        text={y}
-        key={y}
-      />
-    ));
+    const options = years.map(y => {
 
-    const tourneyOptions = tourneys.map(t => (
-      <MenuOption
-        onSelect={() => this._setTourney(t.id)}
-        text={t.label}
-        key={t.id}
-      />
-    ));
+      let tourneyOptions = tourneys.map(t => (
+        <MenuOption
+          onSelect={() => this._setSelection(y, t.id)}
+          text={t.label}
+          key={y + '_' + t.id}
+        />
+      ));
+
+      return (
+        <View style={styles.yearOptionsContainer} key={y}>
+        <Text style={styles.yearOptionsText}>{y}</Text>
+        {tourneyOptions}
+        <View style={{borderBottomColor: '#999',borderBottomWidth:1}} />
+        </View>
+      );
+    });
 
     return (
       <View style={styles.hdr}>
@@ -132,9 +146,7 @@ export class ScoresTees extends React.Component {
             <MenuOptions
               customStyles={{optionsContainer: styles.optionsContainer}}
             >
-              {yearOptions}
-              <View style={{borderBottomColor: '#999',borderBottomWidth:1}} />
-              {tourneyOptions}
+              {options}
             </MenuOptions>
           </Menu>
         </View>
@@ -204,6 +216,12 @@ const styles = StyleSheet.create({
   },
   gg: {
     flex: 1
+  },
+  yearOptionsContainer: {
+    padding: 10
+  },
+  yearOptionsText: {
+    fontWeight: 'bold'
   },
   optionsContainer: {
     width: '40%'
