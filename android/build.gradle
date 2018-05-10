@@ -25,7 +25,9 @@ allprojects {
        resolutionStrategy {
          eachDependency { DependencyResolveDetails details ->
            if (details.requested.group == 'com.facebook.react' && details.requested.name == 'react-native') {
-             details.useVersion "0.42.0-rc.3" // Your real React Native version here
+               def file = new File("$rootDir/../node_modules/react-native/package.json")
+               def version = new groovy.json.JsonSlurper().parseText(file.text).version
+               details.useVersion version
            }
          }
        }
