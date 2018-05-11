@@ -96,12 +96,12 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '26.0.1'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.dogwood"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 26
         versionCode 7
         versionName "2.0.0"
         ndk {
