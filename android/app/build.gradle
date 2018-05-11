@@ -95,7 +95,7 @@ def enableProguardInReleaseBuilds = false
 
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion '27.0.3'
 
     defaultConfig {
@@ -148,13 +148,19 @@ android {
             }
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        disable 'MissingTranslation'
+        abortOnError false
+    }
 }
 
 dependencies {
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-device-info')
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    api project(':react-native-vector-icons')
+    api project(':react-native-device-info')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api 'com.android.support:appcompat-v7:23.0.1'
     // From node_modules
 }
 
@@ -168,6 +174,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
 repositories {
     mavenLocal()
     jcenter()
+    google()
     maven {
         // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
         url "$rootDir/../node_modules/react-native/android"

@@ -26,6 +26,7 @@ If ready for deploy, perform a version bump commit:
 
 After version bump, follow instructions here: [https://facebook.github.io/react-native/docs/signed-apk-android.html](https://facebook.github.io/react-native/docs/signed-apk-android.html).  Basically, when everything is set up, do:
 
+    npm run build:android
     cd android && ./gradlew assembleRelease
 
 Then go to [App Releases](https://play.google.com/apps/publish/?dev_acc=00137341438711124394#ManageReleasesPlace:p=com.dogwood) in the Play Store.
