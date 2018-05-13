@@ -4,6 +4,7 @@ import {
   Text,
   View
 } from 'react-native';
+import { ListItem } from 'react-native-elements';
 
 import { fontSize } from 'common/styles/style';
 
@@ -11,14 +12,14 @@ import { fontSize } from 'common/styles/style';
 export class Champion extends React.Component {
 
   render() {
-    const { i, year, name, walker } = this.props;
+    const { year, name, walker } = this.props;
     var w = walker ? "*" : "";
 
     return(
-      <View style={[styles.chRow]}>
-        <Text style={[styles.chYear]}>{year}</Text>
-        <Text style={[styles.chName]}>{name}{w}</Text>
-      </View>
+      <ListItem
+        title={year + ' - ' + name + ' ' + w}
+        hideChevron
+      />
     );
   }
 

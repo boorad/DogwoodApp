@@ -1,11 +1,13 @@
 import React from 'react';
 import {
+  FlatList,
   Image,
   ScrollView,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import { List } from 'react-native-elements';
 
 import {
   fontFamily,
@@ -59,6 +61,16 @@ export class Champions extends React.Component {
     return champions.sort((a,b) => parseInt(b.year) - parseInt(a.year));
   }
 
+  _renderItem( { item } ) {
+    return (
+      <Champion
+        year={item.year}
+        name={item.name}
+        walker={item.walker}
+      />
+    );
+  }
+
   render() {
     var title, sub, content;
 
@@ -71,9 +83,8 @@ export class Champions extends React.Component {
     );
 
     sub = (
-      <View style={[styles.chRow]}>
-        <Text style={[styles.chYear]}> </Text>
-        <Text style={[styles.chSubTitle]}>
+      <View style={styles.sub}>
+        <Text style={styles.subText}>
           * denotes Walker Cup team member
         </Text>
       </View>
@@ -84,19 +95,16 @@ export class Champions extends React.Component {
       champions = this._sort(champions);
 
       content = (
-        <ScrollView style={styles.scroll}>
+        <View style={styles.scroll}>
           {sub}
-          {champions.map((champ, i) => {
-             return (
-               <Champion
-                 year={champ.year}
-                 name={champ.name}
-                 walker={champ.walker}
-                 i={i}
-                 key={i}
-               />);
-           })}
-        </ScrollView>
+          <List style={styles.list}>
+            <FlatList
+              data={champions}
+              renderItem={this._renderItem}
+              keyExtractor={champ => champ.year}
+            />
+          </List>
+        </View>
       );
     } else {
       content = (
@@ -130,6 +138,14 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   scroll: {
+    backgroundColor: 'white'
+  },
+  sub: {
+    backgroundColor: 'white',
+    alignItems: 'center'
+  },
+  subText: {
+    marginTop: 10,
     backgroundColor: 'white'
   },
   chSubTitle: {

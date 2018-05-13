@@ -84,7 +84,6 @@ export class ScoresTees extends React.Component {
 
   _updateData(data) {
     const type = find(tourneys, {id: this.state.tourney}).key;
-    console.log('data', data, 'type', type, 'year', this.state.year);
     this.setState((prevState, props) => {
       prevState.data = data;
       prevState.tt = find(data, {year: this.state.year})[type].teetimes;

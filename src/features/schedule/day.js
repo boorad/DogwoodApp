@@ -20,11 +20,17 @@ class Event extends React.Component {
         <View style={styles.eventRow}>
           <Text style={styles.eventStart}>{event.start}</Text>
           <Text style={styles.eventEnd}  >{event.end}</Text>
-          <Text style={styles.eventDescr}>{event.descr}</Text>
+          <Text
+            style={styles.eventDescr}
+            allowFontScaling={true}
+          >{event.descr}</Text>
         </View>
         <View style={styles.eventRow}>
           <Text style={styles.eventBlank}></Text>
-          <Text style={styles.eventNotes}>{event.notes}</Text>
+          <Text
+            style={styles.eventNotes}
+            allowFontScaling={true}
+          >{event.notes}</Text>
         </View>
       </View>
     );
