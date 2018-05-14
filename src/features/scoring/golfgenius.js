@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Dimensions,
+  Platform,
   StyleSheet,
   Text,
   WebView
@@ -59,7 +60,7 @@ export class GolfGenius extends React.PureComponent {
       <WebView
         source={{html: html}}
         style={styles.gglb}
-        scalesPageToFit={false}
+        scalesPageToFit={Platform.OS === 'android'}
       />
     );
 
