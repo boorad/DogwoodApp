@@ -81,14 +81,6 @@ class TabsContainer extends Component  {
                   component={TournamentScreen}
                   hideNavBar
                 />
-                <Scene
-                  key='am-am'
-                  component={AmAmScreen}
-                />
-                <Scene
-                  key='qualifier'
-                  component={QualifierScreen}
-                />
               </Stack>
               <Stack
                 key='schedule_stack'
