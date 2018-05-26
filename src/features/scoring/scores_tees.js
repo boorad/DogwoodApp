@@ -44,7 +44,6 @@ export class ScoresTees extends React.Component {
     let { y, t } = this._initialYearTourney();
     this.state = {
       data: [],
-      page: 'lb',
       year: y,
       tourney: t
     };
@@ -68,6 +67,10 @@ export class ScoresTees extends React.Component {
     } else if( now < new Date(2018, 5, 6, 12, 0, 0)) {
       t = 'a';
     }
+
+    // tee times can default to 2018
+    if( this.props.page === 'tt' ) y = 2018;
+
     return {y: y.toString(), t: t};
   }
 
@@ -165,11 +168,12 @@ export class ScoresTees extends React.Component {
       let label = find(tourneys, {id: this.state.tourney}).label;
       hdr = this._renderHdr(this.state.year + ' ' + label);
 
+      const gg_num = this.props.page === 'tt' ? this.state.tt : this.state.lb;
       gg = (
         <View style={styles.gg}>
           <GolfGenius
-            gg_num={this.state.lb}
-            type={this.state.page}
+            gg_num={gg_num}
+            type={this.props.page}
           />
         </View>
       );

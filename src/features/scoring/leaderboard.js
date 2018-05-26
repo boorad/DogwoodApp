@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  StyleSheet,
   Text,
   View
 } from 'react-native';
@@ -7,11 +8,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { Header } from 'common/header';
 import { ScoresTees } from './scores_tees';
-import { styles } from 'common/styles/style';
+import { green } from 'common/styles/color';
 
 
-
-export class QualifierScreen extends React.Component {
+export class LeaderboardScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -21,15 +21,17 @@ export class QualifierScreen extends React.Component {
   render() {
     return (
       <View style={[styles.container]}>
-        <Header
-          label="Qualifier"
-          nav={this.props.navigation}
-        />
-        <ScoresTees
-          type="qualifier"
-        />
+        <Header />
+        <ScoresTees page='lb' />
       </View>
     );
   }
 
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: green
+  }
+});

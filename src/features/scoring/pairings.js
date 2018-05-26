@@ -11,7 +11,7 @@ import { ScoresTees } from './scores_tees';
 import { green } from 'common/styles/color';
 
 
-export class TournamentScreen extends React.Component {
+export class PairingsScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -22,10 +22,7 @@ export class TournamentScreen extends React.Component {
     return (
       <View style={[styles.container]}>
         <Header />
-        <ScoresTees
-          type="tournament"
-          label="Tournament"
-        />
+        <ScoresTees page='tt' />
       </View>
     );
   }

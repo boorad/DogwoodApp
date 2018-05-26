@@ -23,7 +23,6 @@ export class GolfGenius extends React.PureComponent {
       src = "src='https://www.golfgenius.com/leagues/" + gg_num
           + "/widgets/next_round?teesheet_mobile=true' ";
     }
-
     return src;
   }
 

@@ -26,9 +26,8 @@ import {
 
 import { createTabsReducer } from './TabsReducer';
 
-import { TournamentScreen } from 'features/scoring/tournament';
-import { QualifierScreen } from 'features/scoring/qualifier';
-import { AmAmScreen } from 'features/scoring/am-am';
+import { LeaderboardScreen } from 'features/scoring/leaderboard';
+import { PairingsScreen } from 'features/scoring/pairings';
 import { ScheduleScreen } from 'features/schedule/schedule';
 import { HistoryScreen } from 'features/history/history';
 import { AboutScreen } from 'features/about/about';
@@ -77,8 +76,19 @@ class TabsContainer extends Component  {
                 initial
               >
                 <Scene
-                  key='tourney'
-                  component={TournamentScreen}
+                  key='leaderboard'
+                  component={LeaderboardScreen}
+                  hideNavBar
+                />
+              </Stack>
+              <Stack
+                key='pairings_stack'
+                tabBarLabel='Pairings'
+                icon={() => <TabIcon color='#fff' name='account-multiple'/>}
+              >
+                <Scene
+                  key='pairings'
+                  component={PairingsScreen}
                   hideNavBar
                 />
               </Stack>
