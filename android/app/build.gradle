@@ -157,6 +157,7 @@ android {
 }
 
 dependencies {
+    api project(':react-native-splash-screen')
     api project(':react-native-vector-icons')
     api project(':react-native-device-info')
     api fileTree(include: ['*.jar'], dir: 'libs')
