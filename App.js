@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import { Provider } from 'react-redux';
 import { MenuProvider } from 'react-native-popup-menu';
+import SplashScreen from 'react-native-splash-screen';
 
 import configureStore from 'app/store/configureStore';
 import TabsContainer from 'features/tabs/TabsContainer';
@@ -12,6 +13,11 @@ import TabsContainer from 'features/tabs/TabsContainer';
 const store = configureStore();
 
 export default class App extends Component {
+
+  componentDidMount() {
+    SplashScreen.hide();
+  }
+
   render() {
     return (
       <Provider store={store}>
