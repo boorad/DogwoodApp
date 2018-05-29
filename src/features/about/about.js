@@ -12,7 +12,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DeviceInfo from 'react-native-device-info';
 
 import { Header } from 'common/header';
-import { primaryColor } from 'common/styles/color';
+import { primaryColor, headerColor } from 'common/styles/color';
+import {
+  fontFamily,
+  fontSize
+} from 'common/styles/style';
 
 
 export class AboutScreen extends React.Component {
@@ -37,11 +41,18 @@ export class AboutScreen extends React.Component {
   render() {
     var version = DeviceInfo.getVersion();
 
+    const title = (
+      <View style={[styles.title]}>
+        <Text style={[styles.titleText]}>
+          Dogwood App
+        </Text>
+      </View>
+    );
+
     return (
       <View style={[styles.container]}>
-        <Header
-          label="About"
-        />
+        <Header />
+        {title}
         <ScrollView contentContainerStyle={{flex:1}}>
           <View style={styles.aboutContainer}>
             <Image
@@ -76,6 +87,16 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: primaryColor,
     flex: 1
+  },
+  title: {
+    alignItems: 'center',
+    paddingTop: 15,
+    paddingBottom: 15
+  },
+  titleText: {
+    fontSize: fontSize+4,
+    fontFamily: fontFamily,
+    color: headerColor
   },
   aboutContainer: {
     backgroundColor: "#fff",

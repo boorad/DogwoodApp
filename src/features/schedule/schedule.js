@@ -123,9 +123,7 @@ export class ScheduleScreen extends React.Component {
 
     return (
       <View style={[styles.container]}>
-        <Header
-          label="Schedule"
-        />
+        <Header />
         {title}
         {content}
       </View>
