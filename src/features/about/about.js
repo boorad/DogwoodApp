@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   aboutHosted: {
-    marginTop: 10,
+    marginTop: 5,
     marginBottom: 5
   },
   aboutVersion: {
-    marginTop: 25
+    marginTop: 10
   },
   aboutBy: {
-    marginTop: 15,
+    marginTop: 5,
     color: "blue"
   },
   aboutBG: {
