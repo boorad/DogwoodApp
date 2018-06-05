@@ -9,24 +9,24 @@ This is the open source code for the Dogwood mobile application.
 #### iOS
 
  * start up an Apple simulator, choose a device
- * in top level of this project, type `react-native run-ios`
+ * in top level of this project, type `yarn run ios`
 
 #### Android
 
  * run Android Studio, Tools | Android | AVD Manager, start up an Android emulator
- * in top level of this project, type `react-native run-android`
+ * in top level of this project, type `yarn run android`
 
 ## Deployment
 
 If ready for deploy, perform a version bump commit:
 
-    npm version [ major | minor | patch ]
+    yarn version [ major | minor | patch ]
 
 ### Android
 
 After version bump, follow instructions here: [https://facebook.github.io/react-native/docs/signed-apk-android.html](https://facebook.github.io/react-native/docs/signed-apk-android.html).  Basically, when everything is set up, do:
 
-    npm run build:android
+    yarn run build:android
     cd android && ./gradlew assembleRelease
 
 Then go to [App Releases](https://play.google.com/apps/publish/?dev_acc=00137341438711124394#ManageReleasesPlace:p=com.dogwood) in the Play Store.  Upload the APK file found at ```./android/app/build/outputs/apk/release/app-release.apk```
@@ -35,7 +35,7 @@ Then go to [App Releases](https://play.google.com/apps/publish/?dev_acc=00137341
 
 After version bump, in the root of this project, type:
 
-    npm run build:ios
+    yarn run build:ios
 
 In XCode, select Product -> Archive
 
