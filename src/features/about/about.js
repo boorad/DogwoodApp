@@ -20,18 +20,6 @@ import {
 
 
 export class AboutScreen extends React.Component {
-  static navigationOptions = {
-    drawer: () => ({
-      label: 'About',
-      icon: ({tintColor}) => (
-        <Icon
-          name="help-circle"
-          size={20}
-          color={tintColor}
-        />
-      )
-    })
-  };
 
   _sendToSourceCode() {
     var url = "https://github.com/boorad/DogwoodApp";
@@ -53,29 +41,37 @@ export class AboutScreen extends React.Component {
       <View style={[styles.container]}>
         <Header />
         {title}
-        <ScrollView contentContainerStyle={{flex:1}}>
-          <View style={styles.aboutContainer}>
-            <Image
-              source={require('common/img/dogwood-logo.png')}
-              style={styles.aboutDILogo}
-            />
-            <Text style={styles.aboutHosted}>Hosted by:</Text>
-            <Image
-              source={require('common/img/dhgc_trans_bg.png')}
-              style={styles.aboutDHGCLogo}
-            />
-            <Text style={styles.aboutVersion}>App v{version}</Text>
-            <TouchableOpacity onPress={this._sendToSourceCode}>
-              <Text style={styles.aboutBy}>by Brad Anderson</Text>
-            </TouchableOpacity>
+        <View style={styles.aboutContainer}>
+        <ScrollView>
+          <View style={styles.rowsContainer}>
+            <View style={styles.logoContainer}>
+              <View>
+                <Image
+                  source={require('common/img/dogwood-logo.png')}
+                  style={styles.aboutDILogo}
+                />
+              </View>
+              <View>
+                <Text style={styles.aboutHosted}>Hosted by:</Text>
+                <Image
+                  source={require('common/img/dhgc_trans_bg.png')}
+                  style={styles.aboutDHGCLogo}
+                />
+                <Text style={styles.aboutHosted}>Druid Hills Golf Club</Text>
+              </View>
+            </View>
+            <View style={styles.credsContainer}>
+              <Text style={styles.aboutVersion}>App v{version}</Text>
+              <TouchableOpacity onPress={this._sendToSourceCode}>
+                <Text style={styles.aboutBy}>by Brad Anderson</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
+        </View>
         <Image
           source={require('common/img/eleven.png')}
-          style={{
-            width: '100%',
-            position: 'absolute',
-            bottom: 0}}
+          style={styles.aboutBG}
         />
       </View>
     );
@@ -99,17 +95,34 @@ const styles = StyleSheet.create({
     color: headerColor
   },
   aboutContainer: {
+    flex: 1,
+    backgroundColor: "#fff"
+  },
+  rowsContainer: {
+    flex: 1
+  },
+  logoContainer: {
+    backgroundColor: "#fff",
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  credsContainer: {
     backgroundColor: "#fff",
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 20
   },
   aboutDILogo: {
     height: 125,
-    width: 125
+    width: 125,
+    marginRight: 30
   },
   aboutDHGCLogo: {
-    height: 125,
-    width: 113,
+    height: 100,
+    width: 83,
     marginBottom: 10
   },
   aboutHosted: {
@@ -117,10 +130,15 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   aboutVersion: {
-    marginTop: 10
+    marginTop: 25
   },
   aboutBy: {
-    marginTop: 5,
+    marginTop: 15,
     color: "blue"
+  },
+  aboutBG: {
+    width: '100%',
+    position: 'absolute',
+    bottom: 0
   }
 });
