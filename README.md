@@ -20,7 +20,7 @@ This is the open source code for the Dogwood mobile application.
 
 If ready for deploy, perform a version bump commit:
 
-    yarn version [ major | minor | patch ]
+    npm version [ major | minor | patch ]
 
 ### Android
 
