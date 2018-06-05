@@ -68,6 +68,7 @@ class TabsContainer extends Component  {
               labelStyle={styles.maintabslabel}
               allowFontScaling={false}
               tabBarStyle={styles.tabbar}
+              swipeEnabled={false}
             >
               <Stack
                 key='scoring_stack'
