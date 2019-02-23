@@ -10,6 +10,11 @@ This is the open source code for the Dogwood mobile application.
 
  * start up an Apple simulator, choose a device
  * in top level of this project, type `yarn run ios`
+ * build problems like [here](https://github.com/facebook/react-native/issues/19529)?  try:
+ 
+        cd ./node_modules/react-native && scripts/ios-install-third-party.sh && cd third-party && cd $(ls | grep 'glog' | awk '{print $1}') && ./configure`
+        cd ../../../../  {back to base dir}
+        cp ios/build/Build/Products/Debug-iphonesimulator/libfishhook.a node_modules/react-native/Libraries/WebSocket/
 
 #### Android
 

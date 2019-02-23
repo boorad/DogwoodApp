@@ -32,4 +32,7 @@ export default class App extends Component {
 
 // temporary for RN #3965
 import { YellowBox } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+YellowBox.ignoreWarnings([
+  'Warning: isMounted(...) is deprecated',
+  'Module RCTImageLoader requires main queue'
+]);

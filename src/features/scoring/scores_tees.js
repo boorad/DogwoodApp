@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,6 +14,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import { find } from 'lodash';
+import moment from 'moment';
 
 import { GolfGenius } from './golfgenius';
 import {
@@ -26,10 +28,7 @@ import {
 
 import { baseUrl } from 'common/config';
 
-
 const url = `${baseUrl}/golfgenius`;
-
-const years = ['2018', '2017'];
 
 const tourneys = [
   {id: 'q', key: 'qualifier', label:'Qualifier'},
@@ -37,55 +36,89 @@ const tourneys = [
   {id: 't', key: 'tournament', label:'Tournament'}
 ];
 
+
+
 export class ScoresTees extends React.Component {
 
   constructor(props) {
     super(props);
-    let { y, t } = this._initialYearTourney();
     this.state = {
+      years: [],
       data: [],
-      year: y,
-      tourney: t
+      year: null,
+      tourney: null
     };
+
+    this._initialYear = this._initialYear.bind(this);
+    this._initialTourney = this._initialTourney.bind(this);
   }
 
-  // TODO: this is hardcoded as fuck
-  //       get tournament dates and maybe use month and date below, plus math
-  _initialYearTourney() {
-    const now = new Date();
-    const year = now.getUTCFullYear();
-    //const month = now.getUTCMonth();
-    //const date = now.getUTCDate();
+  _initialYear(data) {
+    const now = moment();
+    let y = now.year();
 
-    let y = year;
-    let t = 't';
+    // if we are before the qualifier date (midnight), show last year
+    try {
+      const current = find(data, {year: y.toString()});
+      const qDate = moment(current.qualifier.date);
+      if( now < qDate ) y = qDate.year() - 1;
+    } catch(e) {}
 
-    if( now < new Date(2018, 5, 4, 12, 0, 0) ) {
-      y = 2017;
-    } else if( now < new Date(2018, 5, 5, 12, 0, 0)) {
-      t = 'q';
-    } else if( now < new Date(2018, 5, 6, 12, 0, 0)) {
-      t = 'a';
+    //  if year not in data, set to most recent year
+    const yrs = data.map(yr => yr.year);
+    if( yrs.indexOf(y.toString()) < 0 ) {
+      y = yrs.sort().reverse()[0];
     }
 
-    // tee times can default to 2018
-    if( this.props.page === 'tt' ) y = 2018;
+    // update state
+    this.setState({
+      year: y.toString(),
+      years: yrs
+    });
+  }
 
-    return {y: y.toString(), t: t};
+  _initialTourney(data) {
+
+    let t = 't';
+
+    // check dates to render proper tourney
+    const current = find(data, {year: this.state.year});
+    const now = moment();
+    const qDate = moment(current.qualifier.date);
+    const aDate = moment(current['am-am'].date);
+    const tDate = moment(current.tournament.date);
+
+    if( now > qDate ) t = 'q';
+    if( now > aDate ) t = 'a';
+    if( now > tDate ) t = 't';
+
+    // update state
+    this.setState({
+      tourney: t
+    });
+
   }
 
   async _fetchData() {
+    var myHeaders = new Headers();
+    myHeaders.append('pragma', 'no-cache');
+    myHeaders.append('cache-control', 'no-cache');
+    let myInit = {
+      method: 'GET',
+      headers: myHeaders
+    };
+
     try {
-      let response = await fetch(url);
+      let response = await fetch(url, myInit);
       let responseJson = await response.json();
       this._updateData(responseJson);
-    } catch(error) {
-      console.error(error);
-    }
+    } catch(error) {} // TODO: implement Error component
 
   }
 
   _updateData(data) {
+    this._initialYear(data);
+    this._initialTourney(data);
     const type = find(tourneys, {id: this.state.tourney}).key;
     this.setState((prevState, props) => {
       prevState.data = data;
@@ -95,7 +128,7 @@ export class ScoresTees extends React.Component {
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this._fetchData();
   }
 
@@ -112,7 +145,7 @@ export class ScoresTees extends React.Component {
 
   // TODO: separate components, plz
   _renderHdr(label) {
-    const options = years.map(y => {
+    const options = this.state.years.sort().reverse().map(y => {
 
       let tourneyOptions = tourneys.map(t => (
         <MenuOption
@@ -179,7 +212,7 @@ export class ScoresTees extends React.Component {
       );
     } else {
       gg = (
-        <Text>Loading...</Text>
+        <ActivityIndicator />
       );
     }
 

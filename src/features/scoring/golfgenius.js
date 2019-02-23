@@ -4,6 +4,7 @@ import {
   Platform,
   StyleSheet,
   Text,
+  View,
   WebView
 } from 'react-native';
 
@@ -55,13 +56,22 @@ export class GolfGenius extends React.PureComponent {
   </body>
 </html>
 `;
-    content = (
-      <WebView
-        source={{html: html}}
-        style={styles.gglb}
-        scalesPageToFit={Platform.OS === 'android'}
-      />
-    );
+
+    if( this.props.gg_num != '0' ) {
+      content = (
+        <WebView
+          source={{html: html}}
+          style={styles.gglb}
+          scalesPageToFit={Platform.OS === 'android'}
+        />
+      );
+    } else {
+      content = (
+        <View style={styles.na}>
+          <Text style={styles.naText}>Event Not Currently Available</Text>
+        </View>
+      );
+    }
 
     return content;
   }
@@ -71,5 +81,13 @@ const styles = StyleSheet.create({
   gglb: {
     margin: 0,
     padding: 0
+  },
+  na: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 50
+  },
+  naText: {
+    color: 'white'
   }
 });
