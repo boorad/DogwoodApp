@@ -1,6 +1,6 @@
 {
   "name": "Dogwood",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "private": true,
   "scripts": {
     "start": "react-native start",
