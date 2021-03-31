@@ -5,36 +5,35 @@
   "scripts": {
     "start": "react-native start",
     "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator \"iPhone X\"",
+    "ios": "react-native run-ios",
     "test": "jest",
+    "lint": "eslint .",
     "postversion": "react-native-version",
     "build:ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./ios/Dogwood/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
     "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
-    "lodash": "^4.17.19",
-    "moment": "^2.24.0",
-    "react": "16.3.1",
-    "react-native": "0.55.3",
-    "react-native-device-info": "^0.21.5",
-    "react-native-elements": "^0.19.1",
-    "react-native-iphone-x-helper": "^1.0.2",
-    "react-native-popup-menu": "^0.13.0",
-    "react-native-router-flux": "^4.0.0-beta.28",
-    "react-native-scrollable-tab-view": "^0.8.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "react": "17.0.1",
+    "react-native": "0.64.0",
+    "react-native-device-info": "^8.0.8",
+    "react-native-elements": "^3.3.2",
+    "react-native-popup-menu": "^0.15.10",
+    "react-navigation": "^4.4.4",
     "react-native-splash-screen": "^3.0.6",
-    "react-native-vector-icons": "^4.5.0",
-    "react-native-version": "^2.3.1",
-    "react-redux": "^5.0.7",
-    "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "react-native-vector-icons": "^8.1.0",
+    "react-native-version": "^4.0.0"
   },
   "devDependencies": {
-    "babel-jest": "18.0.0",
-    "babel-preset-react-native": "1.9.1",
-    "jest": "18.1.0",
-    "react-test-renderer": "15.4.2"
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "7.14.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.64.0",
+    "react-test-renderer": "17.0.1"
   },
   "jest": {
     "preset": "react-native"
