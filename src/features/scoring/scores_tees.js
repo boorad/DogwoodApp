@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState, } from 'react';
 import {
   ActivityIndicator,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,7 +15,7 @@ import {
 import { find } from 'lodash';
 import moment from 'moment';
 
-import { GolfGenius } from './golfgenius';
+import GolfGenius from './golfgenius';
 import {
   headerColor,
   primaryColor
@@ -38,22 +37,18 @@ const tourneys = [
 
 
 
-export class ScoresTees extends React.Component {
+const ScoresTees = props => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      years: [],
-      data: [],
-      year: null,
-      tourney: null
-    };
+  const { page } = props;
 
-    this._initialYear = this._initialYear.bind(this);
-    this._initialTourney = this._initialTourney.bind(this);
-  }
+  const [ years, setYears ] = useState([]);
+  const [ data, setData ] = useState([]);
+  const [ year, setYear ] = useState();
+  const [ tourney, setTourney ] = useState();
 
-  _initialYear(data) {
+  let tt, lb, type;
+
+  const _initialYear = async (data) => {
     const now = moment();
     let y = now.year();
 
@@ -71,18 +66,16 @@ export class ScoresTees extends React.Component {
     }
 
     // update state
-    this.setState({
-      year: y.toString(),
-      years: yrs
-    });
-  }
+    await setYear(y.toString());
+    await setYears(yrs);
+  };
 
-  _initialTourney(data) {
+  const _initialTourney = async (data) => {
 
     let t = 't';
 
     // check dates to render proper tourney
-    const current = find(data, {year: this.state.year});
+    const current = find(data, {year});
     const now = moment();
     const qDate = moment(current.qualifier.date);
     const aDate = moment(current['am-am'].date);
@@ -93,13 +86,10 @@ export class ScoresTees extends React.Component {
     if( now > tDate ) t = 't';
 
     // update state
-    this.setState({
-      tourney: t
-    });
+    await setTourney(t);
+  };
 
-  }
-
-  async _fetchData() {
+  const _fetchData = async () => {
     var myHeaders = new Headers();
     myHeaders.append('pragma', 'no-cache');
     myHeaders.append('cache-control', 'no-cache');
@@ -111,45 +101,35 @@ export class ScoresTees extends React.Component {
     try {
       let response = await fetch(url, myInit);
       let responseJson = await response.json();
-      this._updateData(responseJson);
+      await _updateData(responseJson);
     } catch(error) {} // TODO: implement Error component
 
   }
 
-  _updateData(data) {
-    this._initialYear(data);
-    this._initialTourney(data);
-    const type = find(tourneys, {id: this.state.tourney}).key;
-    this.setState((prevState, props) => {
-      prevState.data = data;
-      prevState.tt = find(data, {year: this.state.year})[type].teetimes;
-      prevState.lb = find(data, {year: this.state.year})[type].leaderboard;
-      return prevState;
-    });
-  }
+  const _updateData = async (data) => {
+    await setData(responseJson);
+    await _initialYear(data);
+    await _initialTourney(data);
+    tt = find(data, {year})[type].teetimes;
+    lb = find(data, {year})[type].leaderboard;
 
-  componentDidMount() {
-    this._fetchData();
-  }
+  };
 
-  _setSelection(year, tourney) {
+  const _setSelection = async (year, tourney) => {
     const type = find(tourneys, {id: tourney}).key;
-    this.setState((prevState, props) => {
-      prevState.year = year;
-      prevState.tourney = tourney;
-      prevState.tt = find(this.state.data, {year: year})[type].teetimes;
-      prevState.lb = find(this.state.data, {year: year})[type].leaderboard;
-      return prevState;
-    });
+    await setYear(year);
+    await setTourney(tourney);
+    tt = find(data, {year: year})[type].teetimes;
+    lb = find(data, {year: year})[type].leaderboard;
   }
 
   // TODO: separate components, plz
-  _renderHdr(label) {
-    const options = this.state.years.sort().reverse().map(y => {
+  const _renderHdr = (label) => {
+    const options = years.sort().reverse().map(y => {
 
       let tourneyOptions = tourneys.map(t => (
         <MenuOption
-          onSelect={() => this._setSelection(y, t.id)}
+          onSelect={() => _setSelection(y, t.id)}
           text={t.label}
           key={y + '_' + t.id}
         />
@@ -187,60 +167,70 @@ export class ScoresTees extends React.Component {
         </View>
       </View>
     );
+  };
+
+  useEffect(
+    () => {
+    _fetchData();
+    }, []
+  );
+
+
+  if( tourney && tourneys ) {
+    type = find(tourneys, {id: tourney}).key;
   }
 
-  render() {
-    let hdr = null;
-    let gg = null;
+  let hdr = null;
+  let gg = null;
 
-    if( this.state &&
-        (this.state.tt !== undefined) &&
-        (this.state.lb !== undefined) &&
-        this.state.tourney &&
-        this.state.year) {
-      let label = find(tourneys, {id: this.state.tourney}).label;
-      hdr = this._renderHdr(this.state.year + ' ' + label);
+  if( tt !== undefined &&
+      lb !== undefined &&
+      tourney &&
+      year) {
+    let label = find(tourneys, {id: tourney}).label;
+    hdr = _renderHdr(year + ' ' + label);
 
-      const gg_num = this.props.page === 'tt' ? this.state.tt : this.state.lb;
-      gg = (
-        <View style={styles.gg}>
-          <GolfGenius
-            gg_num={gg_num}
-            type={this.props.page}
-          />
-        </View>
-      );
-    } else {
-      gg = (
-        <ActivityIndicator />
-      );
-    }
-
-    return (
-      <View style={styles.container}>
-        {hdr}
-        {gg}
+    const gg_num = page === 'tt' ? tt : lb;
+    gg = (
+      <View style={styles.gg}>
+        <GolfGenius
+          gg_num={gg_num}
+          type={this.props.page}
+        />
       </View>
+    );
+  } else {
+    gg = (
+      <ActivityIndicator />
     );
   }
 
+  return (
+    <View style={styles.container}>
+      {hdr}
+      {gg}
+    </View>
+  );
+
 };
+
+export default ScoresTees;
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   hdr: {
   },
   hdrLabel: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   hdrMore: {
     position: 'absolute',
     right: 15,
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   hdrLabelText: {
     color: "#eee",
@@ -248,18 +238,18 @@ const styles = StyleSheet.create({
     fontSize: fontSize+4,
     fontFamily: fontFamily,
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   gg: {
-    flex: 1
+    flex: 1,
   },
   yearOptionsContainer: {
-    padding: 10
+    padding: 10,
   },
   yearOptionsText: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   optionsContainer: {
-    width: '40%'
-  }
+    width: '40%',
+  },
 });

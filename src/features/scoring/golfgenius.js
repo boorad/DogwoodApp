@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 
 
-export class GolfGenius extends React.PureComponent {
+const GolfGenius = props => {
 
-  _get_src() {
+  const { type, gg_num } = props;
+
+  const _get_src = () => {
     let src = "";
-    const { type, gg_num } = this.props;
 
     if( type === 'lb' ) {
       src = "src='https://www.golfgenius.com/pages/" + gg_num
@@ -27,23 +28,22 @@ export class GolfGenius extends React.PureComponent {
     return src;
   }
 
-  render() {
-    let { height, width } = Dimensions.get('window');
-    let content;
+  let { height, width } = Dimensions.get('window');
+  let content;
 
-    const iframe = `
+  const iframe = `
 <iframe frameBorder='0'
   mozallowfullscreen='true'
   webkitallowfullscreen='true'
   name='page_iframe'
   scrolling='auto'
-  ` + this._get_src() + `
+  ` + _get_src() + `
   height='` + height + `'
   width='` + width + `'
   >
 </iframe>
 `;
-    const html = `
+  const html = `
 <!DOCTYPE html>\n
 <html>
   <head>
@@ -57,37 +57,40 @@ export class GolfGenius extends React.PureComponent {
 </html>
 `;
 
-    if( this.props.gg_num != '0' ) {
-      content = (
-        <WebView
-          source={{html: html}}
-          style={styles.gglb}
-          scalesPageToFit={Platform.OS === 'android'}
-        />
-      );
-    } else {
-      content = (
-        <View style={styles.na}>
-          <Text style={styles.naText}>Event Not Currently Available</Text>
-        </View>
-      );
-    }
-
-    return content;
+  if( this.props.gg_num != '0' ) {
+    content = (
+      <WebView
+        source={{html: html}}
+        style={styles.gglb}
+        scalesPageToFit={Platform.OS === 'android'}
+      />
+    );
+  } else {
+    content = (
+      <View style={styles.na}>
+        <Text style={styles.naText}>Event Not Currently Available</Text>
+      </View>
+    );
   }
+
+  return content;
+
 };
+
+export default GolfGenius;
+
 
 const styles = StyleSheet.create({
   gglb: {
     margin: 0,
-    padding: 0
+    padding: 0,
   },
   na: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 50
+    marginTop: 50,
   },
   naText: {
-    color: 'white'
-  }
+    color: 'white',
+  },
 });

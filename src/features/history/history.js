@@ -1,13 +1,11 @@
 import React from 'react';
 import {
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
 import {
@@ -20,28 +18,26 @@ import {
   primaryColor
 } from 'common/styles/color';
 
-import { Header } from 'common/header';
-import { Champions } from 'features/history/champions';
-import { Alumni } from 'features/history/alumni';
-import { Story } from 'features/history/story';
+import Header from 'common/header';
+import Champions from 'features/history/champions';
+import Alumni from 'features/history/alumni';
+import Story from 'features/history/story';
 
-export class HistoryScreen extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
 
-  _renderTabBar() {
+const HistoryScreen = props => {
+
+  const _renderTabBar = () => {
     return (
       <ScrollableTabBar
         style={styles.tabContainer}
         underlineStyle={{backgroundColor: "yellow"}}
-        renderTab={this._renderTab}
+        renderTab={_renderTab}
       />
     );
   }
 
-  _renderTab(name, page, isTabActive, onPressHandler, onLayoutHandler) {
+  const _renderTab = (name, page, isTabActive, onPressHandler, onLayoutHandler) => {
     var st = [styles.tab, styles.histTab];
     if( isTabActive ) st.push(styles.activeTab);
 
@@ -57,31 +53,29 @@ export class HistoryScreen extends React.Component {
     );
   }
 
-  _handleChangeTab({i, ref, from}) {}
+  let tabBarPosition = Platform.OS  === 'ios' ? 'bottom' : 'top';
+  let content = (
+    <ScrollableTabView
+      initialPage={0}
+      tabBarPosition={tabBarPosition}
+      renderTabBar={_renderTabBar}
+    >
+      <Champions tabLabel="Past Champions" />
+      <Alumni tabLabel="Alumni" />
+      <Story tabLabel="Dogwood History" />
+    </ScrollableTabView>
+  );
 
-  render() {
-    let tabBarPosition = Platform.OS  === 'ios' ? 'bottom' : 'top';
-    let content = (
-      <ScrollableTabView
-        initialPage={0}
-        tabBarPosition={tabBarPosition}
-        renderTabBar={() => this._renderTabBar()}
-      >
-        <Champions tabLabel="Past Champions" />
-        <Alumni tabLabel="Alumni" />
-        <Story tabLabel="Dogwood History" />
-      </ScrollableTabView>
-    );
-
-    return (
-      <View style={[styles.container]}>
-        <Header />
-        {content}
-      </View>
-    );
-  }
+  return (
+    <View style={[styles.container]}>
+      <Header />
+      {content}
+    </View>
+  );
 
 };
+
+export default HistoryScreen;
 
 
 const styles = StyleSheet.create({

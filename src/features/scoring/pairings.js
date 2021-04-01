@@ -1,33 +1,28 @@
 import React from 'react';
 import {
   StyleSheet,
-  Text,
   View
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Header } from 'common/header';
-import { ScoresTees } from './scores_tees';
+import Header from 'common/header';
+import ScoresTees from './scores_tees';
 import { green } from 'common/styles/color';
 
 
-export class PairingsScreen extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
+const PairingsScreen = props => {
 
-
-  render() {
-    return (
-      <View style={[styles.container]}>
-        <Header />
-        <ScoresTees page='tt' />
-      </View>
-    );
-  }
+  return (
+    <View style={[styles.container]}>
+      <Header />
+      <ScoresTees page='tt' />
+    </View>
+  );
 
 };
+
+export default PairingsScreen;
+
 
 const styles = StyleSheet.create({
   container: {

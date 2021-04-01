@@ -18,10 +18,10 @@ import {
   fontFamily,
   fontSize
 } from 'common/styles/style';
-//import { LeaderboardScreen } from 'features/scoring/leaderboard';
-//import { PairingsScreen } from 'features/scoring/pairings';
+import LeaderboardScreen from 'features/scoring/leaderboard';
+import PairingsScreen from 'features/scoring/pairings';
 import ScheduleScreen from 'features/schedule/schedule';
-//import { HistoryScreen } from 'features/history/history';
+import HistoryScreen from 'features/history/history';
 import AboutScreen from 'features/about/about';
 
 
@@ -45,11 +45,41 @@ const TabsContainer = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName='AboutScreen'
+      initialRouteName='LeaderboardScreen'
+      shifting={true}
       activeColor='#fff'
       inactiveColor='#aaa'
       barStyle={styles.tabbar}
       >
+      <Tab.Screen
+        name='LeaderboardScreen'
+        component={LeaderboardScreen}
+        options={{
+          title: 'Leaderboard',
+          tabBarIcon: ({focused}) => (
+            <TabIcon
+              color={focused ? '#fff' : '#aaa'}
+              name='format-list-bulleted'
+              type='material-community'
+            />
+          ),
+          tabBarColor: green,
+        }}
+      />
+      <Tab.Screen
+        name='PairingsScreen'
+        component={PairingsScreen}
+        options={{
+          title: 'Pairings',
+          tabBarIcon: ({focused}) => (
+            <TabIcon
+              color={focused ? '#fff' : '#aaa'}
+              name='account-multiple'
+              type='material-community'
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name='ScheduleScreen'
         component={ScheduleScreen}
@@ -59,6 +89,21 @@ const TabsContainer = () => {
             <TabIcon
               color={focused ? '#fff' : '#aaa'}
               name='calendar-clock'
+              type='material-community'
+            />
+          ),
+          tabBarColor: green,
+        }}
+      />
+      <Tab.Screen
+        name='HistoryScreen'
+        component={HistoryScreen}
+        options={{
+          title: 'History',
+          tabBarIcon: ({focused}) => (
+            <TabIcon
+              color={focused ? '#fff' : '#aaa'}
+              name='trophy'
               type='material-community'
             />
           ),

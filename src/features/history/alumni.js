@@ -6,16 +6,15 @@ import {
   Text,
   View
 } from 'react-native';
-
-import { List, ListItem } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
   fontFamily,
   fontSize
 } from 'common/styles/style';
-
 import { worldRankings } from './owgr.json';
+
 
 const trophy = (
   <Icon name='trophy' size={30} color={'#666'}/>
@@ -25,88 +24,83 @@ const blank = (
   <Icon name='checkbox-blank' size={30} color={'#fff'} />
 );
 
-export class Alumni extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this._renderItem = this._renderItem.bind(this);
-  }
 
-  _itemPressed(item) {
+const Alumni = props => {
+
+  const _itemPressed = (item) => {
     const id = item.id;
     const name = item.name.toLowerCase().replace(' ', '-');
     const url = `https://www.pgatour.com/players/player.${id}.${name}.html`;
     Linking.openURL(url);
   }
 
-  _renderItem( { item } ) {
+  const _renderItem = ({ item }) => {
     if( !item.dogwood ) return null;
     const champIcon = item.dogwood_champ ? trophy : blank;
 
     return (
       <ListItem
-        title={item.rank + ' - ' + item.name}
-        titleContainerStyle={styles.listItemTitle}
-        leftIcon={champIcon}
-        onPress={() => this._itemPressed(item)}
-      />
+        onPress={() => _itemPressed(item)}
+      >
+        {champIcon}
+        <ListItem.Title style={styles.listItemTitle}>{item.rank + ' - ' + item.name}</ListItem.Title>
+      </ListItem>
     );
   }
 
-  render() {
+  const title = (
+    <View style={styles.title}>
+      <Text style={styles.titleText}>
+        Dogwood Alumni
+      </Text>
+      <Text style={styles.subTitleText}>
+        Official World Golf Rankings
+      </Text>
+    </View>
+  );
 
-    const title = (
-      <View style={[styles.title]}>
-        <Text style={[styles.titleText]}>
-          Dogwood Alumni
-        </Text>
-        <Text style={[styles.subTitleText]}>
-          Official World Golf Rankings
-        </Text>
-      </View>
-    );
+  const content = (
+    <FlatList
+      data={worldRankings}
+      renderItem={_renderItem}
+      keyExtractor={item => item.id}
+    />
+  );
 
-    const content = (
-      <List>
-        <FlatList
-          data={worldRankings}
-          renderItem={this._renderItem}
-          keyExtractor={item => item.id}
-        />
-      </List>
-    );
-
-    return (
-      <View style={styles.container}>
-        {title}
-        {content}
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      {title}
+      {content}
+    </View>
+  );
 
 };
+
+export default Alumni;
 
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   title: {
     alignItems: 'center',
     paddingTop: 15,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   titleText: {
     fontSize: fontSize+4,
     fontFamily: fontFamily,
-    color: 'white'
+    color: 'white',
   },
   subTitleText: {
     fontSize: fontSize,
     fontFamily: fontFamily,
-    color: 'white'
+    color: 'white',
   },
   listItemTitle: {
-    marginLeft: 10
-  }
+    marginLeft: 10,
+    color: '#333',
+  },
 });

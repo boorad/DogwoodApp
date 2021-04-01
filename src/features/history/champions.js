@@ -1,67 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState, } from 'react';
 import {
+  ActivityIndicator,
   FlatList,
-  Image,
-  ScrollView,
   StyleSheet,
   Text,
   View
 } from 'react-native';
-import { List } from 'react-native-elements';
 
 import {
   fontFamily,
   fontSize
 } from 'common/styles/style';
-
 import {
-  headerColor,
-  primaryColor,
   green
 } from 'common/styles/color';
-
-import { Champion } from './champion';
-
+import Champion from './champion';
 import { baseUrl } from 'common/config';
-
 
 const url = `${baseUrl}/champions`;
 
-export class Champions extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
-  async _fetchData() {
-    try {
-      let response = await fetch(url);
-      let responseJson = await response.json();
-      this._updateData(responseJson);
-    } catch(error) {
-      console.error(error);
-    }
+const Champions = props => {
 
-  }
+  const [ data, setData ] = useState([]);
 
-  _updateData(data) {
-    this.setState((prevState, props) => {
-      prevState.data = data.champions;
-      return prevState;
-    });
-  }
+  useEffect(
+    () => {
+      const _fetchData = async () => {
+        try {
+          let response = await fetch(url);
+          let responseJson = await response.json();
+          setData(responseJson);
+        } catch(error) {
+          console.error(error);
+        }
+      };
+      _fetchData();
+    }, []
+  );
 
-  componentWillMount() {
-    this._fetchData();
-  }
-
-  _sort(champions) {
+  const _sort = (champions)  => {
     // sort descending, so (b-a)
     return champions.sort((a,b) => parseInt(b.year) - parseInt(a.year));
   }
 
-  _renderItem( { item } ) {
+  const _renderItem = ({ item }) => {
     return (
       <Champion
         year={item.year}
@@ -71,56 +55,55 @@ export class Champions extends React.Component {
     );
   }
 
-  render() {
-    var title, sub, content;
+  let title, sub, content;
 
-    title = (
-      <View style={[styles.title]}>
-        <Text style={[styles.titleText]}>
-          Dogwood Champions
-        </Text>
+  title = (
+    <View style={styles.title}>
+      <Text style={styles.titleText}>
+        Dogwood Champions
+      </Text>
+    </View>
+  );
+
+  sub = (
+    <View style={styles.sub}>
+      <Text style={styles.subText}>
+        * denotes Walker Cup team member
+      </Text>
+    </View>
+  );
+
+  if( data && data.champions ) {
+    //console.log('data', data);
+    const champions = _sort(data.champions);
+
+    content = (
+      <View style={styles.scroll}>
+        {sub}
+        <FlatList
+          data={champions}
+          renderItem={_renderItem}
+          keyExtractor={champ => champ.year}
+        />
       </View>
     );
-
-    sub = (
-      <View style={styles.sub}>
-        <Text style={styles.subText}>
-          * denotes Walker Cup team member
-        </Text>
-      </View>
-    );
-
-    if( this.state && this.state.data ) {
-      var champions = this.state.data;
-      champions = this._sort(champions);
-
-      content = (
-        <View style={styles.scroll}>
-          {sub}
-          <List style={styles.list}>
-            <FlatList
-              data={champions}
-              renderItem={this._renderItem}
-              keyExtractor={champ => champ.year}
-            />
-          </List>
-        </View>
-      );
-    } else {
-      content = (
-        <Text>Loading...</Text>
-      );
-    }
-
-    return (
-      <View style={styles.container}>
-        {title}
-        {content}
-      </View>
+  } else {
+    content = (
+      <ActivityIndicator />
     );
   }
 
+  return (
+    <View style={styles.container}>
+      {title}
+      {content}
+    </View>
+  );
+
 };
+
+export default Champions;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -138,7 +121,8 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   scroll: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    marginBottom: 80,
   },
   sub: {
     backgroundColor: 'white',
@@ -146,7 +130,9 @@ const styles = StyleSheet.create({
   },
   subText: {
     marginTop: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    color: '#999',
+    paddingBottom: 10,
   },
   chSubTitle: {
     fontSize: fontSize-2,
