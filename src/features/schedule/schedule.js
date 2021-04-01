@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState, } from 'react';
 import {
+  ActivityIndicator,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 
 import {
@@ -20,47 +19,38 @@ import {
   primaryColor
 } from 'common/styles/color';
 
-import { Header } from 'common/header';
+import Header from 'common/header';
 import { baseUrl } from 'common/config';
-import { Day } from './day';
-
+import Day from './day';
 
 const url = `${baseUrl}/schedule`;
 
-export class ScheduleScreen extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
-  async _fetchData() {
-    try {
-      let response = await fetch(url, {
-        headers: {
-          'Cache-Control': 'no-cache'
+const ScheduleScreen = props => {
+
+  const [ schedule, setSchedule ] = useState();
+
+  useEffect(
+    () => {
+      const fetchData = async () => {
+        try {
+          let response = await fetch(url, {
+            headers: {
+              'Cache-Control': 'no-cache'
+            }
+          });
+          let responseJson = await response.json();
+          setSchedule(responseJson);
+        } catch(error) {
+          console.error(error);
         }
-      });
-      let responseJson = await response.json();
-      this._updateData(responseJson);
-    } catch(error) {
-      console.error(error);
-    }
+      };
+      fetchData();
+    }, []
+  );
 
-  }
-
-  _updateData(data) {
-    this.setState((prevState, props) => {
-      prevState.data = data;
-      return prevState;
-    });
-  }
-
-  componentWillMount() {
-    this._fetchData();
-  }
-
-  _renderTab(name, page, isTabActive, onPressHandler, onLayoutHandler) {
+  const _renderTab = (name, page, isTabActive, onPressHandler, onLayoutHandler) => {
     var st = [styles.tab, styles.schTab];
     if( isTabActive ) st.push(styles.activeTab);
 
@@ -74,63 +64,62 @@ export class ScheduleScreen extends React.Component {
         <Text style={[styles.schTab, styles.tabText]}>{name}</Text>
       </TouchableHighlight>
     );
-  }
+  };
 
-  _handleChangeTab({i, ref, from}) {}
+  let title, content;
+  const tabBarPosition = Platform.OS  === 'ios' ? 'bottom' : 'top';
 
-  render() {
-    var title, content;
-
-    let tabBarPosition = Platform.OS  === 'ios' ? 'bottom' : 'top';
-
-    if( this.state && this.state.data ) {
-      const { year, days } = this.state.data;
-      title = (
-        <View style={[styles.title]}>
-          <Text style={[styles.titleText]}>
-            {year} Dogwood Invitational Week
-          </Text>
-        </View>
-      );
-      content = (
-        <ScrollableTabView
-          initialPage={0}
-          tabBarPosition={tabBarPosition}
-          renderTabBar={ () =>
-            <ScrollableTabBar
-              style={styles.tabContainer}
-              underlineStyle={{backgroundColor: "yellow"}}
-              renderTab={this._renderTab} />
-                       }>
-          {days.map((day, i) => {
-             var label = day.dow + '\n' + day.shortdate;
-             return (
-               <Day
-                 tabLabel={label}
-                 i={i}
-                 key={i}
-                 day={day}
-               />);
-           })}
-        </ScrollableTabView>
-      );
-    } else {
-      title = <Text>Dogwood Invitational Week</Text>;
-      content = (
-        <Text>Loading...</Text>
-      );
-    }
-
-    return (
-      <View style={[styles.container]}>
-        <Header />
-        {title}
-        {content}
+  if( schedule ) {
+    const { year, days } = schedule;
+    title = (
+      <View style={styles.title}>
+        <Text style={styles.titleText}>
+          {year} Dogwood Invitational Week
+        </Text>
       </View>
+    );
+    content = (
+      <ScrollableTabView
+        initialPage={0}
+        tabBarPosition={tabBarPosition}
+        renderTabBar={ () =>
+          <ScrollableTabBar
+            style={styles.tabContainer}
+            underlineStyle={{backgroundColor: "yellow"}}
+            renderTab={_renderTab} />
+        }
+      >
+        {days.map((day, i) => {
+          const label = day.dow + '\n' + day.shortdate;
+          return (
+            <Day
+              tabLabel={label}
+              i={i}
+              key={i}
+              day={day}
+            />);
+          }
+        )}
+      </ScrollableTabView>
+    );
+  } else {
+    title = <Text>Dogwood Invitational Week</Text>;
+    content = (
+      <ActivityIndicator />
     );
   }
 
+  return (
+    <View style={styles.container}>
+      <Header />
+      {title}
+      {content}
+    </View>
+  );
+
 };
+
+export default ScheduleScreen;
 
 
 const styles = StyleSheet.create({

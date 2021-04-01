@@ -11,7 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DeviceInfo from 'react-native-device-info';
 
-import { Header } from 'common/header';
+import Header from 'common/header';
 import { primaryColor, headerColor } from 'common/styles/color';
 import {
   fontFamily,
@@ -19,64 +19,66 @@ import {
 } from 'common/styles/style';
 
 
-export class AboutScreen extends React.Component {
+const AboutScreen = props => {
 
-  _sendToSourceCode() {
+  const _sendToSourceCode = () => {
     var url = "https://github.com/boorad/DogwoodApp";
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
 
-  render() {
-    var version = DeviceInfo.getVersion();
+  var version = DeviceInfo.getVersion();
 
-    const title = (
-      <View style={[styles.title]}>
-        <Text style={[styles.titleText]}>
-          Dogwood App
-        </Text>
-      </View>
-    );
+  const title = (
+    <View style={[styles.title]}>
+      <Text style={[styles.titleText]}>
+        Dogwood App
+      </Text>
+    </View>
+  );
 
-    return (
-      <View style={[styles.container]}>
-        <Header />
-        {title}
-        <View style={styles.aboutContainer}>
-        <ScrollView>
-          <View style={styles.rowsContainer}>
-            <View style={styles.logoContainer}>
-              <View>
-                <Image
-                  source={require('common/img/dogwood-logo.png')}
-                  style={styles.aboutDILogo}
-                />
-              </View>
-              <View>
-                <Text style={styles.aboutHosted}>Hosted by:</Text>
-                <Image
-                  source={require('common/img/dhgc_trans_bg.png')}
-                  style={styles.aboutDHGCLogo}
-                />
-                <Text style={styles.aboutHosted}>Druid Hills Golf Club</Text>
-              </View>
+  return (
+    <View style={[styles.container]}>
+      <Header />
+      {title}
+      <View style={styles.aboutContainer}>
+      <ScrollView>
+        <View style={styles.rowsContainer}>
+          <View style={styles.logoContainer}>
+            <View>
+              <Image
+                source={require('common/img/dogwood-logo.png')}
+                style={styles.aboutDILogo}
+              />
             </View>
-            <View style={styles.credsContainer}>
-              <Text style={styles.aboutVersion}>App v{version}</Text>
-              <TouchableOpacity onPress={this._sendToSourceCode}>
-                <Text style={styles.aboutBy}>by Brad Anderson</Text>
-              </TouchableOpacity>
+            <View>
+              <Text style={styles.aboutHosted}>Hosted by:</Text>
+              <Image
+                source={require('common/img/dhgc_trans_bg.png')}
+                style={styles.aboutDHGCLogo}
+              />
+              <Text style={styles.aboutHosted}>Druid Hills Golf Club</Text>
             </View>
           </View>
-        </ScrollView>
+          <View style={styles.credsContainer}>
+            <Text style={styles.aboutVersion}>Version {version}</Text>
+            <TouchableOpacity onPress={() => _sendToSourceCode()}>
+              <Text style={styles.aboutBy}>by Brad Anderson</Text>
+              <Text style={styles.aboutBy}>source code</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <Image
-          source={require('common/img/eleven.png')}
-          style={styles.aboutBG}
-        />
+      </ScrollView>
       </View>
-    );
-  }
+      <Image
+        source={require('common/img/eleven.png')}
+        style={styles.aboutBG}
+      />
+    </View>
+  );
+
 };
+
+export default AboutScreen;
 
 
 const styles = StyleSheet.create({
@@ -130,11 +132,13 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   aboutVersion: {
-    marginTop: 10
+    marginVertical: 10,
+
   },
   aboutBy: {
     marginTop: 5,
-    color: "blue"
+    color: "blue",
+    alignSelf: 'center',
   },
   aboutBG: {
     width: '100%',

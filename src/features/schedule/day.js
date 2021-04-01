@@ -12,54 +12,54 @@ import {
 } from 'common/styles/style';
 
 
-class Event extends React.Component {
-  render() {
-    const { i, event } = this.props;
-    return (
-      <View key={i} style={styles.eventContainer}>
-        <View style={styles.eventRow}>
-          <Text style={styles.eventStart}>{event.start}</Text>
-          <Text style={styles.eventEnd}  >{event.end}</Text>
-          <Text
-            style={styles.eventDescr}
-            allowFontScaling={true}
-          >{event.descr}</Text>
-        </View>
-        <View style={styles.eventRow}>
-          <Text style={styles.eventBlank}></Text>
-          <Text
-            style={styles.eventNotes}
-            allowFontScaling={true}
-          >{event.notes}</Text>
-        </View>
+const Event = props => {
+
+  const { i, event } = props;
+
+  return (
+    <View key={i} style={styles.eventContainer}>
+      <View style={styles.eventRow}>
+        <Text style={styles.eventStart}>{event.start}</Text>
+        <Text style={styles.eventEnd}  >{event.end}</Text>
+        <Text
+          style={styles.eventDescr}
+          allowFontScaling={true}
+        >{event.descr}</Text>
       </View>
-    );
-  }
+      <View style={styles.eventRow}>
+        <Text style={styles.eventBlank}></Text>
+        <Text
+          style={styles.eventNotes}
+          allowFontScaling={true}
+        >{event.notes}</Text>
+      </View>
+    </View>
+  );
 }
 
-export class Day extends React.Component {
+const Day = props => {
 
-  render() {
-    const { i, day } = this.props;
-    const label = day.dow + '\n' + day.shortdate;
+  const { i, day } = props;
+  const label = day.dow + '\n' + day.shortdate;
 
-    return (
-      <ScrollView style={[styles.tabContent]}>
-        <Text
-          key={i}
-          tablabel={label}
-          style={[styles.tabContentTitle]}
-        >
-          {day.longdate}
-        </Text>
-        {day.events.map((event, i) => {
-           return <Event key={i} event={event} />;
-         })}
-      </ScrollView>
-    );
-  }
+  return (
+    <ScrollView style={[styles.tabContent]}>
+      <Text
+        key={i}
+        tablabel={label}
+        style={[styles.tabContentTitle]}
+      >
+        {day.longdate}
+      </Text>
+      {day.events.map((event, i) => {
+          return <Event key={i} event={event} />;
+        })}
+    </ScrollView>
+  );
 
 };
+
+export default Day;
 
 
 const styles = StyleSheet.create({

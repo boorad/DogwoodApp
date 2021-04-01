@@ -1,33 +1,29 @@
 import React from 'react';
 import {
-  Platform,
   StyleSheet,
   View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 
-const paddingTopIphoneX = ifIphoneX(14, 0);
-const paddingTopiOS = Platform.OS  === 'ios' ? 20 : 0;
 
-export class Header extends React.Component {
+const Header = props => {
 
-  render() {
-    const { label } = this.props;
+  const { label } = props;
 
-    return (
-      <View style={styles.header} />
-    );
-  }
+  return (
+    <View style={styles.header} />
+  );
 
 };
+
+export default Header;
 
 
 const styles = StyleSheet.create({
   header: {
-    paddingTop: paddingTopiOS + paddingTopIphoneX,
+    paddingTop: 30,
     justifyContent: 'center',
     alignItems: 'flex-start'
-  }
+  },
 });
