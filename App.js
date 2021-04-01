@@ -20,6 +20,7 @@ const App = () => {
   useEffect(
     () => {
       LogBox.ignoreLogs([
+        'ReactNativeFiberHostComponent: Calling',
       ]);
     }, []
   );

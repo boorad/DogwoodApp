@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
     padding: 10
   },
   eventContainer: {
-    padding: 5
+    paddingVertical: 5,
+    paddingHorizontal: 10,
   },
   eventRow: {
     flexDirection: 'row',
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
   },
   eventNotes: {
     flex: 4,
-    fontSize: fontSize+1
+    fontSize: fontSize+1,
+    color: '#777',
   }
 });
