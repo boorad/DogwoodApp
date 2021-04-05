@@ -15,6 +15,7 @@
   "dependencies": {
     "@react-navigation/material-bottom-tabs": "^5.1.8",
     "@react-navigation/native": "^5.1.5",
+    "@react-navigation/stack": "^5.14.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "react": "17.0.1",
@@ -22,6 +23,7 @@
     "react-native-bootsplash": "^2.2.5",
     "react-native-device-info": "^8.0.8",
     "react-native-elements": "^3.3.2",
+    "react-native-gesture-handler": "^1.10.3",
     "react-native-paper": "^4.7.2",
     "react-native-popup-menu": "^0.15.10",
     "react-native-safe-area-context": "^3.2.0",

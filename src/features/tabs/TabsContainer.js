@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  Text
 } from 'react-native';
 import {
   Icon
@@ -11,18 +10,16 @@ import {
 } from '@react-navigation/material-bottom-tabs';
 
 import {
-  blue,
   green
 } from 'common/styles/color';
 import {
-  fontFamily,
   fontSize
 } from 'common/styles/style';
-import LeaderboardScreen from 'features/scoring/leaderboard';
-import PairingsScreen from 'features/scoring/pairings';
-import ScheduleScreen from 'features/schedule/schedule';
-import HistoryScreen from 'features/history/history';
-import AboutScreen from 'features/about/about';
+import LeaderboardStack from 'features/scoring/leaderboard_stack';
+import PairingsStack from 'features/scoring/pairings_stack';
+import ScheduleStack from 'features/schedule/schedule_stack';
+import HistoryStack from 'features/history/history_stack';
+import AboutStack from 'features/about/about_stack';
 
 
 
@@ -45,15 +42,15 @@ const TabsContainer = () => {
 
   return (
     <Tab.Navigator
-      initialRouteName='LeaderboardScreen'
-      shifting={true}
+      initialRouteName='LeaderboardStack'
+      shifting={false}
       activeColor='#fff'
       inactiveColor='#aaa'
       barStyle={styles.tabbar}
       >
       <Tab.Screen
-        name='LeaderboardScreen'
-        component={LeaderboardScreen}
+        name='LeaderboardStack'
+        component={LeaderboardStack}
         options={{
           title: 'Leaderboard',
           tabBarIcon: ({focused}) => (
@@ -67,8 +64,8 @@ const TabsContainer = () => {
         }}
       />
       <Tab.Screen
-        name='PairingsScreen'
-        component={PairingsScreen}
+        name='PairingsStack'
+        component={PairingsStack}
         options={{
           title: 'Pairings',
           tabBarIcon: ({focused}) => (
@@ -81,8 +78,8 @@ const TabsContainer = () => {
         }}
       />
       <Tab.Screen
-        name='ScheduleScreen'
-        component={ScheduleScreen}
+        name='ScheduleStack'
+        component={ScheduleStack}
         options={{
           title: 'Schedule',
           tabBarIcon: ({focused}) => (
@@ -96,8 +93,8 @@ const TabsContainer = () => {
         }}
       />
       <Tab.Screen
-        name='HistoryScreen'
-        component={HistoryScreen}
+        name='HistoryStack'
+        component={HistoryStack}
         options={{
           title: 'History',
           tabBarIcon: ({focused}) => (
@@ -111,8 +108,8 @@ const TabsContainer = () => {
         }}
       />
       <Tab.Screen
-        name='AboutScreen'
-        component={AboutScreen}
+        name='AboutStack'
+        component={AboutStack}
         options={{
           title: 'About',
           tabBarIcon: ({focused}) => (

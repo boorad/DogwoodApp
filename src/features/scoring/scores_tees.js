@@ -26,6 +26,7 @@ import {
 } from 'common/styles/style';
 
 import { baseUrl } from 'common/config';
+import Header from './header';
 
 const url = `${baseUrl}/golfgenius`;
 
@@ -41,35 +42,18 @@ const ScoresTees = props => {
 
   const { page } = props;
 
-  const [ years, setYears ] = useState([]);
   const [ data, setData ] = useState([]);
   const [ year, setYear ] = useState();
   const [ tourney, setTourney ] = useState();
 
   let tt, lb, type;
 
-  const _initialYear = async (data) => {
-    const now = moment();
-    let y = now.year();
 
-    // if we are before the qualifier date (midnight), show last year
-    try {
-      const current = find(data, {year: y.toString()});
-      const qDate = moment(current.qualifier.date);
-      if( now < qDate ) y = qDate.year() - 1;
-    } catch(e) {}
-
-    //  if year not in data, set to most recent year
-    const yrs = data.map(yr => yr.year);
-    if( yrs.indexOf(y.toString()) < 0 ) {
-      y = yrs.sort().reverse()[0];
-    }
-
-    // update state
-    await setYear(y.toString());
-    await setYears(yrs);
+  const updateYear = y => {
+    setYear(y);
   };
 
+/*
   const _initialTourney = async (data) => {
 
     let t = 't';
@@ -86,7 +70,12 @@ const ScoresTees = props => {
     if( now > tDate ) t = 't';
 
     // update state
-    await setTourney(t);
+    setTourney(t);
+  };
+*/
+
+  const updateTourney = t => {
+    setTourney(t);
   };
 
   const _fetchData = async () => {
@@ -101,73 +90,23 @@ const ScoresTees = props => {
     try {
       let response = await fetch(url, myInit);
       let responseJson = await response.json();
-      await _updateData(responseJson);
+      //console.log('scores_tees data', responseJson);
+      setData(responseJson);
     } catch(error) {} // TODO: implement Error component
 
   }
 
   const _updateData = async (data) => {
-    await setData(responseJson);
+    setData(responseJson);
     await _initialYear(data);
     await _initialTourney(data);
-    tt = find(data, {year})[type].teetimes;
-    lb = find(data, {year})[type].leaderboard;
-
   };
 
   const _setSelection = async (year, tourney) => {
     const type = find(tourneys, {id: tourney}).key;
-    await setYear(year);
-    await setTourney(tourney);
-    tt = find(data, {year: year})[type].teetimes;
-    lb = find(data, {year: year})[type].leaderboard;
+    setYear(year);
+    setTourney(tourney);
   }
-
-  // TODO: separate components, plz
-  const _renderHdr = (label) => {
-    const options = years.sort().reverse().map(y => {
-
-      let tourneyOptions = tourneys.map(t => (
-        <MenuOption
-          onSelect={() => _setSelection(y, t.id)}
-          text={t.label}
-          key={y + '_' + t.id}
-        />
-      ));
-
-      return (
-        <View style={styles.yearOptionsContainer} key={y}>
-        <Text style={styles.yearOptionsText}>{y}</Text>
-        {tourneyOptions}
-        <View style={{borderBottomColor: '#999',borderBottomWidth:1}} />
-        </View>
-      );
-    });
-
-    return (
-      <View style={styles.hdr}>
-        <View style={styles.hdrLabel}>
-          <Text style={styles.hdrLabelText}>{label}</Text>
-        </View>
-        <View style={styles.hdrMore}>
-          <Menu>
-            <MenuTrigger>
-              <Icon
-                size={24}
-                color='#eee'
-                name='dots-vertical'
-              />
-            </MenuTrigger>
-            <MenuOptions
-              customStyles={{optionsContainer: styles.optionsContainer}}
-            >
-              {options}
-            </MenuOptions>
-          </Menu>
-        </View>
-      </View>
-    );
-  };
 
   useEffect(
     () => {
@@ -183,12 +122,22 @@ const ScoresTees = props => {
   let hdr = null;
   let gg = null;
 
-  if( tt !== undefined &&
-      lb !== undefined &&
-      tourney &&
-      year) {
-    let label = find(tourneys, {id: tourney}).label;
-    hdr = _renderHdr(year + ' ' + label);
+  try {
+    tt = find(data, {year})[type].teetimes;
+    console.log('tt', tt);
+    lb = find(data, {year})[type].leaderboard;
+    console.log('lb', lb);
+  } catch(e) {}
+
+  hdr = (
+    <Header
+      data={data}
+      updateYear={updateYear}
+      updateTourney={updateTourney}
+    />
+  );
+
+  if( tt && lb && tourney && year) {
 
     const gg_num = page === 'tt' ? tt : lb;
     gg = (
