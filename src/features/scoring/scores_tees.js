@@ -31,12 +31,12 @@ const ScoresTees = props => {
 
   const { page } = props;
 
+  const [ gg, setGG ] = useState(<ActivityIndicator />);
+
   const [ data, setData ] = useState([]);
   const [ year, setYear ] = useState();
   const [ years, setYears ] = useState([]);
   const [ tourney, setTourney ] = useState();
-
-  let gg, tt, lb;
 
   const updateYear = y => {
     setYear(y);
@@ -114,35 +114,33 @@ const ScoresTees = props => {
     }, []
   );
 
+  useEffect(
+    () => {
+      console.log({year, tourney});
+      if( year && tourney ) {
+        const type = find(tourneys, {id: tourney}).key;
+        const yr = find(data, {year: year.toString()});
+        //console.log('yr', yr);
+        if( yr ) {
+          const tt = yr[type].teetimes;
+          const lb = yr[type].leaderboard;
+          const gg_num = (page === 'tt')
+            ? tt
+            : lb;
+          console.log('setGG');
+          setGG(
+            <View style={styles.gg}>
+              <GolfGenius
+                gg_num={gg_num}
+                type={page}
+              />
+            </View>
+          );
+        }
+      }
+    }, [year, tourney]
+  );
 
-  if( year && tourney ) {
-    const type = find(tourneys, {id: tourney}).key;
-    //console.log('year', year, 'tourney', tourney, 'type', type);
-    const yr = find(data, {year: year.toString()});
-    //console.log('yr', yr);
-    if( yr ) {
-      tt = yr[type].teetimes;
-      lb = yr[type].leaderboard;
-    }
-  }
-
-  if( tt && lb ) {
-    //console.log('page', page, 'tt', tt, 'lb', lb);
-    const gg_num = page === 'tt' ? tt : lb;
-    //console.log('gg_num', gg_num);
-    gg = (
-      <View style={styles.gg}>
-        <GolfGenius
-          gg_num={gg_num}
-          type={page}
-        />
-      </View>
-    );
-  } else {
-    gg = (
-      <ActivityIndicator />
-    );
-  }
 
   return (
     <View style={styles.container}>
