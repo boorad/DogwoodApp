@@ -103,7 +103,11 @@ const ScheduleScreen = props => {
       </ScrollableTabView>
     );
   } else {
-    title = <Text>Dogwood Invitational Week</Text>;
+    title = (
+      <View style={styles.title}>
+        <Text style={styles.titleText}>Dogwood Invitational Week</Text>
+      </View>
+    );
     content = (
       <ActivityIndicator />
     );
@@ -151,7 +155,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4
   },
   tabContainer: {
-    backgroundColor: primaryColor,
+    //backgroundColor: primaryColor,
     height: 50
   },
   schTab: {

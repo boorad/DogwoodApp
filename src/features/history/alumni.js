@@ -17,11 +17,11 @@ import { worldRankings } from './owgr.json';
 
 
 const trophy = (
-  <Icon name='trophy' size={30} color={'#666'}/>
+  <Icon name='trophy' size={24} color={'#666'}/>
 );
 
 const blank = (
-  <Icon name='checkbox-blank' size={30} color={'#fff'} />
+  <Icon name='checkbox-blank' size={24} color={'#fff'} />
 );
 
 
@@ -41,6 +41,7 @@ const Alumni = props => {
 
     return (
       <ListItem
+        containerStyle={styles.containerStyle}
         onPress={() => _itemPressed(item)}
       >
         {champIcon}
@@ -61,11 +62,13 @@ const Alumni = props => {
   );
 
   const content = (
-    <FlatList
-      data={worldRankings}
-      renderItem={_renderItem}
-      keyExtractor={item => item.id}
-    />
+    <View style={styles.scroll}>
+      <FlatList
+        data={worldRankings}
+        renderItem={_renderItem}
+        keyExtractor={item => item.id}
+      />
+      </View>
   );
 
   return (
@@ -84,6 +87,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  containerStyle: {
+    marginHorizontal: 20,
+    marginVertical: 7,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+  },
   title: {
     alignItems: 'center',
     paddingTop: 15,
@@ -99,8 +108,11 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily,
     color: 'white',
   },
+  scroll: {
+    backgroundColor: 'white',
+    marginBottom: 80,
+  },
   listItemTitle: {
-    marginLeft: 10,
     color: '#333',
   },
 });

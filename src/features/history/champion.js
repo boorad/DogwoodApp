@@ -14,8 +14,10 @@ const Champion = props => {
   var w = walker ? "*" : "";
 
   return(
-    <ListItem>
-      <ListItem.Title>{year + ' - ' + name + ' ' + w}</ListItem.Title>
+    <ListItem containerStyle={styles.containerStyle}>
+      <ListItem.Content>
+        <ListItem.Title>{year + ' - ' + name + ' ' + w}</ListItem.Title>
+      </ListItem.Content>
     </ListItem>
   );
 
@@ -25,20 +27,10 @@ export default Champion;
 
 
 const styles = StyleSheet.create({
-  chRow: {
-    flexDirection: 'row',
-    flex: 8,
-  },
-  chYear: {
-    flex: 1,
-    fontSize: fontSize+1,
-    color: "#222",
-    paddingHorizontal: 10,
-  },
-  chName: {
-    flex: 7,
-    fontSize: fontSize+1,
-    color: "#222",
-    paddingHorizontal: 10,
+  containerStyle: {
+    marginHorizontal: 20,
+    marginVertical: 7,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
   },
 });
