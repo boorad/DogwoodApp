@@ -10,6 +10,7 @@ import {
   MenuTrigger,
 } from 'react-native-popup-menu';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { find } from 'lodash';
 
 import {
   fontSize
@@ -17,32 +18,38 @@ import {
 
 
 
-const YearChooser = props => {
+const TourneyChooser = props => {
 
-  const { year, years, updateYear } = props;
+  const { tourney, tourneys, updateTourney } = props;
+  const t = find(tourneys, {id: tourney});
+  const label = (t && t.label)
+    ? t.label
+    : '';
+  //console.log('label', label);
 
-  const options = years.sort().reverse().map(y => {
+  const options = tourneys.map(t => {
     return (
       <MenuOption
-        value={y}
-        key={y}
+        value={t.id}
+        key={t.key}
       >
-         <Text style={styles.yearOptionsText}>
-          {y}
+         <Text style={styles.tourneyOptionsText}>
+          {t.label}
          </Text>
       </MenuOption>
     );
   });
 
+
   return (
     <Menu onSelect={value => {
       //console.log('selected ' + value);
-      updateYear(value);
+      updateTourney(value);
     }}>
       <MenuTrigger
         style={styles.chooserContainer}
       >
-        <Text style={styles.yearTxt}>{year}</Text>
+        <Text style={styles.tourneyTxt}>{label}</Text>
         <Icon
           size={30}
           color='#eee'
@@ -58,24 +65,23 @@ const YearChooser = props => {
   );
 };
 
-export default YearChooser;
+export default TourneyChooser;
 
 
 const styles = StyleSheet.create({
   chooserContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 20,
   },
-  yearTxt: {
+  tourneyTxt: {
     color: "#eee",
     fontSize: fontSize+4,
     fontWeight: 'bold',
   },
-  yearOptionsContainer: {
+  tourneyOptionsContainer: {
     padding: 10,
   },
-  yearOptionsText: {
+  tourneyOptionsText: {
     fontWeight: 'bold',
   },
   optionsContainer: {

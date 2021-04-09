@@ -11,7 +11,7 @@ const StackNav = props => {
 
   const { screen, title } = props;
   const stackName = `${title}Stack`;
-console.log('screen', screen);
+
   const Stack = createStackNavigator();
 
   return (

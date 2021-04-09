@@ -5,68 +5,33 @@ import {
   View,
 } from 'react-native';
 
+import YearChooser from './yearChooser';
+import TourneyChooser from './tourneyChooser';
 
 
-  const Header = props => {
+const Header = props => {
 
-    const { data, updateYear, updateTourney } = props;
+  const { year, years, updateYear, tourney, tourneys, updateTourney } = props;
 
-    return (
-      <View><Text>header</Text></View>
-    );
-
-
-    const options = years.sort().reverse().map(y => {
-
-      let tourneyOptions = tourneys.map(t => (
-        <MenuOption
-          onSelect={() => _setSelection(y, t.id)}
-          text={t.label}
-          key={y + '_' + t.id}
-        />
-      ));
-
-      return (
-        <View style={styles.yearOptionsContainer} key={y}>
-        <Text style={styles.yearOptionsText}>{y}</Text>
-        {tourneyOptions}
-        <View style={{borderBottomColor: '#999',borderBottomWidth:1}} />
-        </View>
-      );
-    });
-
-    return (
-      <View style={styles.hdr}>
-        <View style={styles.hdrLabel}>
-          <Text style={styles.hdrLabelText}>{label}</Text>
-        </View>
+  return (
+    <View style={styles.hdr}>
+      <View style={styles.hdrYear}>
+        <YearChooser year={year} years={years} updateYear={updateYear} />
       </View>
-    );
-  };
+      <View style={styles.hdrTourney}>
+        <TourneyChooser tourney={tourney} tourneys={tourneys} updateTourney={updateTourney} />
+      </View>
+    </View>
+  );
+};
 
 export default Header;
 
 
 const styles = StyleSheet.create({
-
+  hdr: {
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
 });
-
-
-  /*
-          <View style={styles.hdrMore}>
-          <Menu>
-            <MenuTrigger>
-              <Icon
-                size={24}
-                color='#eee'
-                name='dots-vertical'
-              />
-            </MenuTrigger>
-            <MenuOptions
-              customStyles={{optionsContainer: styles.optionsContainer}}
-            >
-              {options}
-            </MenuOptions>
-          </Menu>
-        </View>
-*/
