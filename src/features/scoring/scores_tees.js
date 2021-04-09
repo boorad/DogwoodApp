@@ -127,7 +127,6 @@ const ScoresTees = props => {
           const gg_num = (page === 'tt')
             ? tt
             : lb;
-          console.log('setGG');
           setGG(
             <View style={styles.gg}>
               <GolfGenius
