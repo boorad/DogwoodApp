@@ -105,7 +105,7 @@ const ScoresTees = props => {
         try {
           let response = await fetch(url, myInit);
           let responseJson = await response.json();
-          console.log('scores_tees data', responseJson);
+          //console.log('scores_tees data', responseJson);
           setData(responseJson);
         } catch(error) {} // TODO: implement Error component
 
