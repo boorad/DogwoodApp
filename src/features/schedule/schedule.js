@@ -88,6 +88,7 @@ const ScheduleScreen = props => {
             underlineStyle={{backgroundColor: "yellow"}}
             renderTab={_renderTab} />
         }
+        style={styles.tabView}
       >
         {days.map((day, i) => {
           const label = day.dow + '\n' + day.shortdate;
@@ -141,13 +142,17 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily,
     color: headerColor
   },
+  tabView: {
+    backgroundColor: 'white',
+  },
   tab: {
     flex: 1,
     height: 49,
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 4,
-    borderColor: primaryColor
+    borderColor: primaryColor,
+    backgroundColor: primaryColor,
   },
   activeTab: {
     backgroundColor: '#00b0d6',
