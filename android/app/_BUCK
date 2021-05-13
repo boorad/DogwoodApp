@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.dogwood",
+    package = "com.thedogwood",
 )
 
 android_resource(
     name = "res",
-    package = "com.dogwood",
+    package = "com.thedogwood",
     res = "src/main/res",
 )
 

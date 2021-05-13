@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState, } from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   Linking,
   StyleSheet,
@@ -8,30 +9,47 @@ import {
 } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import moment from 'moment';
 
 import {
   fontFamily,
   fontSize
 } from 'common/styles/style';
-import { worldRankings } from './owgr.json';
-
-
-const trophy = (
-  <Icon name='trophy' size={24} color={'#666'}/>
-);
-
-const blank = (
-  <Icon name='checkbox-blank' size={24} color={'#fff'} />
-);
+import { baseUrl } from 'common/config';
 
 
 
 const Alumni = props => {
 
+  const [ data, setData ] = useState([]);
+  const url = `${baseUrl}/alumni?cache=1`;
+
+  const trophy = (
+    <Icon name='trophy' size={24} color={'#666'}/>
+  );
+
+  const blank = (
+    <Icon name='checkbox-blank' size={24} color={'#fff'} />
+  );
+
+  useEffect(
+    () => {
+      const _fetchData = async () => {
+        try {
+          let response = await fetch(url);
+          let data = await response.json();
+          setData(data);
+        } catch(error) {
+          console.error(error);
+        }
+      };
+      _fetchData();
+    }, []
+  );
+
   const _itemPressed = (item) => {
-    const id = item.id;
-    const name = item.name.toLowerCase().replace(' ', '-');
-    const url = `https://www.pgatour.com/players/player.${id}.${name}.html`;
+    if( !item || !item.uri ) return;
+    const url = `https://www.pgatour.com/${item.uri}`;
     Linking.openURL(url);
   }
 
@@ -45,7 +63,10 @@ const Alumni = props => {
         onPress={() => _itemPressed(item)}
       >
         {champIcon}
-        <ListItem.Title style={styles.listItemTitle}>{item.rank + ' - ' + item.name}</ListItem.Title>
+        <ListItem.Content>
+          <ListItem.Title style={styles.listItemTitle}>{item.rank + ' - ' + item.name}</ListItem.Title>
+        </ListItem.Content>
+        <ListItem.Chevron />
       </ListItem>
     );
   }
@@ -61,15 +82,27 @@ const Alumni = props => {
     </View>
   );
 
-  const content = (
-    <View style={styles.scroll}>
-      <FlatList
-        data={worldRankings}
-        renderItem={_renderItem}
-        keyExtractor={item => item.id}
-      />
+  let content;
+  if( data && data.players ) {
+    let count = data.players.length;
+    let dt = moment(data.date).format('ll');
+    content = (
+      <View style={{flex: 1,}}>
+        <View style={styles.stats}>
+          <Text style={styles.statsTxt}>as of {dt}</Text>
+          <Text style={styles.statsTxt}>{count} of Top 1,000</Text>
+        </View>
+        <FlatList
+          data={data.players}
+          renderItem={_renderItem}
+          style={styles.flatList}
+          keyExtractor={item => item.rank}
+        />
       </View>
-  );
+    );
+  } else {
+    content = (<ActivityIndicator />);
+  }
 
   return (
     <View style={styles.container}>
@@ -108,9 +141,17 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily,
     color: 'white',
   },
-  scroll: {
+  stats: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 5,
+  },
+  statsTxt: {
+    color: 'white',
+    fontSize: fontSize - 2,
+  },
+  flatList: {
     backgroundColor: 'white',
-    marginBottom: 80,
   },
   listItemTitle: {
     color: '#333',

@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   tab: {
     flex: 1,
-    height: 40,
+    //height: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 4,
@@ -112,17 +112,17 @@ const styles = StyleSheet.create({
   },
   tabContainer: {
     backgroundColor: primaryColor,
-    height: 40
+    //height: 40
   },
   tabRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    height: 40
+    //height: 40
   },
   tabText: {
     color: "#eee",
     textAlign: 'center',
-    fontSize: fontSize-2,
+    fontSize: fontSize-3,
     fontFamily: fontFamily
   }
 });

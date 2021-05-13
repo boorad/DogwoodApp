@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   StyleSheet,
+  Text,
 } from 'react-native';
 import {
   Icon
@@ -47,12 +48,12 @@ const TabsContainer = () => {
       activeColor='#fff'
       inactiveColor='#aaa'
       barStyle={styles.tabbar}
-      >
+    >
       <Tab.Screen
         name='LeaderboardStack'
         component={LeaderboardStack}
         options={{
-          title: 'Leaderboard',
+          tabBarLabel: (<Text style={styles.maintabslabel}>Scoring</Text>),
           tabBarIcon: ({focused}) => (
             <TabIcon
               color={focused ? '#fff' : '#aaa'}
@@ -62,12 +63,12 @@ const TabsContainer = () => {
           ),
           tabBarColor: green,
         }}
-      />
+    />
       <Tab.Screen
         name='PairingsStack'
         component={PairingsStack}
         options={{
-          title: 'Pairings',
+          tabBarLabel: (<Text style={styles.maintabslabel}>Pairings</Text>),
           tabBarIcon: ({focused}) => (
             <TabIcon
               color={focused ? '#fff' : '#aaa'}
@@ -81,7 +82,7 @@ const TabsContainer = () => {
         name='ScheduleStack'
         component={ScheduleStack}
         options={{
-          title: 'Schedule',
+          tabBarLabel: (<Text style={styles.maintabslabel}>Schedule</Text>),
           tabBarIcon: ({focused}) => (
             <TabIcon
               color={focused ? '#fff' : '#aaa'}
@@ -96,7 +97,7 @@ const TabsContainer = () => {
         name='HistoryStack'
         component={HistoryStack}
         options={{
-          title: 'History',
+          tabBarLabel: (<Text style={styles.maintabslabel}>History</Text>),
           tabBarIcon: ({focused}) => (
             <TabIcon
               color={focused ? '#fff' : '#aaa'}
@@ -111,7 +112,7 @@ const TabsContainer = () => {
         name='AboutStack'
         component={AboutStack}
         options={{
-          title: 'About',
+          tabBarLabel: (<Text style={styles.maintabslabel}>About</Text>),
           tabBarIcon: ({focused}) => (
             <TabIcon
               color={focused ? '#fff' : '#aaa'}
@@ -127,79 +128,14 @@ const TabsContainer = () => {
 
 };
 
-/*
-  render() {
-    return (
-      <Router
-        createReducer={createTabsReducer}
-      >
-        <Stack key='root'>
-          <Scene
-            key='main'
-            hideNavBar
-            panHandlers={null}
-          >
-            <Tabs
-              key='main_tabs'
-              inactiveTintColor='#ccc'
-              inactiveBackgroundColor='#666'
-              activeTintColor='#fff'
-              activeBackgroundColor={green}
-              labelStyle={styles.maintabslabel}
-              allowFontScaling={false}
-              tabBarStyle={styles.tabbar}
-              swipeEnabled={false}
-            >
-              <Stack
-                key='scoring_stack'
-                tabBarLabel='Leaderboard'
-                icon={() => <TabIcon color='#fff' name='lead-pencil'/>}
-                initial
-              >
-                <Scene
-                  key='leaderboard'
-                  component={LeaderboardScreen}
-                  hideNavBar
-                />
-              </Stack>
-              <Stack
-                key='pairings_stack'
-                tabBarLabel='Pairings'
-                icon={() => <TabIcon color='#fff' name='account-multiple'/>}
-              >
-                <Scene
-                  key='pairings'
-                  component={PairingsScreen}
-                  hideNavBar
-                />
-              </Stack>
-              <Stack
-                key='history_stack'
-                tabBarLabel='History'
-                icon={() => <TabIcon color='#fff' name='trophy'/>}
-              >
-                <Scene
-                  key='history'
-                  component={HistoryScreen}
-                  hideNavBar
-                />
-              </Stack>
-            </Tabs>
-          </Scene>
-        </Stack>
-      </Router>
-    );
-  }
-*/
-
 export default TabsContainer;
 
 
 const styles = StyleSheet.create({
   maintabslabel: {
-    fontSize: fontSize-3
+    fontSize: fontSize-4,
   },
   tabbar: {
-    backgroundColor: green
-  }
+    backgroundColor: green,
+  },
 });

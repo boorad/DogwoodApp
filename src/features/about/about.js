@@ -63,7 +63,7 @@ const AboutScreen = props => {
             <Text style={styles.aboutVersion}>Version {version}</Text>
             <TouchableOpacity onPress={() => _sendToSourceCode()}>
               <Text style={styles.aboutBy}>by Brad Anderson</Text>
-              <Text style={styles.aboutBy}>source code</Text>
+              <Text style={styles.aboutSrc}>source code</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -137,6 +137,12 @@ const styles = StyleSheet.create({
   },
   aboutBy: {
     marginTop: 5,
+    fontSize: fontSize - 2,
+    color: "blue",
+    alignSelf: 'center',
+  },
+  aboutSrc: {
+    fontSize: fontSize - 4,
     color: "blue",
     alignSelf: 'center',
   },

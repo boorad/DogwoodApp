@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15
   },
   titleText: {
-    fontSize: fontSize+4,
+    fontSize: fontSize+3,
     fontFamily: fontFamily,
     color: headerColor
   },
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   tabText: {
     color: "#eee",
     textAlign: 'center',
-    fontSize: fontSize+2,
+    fontSize: fontSize-2,
     fontFamily: fontFamily
   }
 });

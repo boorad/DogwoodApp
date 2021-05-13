@@ -1,5 +1,5 @@
 import React, { useEffect, } from 'react';
-import { LogBox } from 'react-native';
+import { LogBox, SafeAreaView } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { MenuProvider } from 'react-native-popup-menu';

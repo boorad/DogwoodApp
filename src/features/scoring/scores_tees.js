@@ -76,14 +76,20 @@ const ScoresTees = props => {
       // check dates to render proper tourney
       try {
         current = find(data, {year});
-        qDate = moment(current.qualifier.date);
-        aDate = moment(current['am-am'].date);
-        tDate = moment(current.tournament.date);
+        qDate = (current && current.qualifier && current.qualifier.date)
+          ? moment(current.qualifier.date)
+          : null;
+        aDate = (current && current['am-am'] && current['am-am'].date)
+          ? moment(current['am-am'].date)
+          : null;
+        tDate = (current && current.tournament && current.tournament.date)
+          ? moment(current.tournament.date)
+          : null;
       } catch(e) {}
 
-      if( now > qDate ) t = 'q';
-      if( now > aDate ) t = 'a';
-      if( now > tDate ) t = 't';
+      if( qDate && now > qDate ) t = 'q';
+      if( aDate && now > aDate ) t = 'a';
+      if( tDate && now > tDate ) t = 't';
 
       //console.log('setting tourney', t);
       setTourney(t);
@@ -122,8 +128,11 @@ const ScoresTees = props => {
         const yr = find(data, {year: year.toString()});
         //console.log('yr', yr);
         if( yr ) {
-          const tt = yr[type].teetimes;
-          const lb = yr[type].leaderboard;
+          let tt, lb;
+          if( yr[type] ) {
+            tt = yr[type].teetimes;
+            lb = yr[type].leaderboard;
+          }
           const gg_num = (page === 'tt')
             ? tt
             : lb;

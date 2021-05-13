@@ -18,8 +18,7 @@ const GolfGenius = props => {
 
   let content;
 
-  if( gg_num != '0' ) {
-    //console.log('uri', uri);
+  if( gg_num && gg_num != '0' ) {
     content = (
       <WebView
         source={{uri}}

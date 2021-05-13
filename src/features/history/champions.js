@@ -78,11 +78,12 @@ const Champions = props => {
     const champions = _sort(data.champions);
 
     content = (
-      <View style={styles.scroll}>
+      <View style={{flex: 1,}}>
         {sub}
         <FlatList
           data={champions}
           renderItem={_renderItem}
+          style={styles.flatList}
           keyExtractor={champ => champ.year}
         />
       </View>
@@ -120,9 +121,8 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily,
     color: 'white'
   },
-  scroll: {
+  flatList: {
     backgroundColor: 'white',
-    marginBottom: 80,
   },
   sub: {
     backgroundColor: 'white',

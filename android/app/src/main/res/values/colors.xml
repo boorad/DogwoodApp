@@ -2,4 +2,5 @@
 <resources>
     <color name="green">#428240</color>
     <color name="primary_dark">#428240</color>
+    <color name="bootsplash_background">#263246</color>
 </resources>
