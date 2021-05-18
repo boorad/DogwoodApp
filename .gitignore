@@ -58,3 +58,6 @@ android/app/libs
 
 # CocoaPods
 /ios/Pods/
+
+# android builds
+./android/app/src/main/assets/*.bundle

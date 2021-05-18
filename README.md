@@ -29,12 +29,21 @@ If ready for deploy, perform a version bump commit:
 
 ### Android
 
-After version bump, follow instructions here: [https://facebook.github.io/react-native/docs/signed-apk-android.html](https://facebook.github.io/react-native/docs/signed-apk-android.html).  Basically, when everything is set up, do:
+After version bump, follow instructions here: [https://reactnative.dev/docs/signed-apk-android](https://reactnative.dev/docs/signed-apk-android).
+
+Make sure ~/.gradle/gradle.properties has the following (get pwd from 1password):
+
+    DOGWOODAPP_RELEASE_STORE_FILE=dogwood-release-key.keystore
+    DOGWOODAPP_RELEASE_KEY_ALIAS=dogwood-key-alias
+    DOGWOODAPP_RELEASE_STORE_PASSWORD=************
+    DOGWOODAPP_RELEASE_KEY_PASSWORD==************
+
+Basically, when everything is set up, do:
 
     yarn run build:android
-    cd android && ./gradlew assembleRelease
+    cd android && ./gradlew bundleRelease
 
-Then go to [App Releases](https://play.google.com/apps/publish/?dev_acc=00137341438711124394#ManageReleasesPlace:p=com.thedogwood) in the Play Store.  Upload the APK file found at ```./android/app/build/outputs/apk/release/app-release.apk```
+Then go to [App Releases](https://play.google.com/apps/publish/?dev_acc=00137341438711124394#ManageReleasesPlace:p=com.thedogwood) in the Play Store.  Upload the AAB file found at ```./android/app/build/outputs/bundle/release/app-release.aab```
 
 ### iOS
 
