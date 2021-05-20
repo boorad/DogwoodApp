@@ -56,4 +56,4 @@ In XCode, select Product -> Archive
  * Validate
  * Upload to App Store
 
-In [iTunes Connect](itunesconnect.apple.com/WebObjects/iTunesConnect.woa/ra/ng/app/1250184426), under My Apps, Dogwood, select "+ Version or Platform", type new version number in, and continue through to submit for review.
+In [App Store Connect](https://appstoreconnect.apple.com/apps/1250184426/appstore/ios/version/inflight), under My Apps, Dogwood, select "+ Version or Platform", type new version number in, and continue through to submit for review.
