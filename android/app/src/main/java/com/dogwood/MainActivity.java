@@ -1,4 +1,4 @@
-package com.thedogwood;
+package com.dogwood;
 
 import android.os.Bundle;
 

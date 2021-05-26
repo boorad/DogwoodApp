@@ -1,4 +1,4 @@
-package com.thedogwood;
+package com.dogwood;
 
 import android.app.Application;
 import android.content.Context;
