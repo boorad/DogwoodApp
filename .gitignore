@@ -60,4 +60,4 @@ android/app/libs
 /ios/Pods/
 
 # android builds
-./android/app/src/main/assets/*.bundle
+/android/app/src/main/assets/*.bundle
