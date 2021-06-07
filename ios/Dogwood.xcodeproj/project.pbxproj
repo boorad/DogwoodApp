@@ -23,7 +23,6 @@
 		7CCA8578CC084150BC17EF0A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBC3CC7272D94CDD81A4F4A0 /* Octicons.ttf */; };
 		92A32FB6FF784A78A4E9D173 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B0DC0DA1F2E64F03A26583D3 /* MaterialIcons.ttf */; };
 		9A465BA1C3904509930DFC8D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6CB9C161404C2BA8D23249 /* MaterialCommunityIcons.ttf */; };
-		A24B397B1EF0BC93007C6548 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = A24B397A1EF0BC93007C6548 /* main.jsbundle */; };
 		A24B397D1EF0BCE3007C6548 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = A24B397C1EF0BCE3007C6548 /* assets */; };
 		B1F6006277B6406BB168EC50 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42A7A6CB5CE442D5B3512E31 /* Entypo.ttf */; };
 		CCF099FA0DB845608E5E57B1 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCC7CBAAAF5747C9862210EC /* FontAwesome.ttf */; };
@@ -243,7 +242,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				A24B397D1EF0BCE3007C6548 /* assets in Resources */,
-				A24B397B1EF0BC93007C6548 /* main.jsbundle in Resources */,
 				76F0786D26151F37008CE199 /* BootSplash.storyboard in Resources */,
 				B1F6006277B6406BB168EC50 /* Entypo.ttf in Resources */,
 				1CD540B5383C49A0AE234D56 /* EvilIcons.ttf in Resources */,
