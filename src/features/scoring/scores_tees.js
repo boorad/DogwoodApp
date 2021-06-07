@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 import { find } from 'lodash';
 import fetch from 'node-fetch';
-import moment from 'moment';
 
 import GolfGenius from './golfgenius';
 import {
@@ -49,19 +48,19 @@ const ScoresTees = props => {
   // once we have data, set more state about years & tourneys
   useEffect(
     () => {
-      const now = moment();
-      let y = now.year();
+      const now = new Date();
+      let y = now.getFullYear();
       let current, qDate, aDate, tDate;
 
       // if we are before the qualifier date (midnight), show last year
       try {
         current = find(data, {year: y.toString()});
-        qDate = moment(current.qualifier.date);
+        qDate = new Date(current.qualifier.date);
         if( now < qDate ) y = qDate.year() - 1;
       } catch(e) {}
 
       // because FUCK COVID
-      if( y = 2020 ) y = 2019;
+      if( y == 2020 ) y = 2019;
 
       //  if year not in data, set to most recent year
       const yrs = data.map(yr => yr.year);
@@ -75,15 +74,15 @@ const ScoresTees = props => {
 
       // check dates to render proper tourney
       try {
-        current = find(data, {year});
+        current = find(data, {year: y.toString()});
         qDate = (current && current.qualifier && current.qualifier.date)
-          ? moment(current.qualifier.date)
+          ? new Date(current.qualifier.date)
           : null;
         aDate = (current && current['am-am'] && current['am-am'].date)
-          ? moment(current['am-am'].date)
+          ? new Date(current['am-am'].date)
           : null;
         tDate = (current && current.tournament && current.tournament.date)
-          ? moment(current.tournament.date)
+          ? new Date(current.tournament.date)
           : null;
       } catch(e) {}
 
@@ -122,7 +121,7 @@ const ScoresTees = props => {
 
   useEffect(
     () => {
-      console.log({year, tourney});
+      // console.log({year, tourney});
       if( year && tourney ) {
         const type = find(tourneys, {id: tourney}).key;
         const yr = find(data, {year: year.toString()});
