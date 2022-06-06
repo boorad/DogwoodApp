@@ -1,8 +1,5 @@
-import { Platform, StyleSheet } from 'react-native';
-import {
-  primaryColor,
-  headerColor
-} from './color.js';
+import {Platform, StyleSheet} from 'react-native';
+import {primaryColor, headerColor} from './color.js';
 
 export const fontFamily = 'HelveticaNeue';
 export const fontSize = 15;

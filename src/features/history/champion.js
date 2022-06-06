@@ -1,30 +1,23 @@
 import React from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
-import { ListItem } from 'react-native-elements';
+import {StyleSheet} from 'react-native';
+import {ListItem} from 'react-native-elements';
 
-import { fontSize } from 'common/styles/style';
-
-
+import {fontSize} from 'common/styles/style';
 
 const Champion = props => {
+  const {year, name, walker} = props;
+  var w = walker ? '*' : '';
 
-  const { year, name, walker } = props;
-  var w = walker ? "*" : "";
-
-  return(
+  return (
     <ListItem containerStyle={styles.containerStyle}>
       <ListItem.Content>
         <ListItem.Title>{year + ' - ' + name + ' ' + w}</ListItem.Title>
       </ListItem.Content>
     </ListItem>
   );
-
 };
 
 export default Champion;
-
 
 const styles = StyleSheet.create({
   containerStyle: {

@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-
+import {StyleSheet, View} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const StackNav = props => {
-
-  const { screen, title } = props;
+  const {screen, title} = props;
   const stackName = `${title}Stack`;
 
   const Stack = createStackNavigator();
@@ -25,17 +19,14 @@ const StackNav = props => {
           headerStyle: {
             height: 0,
           },
-        }}
-      >
+        }}>
         <Stack.Screen name={stackName} component={screen} />
       </Stack.Navigator>
     </View>
   );
-
 };
 
 export default StackNav;
-
 
 const styles = StyleSheet.create({
   container: {
