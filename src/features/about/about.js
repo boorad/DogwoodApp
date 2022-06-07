@@ -1,26 +1,12 @@
-import React from 'react';
-import {
-  Image,
-  Linking,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import DeviceInfo from 'react-native-device-info';
-
-import Header from 'common/header';
-import {primaryColor, headerColor} from 'common/styles/color';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {fontFamily, fontSize} from 'common/styles/style';
+import {headerColor, primaryColor} from 'common/styles/color';
+
+import DeviceInfo from 'react-native-device-info';
+import Header from 'common/header';
+import React from 'react';
 
 const AboutScreen = props => {
-  const _sendToSourceCode = () => {
-    var url = 'https://github.com/boorad/DogwoodApp';
-    Linking.openURL(url).catch(err => console.error('An error occurred', err));
-  };
-
   var version = DeviceInfo.getVersion();
 
   const title = (
@@ -54,10 +40,6 @@ const AboutScreen = props => {
             </View>
             <View style={styles.credsContainer}>
               <Text style={styles.aboutVersion}>Version {version}</Text>
-              <TouchableOpacity onPress={() => _sendToSourceCode()}>
-                <Text style={styles.aboutBy}>by Brad Anderson</Text>
-                <Text style={styles.aboutSrc}>source code</Text>
-              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
@@ -125,12 +107,10 @@ const styles = StyleSheet.create({
   aboutBy: {
     marginTop: 5,
     fontSize: fontSize - 2,
-    color: 'blue',
     alignSelf: 'center',
   },
   aboutSrc: {
     fontSize: fontSize - 4,
-    color: 'blue',
     alignSelf: 'center',
   },
   aboutBG: {

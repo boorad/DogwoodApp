@@ -1,8 +1,6 @@
+import {ListItem} from 'react-native-elements';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {ListItem} from 'react-native-elements';
-
-import {fontSize} from 'common/styles/style';
 
 const Champion = props => {
   const {year, name, walker} = props;

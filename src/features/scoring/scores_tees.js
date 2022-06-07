@@ -1,31 +1,45 @@
-import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
-import {find} from 'lodash';
-import fetch from 'node-fetch';
+import React, {useContext, useEffect, useState} from 'react';
+import {filter, find, orderBy} from 'lodash';
+import {fontFamily, fontSize} from 'common/styles/style';
+import {parseISO, sub} from 'date-fns';
 
 import GolfGenius from './golfgenius';
-import {fontFamily, fontSize} from 'common/styles/style';
-
-import {baseUrl} from 'common/config';
 import Header from './header';
-
-const url = `${baseUrl}/golfgenius`;
-
-const tourneys = [
-  {id: 'q', key: 'qualifier', label: 'Qualifier'},
-  {id: 'a', key: 'am-am', label: 'Am-Am'},
-  {id: 't', key: 'tournament', label: 'Tournament'},
-];
+import {TournamentContext} from '../tournament/TournamentContext';
 
 const ScoresTees = props => {
   const {page} = props;
 
   const [gg, setGG] = useState(<ActivityIndicator />);
+  const [header, setHeader] = useState();
+
+  const {tournament, selectedYear} = useContext(TournamentContext);
 
   const [data, setData] = useState([]);
   const [year, setYear] = useState();
   const [years, setYears] = useState([]);
   const [tourney, setTourney] = useState();
+  const [tourneys, setTourneys] = useState();
+
+  const parseTournament = t => {
+    let ret = [];
+    if (t?.years) {
+      t.years.map(y => {
+        if (y.scoring) {
+          ret.push({
+            year: y.year,
+            ...y.scoring,
+          });
+        }
+      });
+    }
+    return ret;
+  };
+
+  useEffect(() => {
+    setData(parseTournament(tournament));
+  }, [tournament]);
 
   const updateYear = y => {
     setYear(y);
@@ -35,90 +49,63 @@ const ScoresTees = props => {
     setTourney(t);
   };
 
-  // once we have data, set more state about years & tourneys
   useEffect(() => {
-    const now = new Date();
-    let y = now.getFullYear();
-    let current, qDate, aDate, tDate;
+    // console.log('data', data);
 
-    // if we are before the qualifier date (midnight), show last year
-    try {
-      current = find(data, {year: y.toString()});
-      qDate = new Date(current.qualifier.date);
-      if (now < qDate) y = qDate.year() - 1;
-    } catch (e) {}
-
-    // because FUCK COVID
-    if (y == 2020) y = 2019;
-
-    //  if year not in data, set to most recent year
+    // set list of years
     const yrs = data.map(yr => yr.year);
-    if (yrs.indexOf(y.toString()) < 0) {
-      y = yrs.sort().reverse()[0];
-    }
-    setYear(y);
     setYears(yrs);
 
-    let t = 't';
-
-    // check dates to render proper tourney
-    try {
-      current = find(data, {year: y.toString()});
-      qDate =
-        current && current.qualifier && current.qualifier.date
-          ? new Date(current.qualifier.date)
-          : null;
-      aDate =
-        current && current['am-am'] && current['am-am'].date
-          ? new Date(current['am-am'].date)
-          : null;
-      tDate =
-        current && current.tournament && current.tournament.date
-          ? new Date(current.tournament.date)
-          : null;
-    } catch (e) {}
-
-    if (qDate && now > qDate) t = 'q';
-    if (aDate && now > aDate) t = 'a';
-    if (tDate && now > tDate) t = 't';
-
-    //console.log('setting tourney', t);
-    setTourney(t);
-  }, [data]);
+    // set year
+    setYear(selectedYear);
+  }, [data, selectedYear]);
 
   useEffect(() => {
-    const _fetchData = async () => {
-      var myHeaders = new Headers();
-      myHeaders.append('pragma', 'no-cache');
-      myHeaders.append('cache-control', 'no-cache');
-      let myInit = {
-        method: 'GET',
-        headers: myHeaders,
-      };
+    // set tourneys
+    const ty = find(data, {year});
+    // console.log('ty', ty);
 
-      try {
-        let response = await fetch(url, myInit);
-        let responseJson = await response.json();
-        //console.log('scores_tees data', responseJson);
-        setData(responseJson);
-      } catch (error) {} // TODO: implement Error component
-    };
-    _fetchData();
-  }, []);
+    if (ty) {
+      const sortedEvents = orderBy(ty.events, ['date', 'asc']);
+
+      setTourneys(sortedEvents);
+      const now = new Date();
+      const nextEvents = filter(
+        sortedEvents,
+        e => parseISO(e.date) > sub(now, {days: 1}),
+      );
+      if (nextEvents.length > 0) {
+        setTourney(nextEvents[0].name);
+      } else {
+        // if we're past every date in events, show the last one
+        setTourney(ty.events[sortedEvents.length - 1].name);
+      }
+    }
+  }, [data, year]);
 
   useEffect(() => {
-    // console.log({year, tourney});
+    if (tourneys) {
+      setHeader(
+        <Header
+          data={data}
+          year={year}
+          years={years}
+          updateYear={updateYear}
+          tourney={tourney}
+          tourneys={tourneys}
+          updateTourney={updateTourney}
+        />,
+      );
+    }
+  }, [data, tourney, tourneys, year, years]);
+
+  useEffect(() => {
+    // console.log('selections:', {year, tourney});
     if (year && tourney) {
-      const type = find(tourneys, {id: tourney}).key;
-      const yr = find(data, {year: year.toString()});
-      //console.log('yr', yr);
-      if (yr) {
-        let tt, lb;
-        if (yr[type]) {
-          tt = yr[type].teetimes;
-          lb = yr[type].leaderboard;
-        }
-        const gg_num = page === 'tt' ? tt : lb;
+      const e = find(tourneys, {name: tourney});
+      // console.log('e', e);
+      if (e) {
+        const gg_num = page === 'tt' ? e.teetimes : e.leaderboard;
         setGG(
           <View style={styles.gg}>
             <GolfGenius gg_num={gg_num} type={page} />
@@ -126,19 +113,11 @@ const ScoresTees = props => {
         );
       }
     }
-  }, [year, tourney]);
+  }, [year, tourney, data, page, tourneys]);
 
   return (
     <View style={styles.container}>
-      <Header
-        data={data}
-        year={year}
-        years={years}
-        updateYear={updateYear}
-        tourney={tourney}
-        tourneys={tourneys}
-        updateTourney={updateTourney}
-      />
+      {header}
       {gg}
     </View>
   );

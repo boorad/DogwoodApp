@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -6,71 +5,68 @@ import {
   Text,
   View,
 } from 'react-native';
-
+import React, {useContext, useEffect, useState} from 'react';
 import {fontFamily, fontSize} from 'common/styles/style';
-import {green} from 'common/styles/color';
-import Champion from './champion';
-import {baseUrl} from 'common/config';
 
-const url = `${baseUrl}/champions`;
+import Champion from './champion';
+import {GET_CHAMPIONS_QUERY} from 'features/history/graphql';
+import {TournamentContext} from '../tournament/TournamentContext';
+import {green} from 'common/styles/color';
+import {orderBy} from 'lodash';
+import {useQuery} from '@apollo/client';
 
 const Champions = props => {
-  const [data, setData] = useState([]);
+  const [content, setContent] = useState(<ActivityIndicator />);
+  const {tournament} = useContext(TournamentContext);
+  const tkey = tournament._key;
 
-  useEffect(() => {
-    const _fetchData = async () => {
-      try {
-        let response = await fetch(url);
-        let responseJson = await response.json();
-        setData(responseJson);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    _fetchData();
-  }, []);
-
-  const _sort = champions => {
-    // sort descending, so (b-a)
-    return champions.sort((a, b) => parseInt(b.year) - parseInt(a.year));
-  };
+  const {data} = useQuery(GET_CHAMPIONS_QUERY, {
+    variables: {
+      tkey,
+    },
+  });
 
   const _renderItem = ({item}) => {
-    return <Champion year={item.year} name={item.name} walker={item.walker} />;
+    return (
+      <Champion
+        year={item.year}
+        name={`${item.firstName} ${item.lastName}`}
+        walker={item.walkerCup === true}
+      />
+    );
   };
 
-  let title, sub, content;
-
-  title = (
+  const title = (
     <View style={styles.title}>
       <Text style={styles.titleText}>Dogwood Champions</Text>
     </View>
   );
 
-  sub = (
+  const sub = (
     <View style={styles.sub}>
       <Text style={styles.subText}>* denotes Walker Cup team member</Text>
     </View>
   );
 
-  if (data && data.champions) {
-    //console.log('data', data);
-    const champions = _sort(data.champions);
+  useEffect(() => {
+    if (data && data.champions) {
+      // console.log('data', data);
+      const champions = orderBy(data.champions, ['year'], ['desc']);
 
-    content = (
-      <View style={{flex: 1}}>
-        {sub}
-        <FlatList
-          data={champions}
-          renderItem={_renderItem}
-          style={styles.flatList}
-          keyExtractor={champ => champ.year}
-        />
-      </View>
-    );
-  } else {
-    content = <ActivityIndicator />;
-  }
+      setContent(
+        <View style={styles.subContainer}>
+          {sub}
+          <FlatList
+            data={champions}
+            renderItem={_renderItem}
+            style={styles.flatList}
+            keyExtractor={champ => champ.year}
+          />
+        </View>,
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <View style={styles.container}>
@@ -85,6 +81,9 @@ export default Champions;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: green,
+    flex: 1,
+  },
+  subContainer: {
     flex: 1,
   },
   title: {

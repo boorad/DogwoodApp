@@ -1,20 +1,20 @@
-import React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import {Icon} from 'react-native-elements';
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 
-import {green} from 'common/styles/color';
-import {fontSize} from 'common/styles/style';
+import AboutStack from 'features/about/about_stack';
+import HistoryStack from 'features/history/history_stack';
+import {Icon} from 'react-native-elements';
 import LeaderboardStack from 'features/scoring/leaderboard_stack';
 import PairingsStack from 'features/scoring/pairings_stack';
+import React from 'react';
 import ScheduleStack from 'features/schedule/schedule_stack';
-import HistoryStack from 'features/history/history_stack';
-import AboutStack from 'features/about/about_stack';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import {fontSize} from 'common/styles/style';
+import {green} from 'common/styles/color';
 
 const TabIcon = ({type, name, color}) => {
   return (
     <Icon
-      style={{width: 18, height: 18}}
+      style={styles.iconStyle}
       size={18}
       color={color}
       name={name}
@@ -119,5 +119,9 @@ const styles = StyleSheet.create({
   },
   tabbar: {
     backgroundColor: green,
+  },
+  iconStyle: {
+    width: 18,
+    height: 18,
   },
 });

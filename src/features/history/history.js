@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Platform,
   StyleSheet,
@@ -9,14 +8,13 @@ import {
 import ScrollableTabView, {
   ScrollableTabBar,
 } from 'react-native-scrollable-tab-view';
-
 import {fontFamily, fontSize} from 'common/styles/style';
-
 import {headerColor, primaryColor} from 'common/styles/color';
 
-import Header from 'common/header';
+// import Alumni from 'features/history/alumni';
 import Champions from 'features/history/champions';
-import Alumni from 'features/history/alumni';
+import Header from 'common/header';
+import React from 'react';
 import Story from 'features/history/story';
 
 const HistoryScreen = props => {
@@ -24,7 +22,7 @@ const HistoryScreen = props => {
     return (
       <ScrollableTabBar
         style={styles.tabContainer}
-        underlineStyle={{backgroundColor: 'yellow'}}
+        underlineStyle={styles.underlineStyle}
         renderTab={_renderTab}
       />
     );
@@ -38,7 +36,9 @@ const HistoryScreen = props => {
     onLayoutHandler,
   ) => {
     var st = [styles.tab, styles.histTab];
-    if (isTabActive) st.push(styles.activeTab);
+    if (isTabActive) {
+      st.push(styles.activeTab);
+    }
 
     return (
       <TouchableHighlight
@@ -58,7 +58,7 @@ const HistoryScreen = props => {
       tabBarPosition={tabBarPosition}
       renderTabBar={_renderTabBar}>
       <Champions tabLabel="Past Champions" />
-      <Alumni tabLabel="Alumni" />
+      {/* <Alumni tabLabel="Alumni" /> */}
       <Story tabLabel="Dogwood History" />
     </ScrollableTabView>
   );
@@ -100,6 +100,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#00b0d6',
     borderColor: 'yellow',
     borderBottomWidth: 4,
+  },
+  underlineStyle: {
+    backgroundColor: 'yellow',
   },
   histTab: {
     width: 50,

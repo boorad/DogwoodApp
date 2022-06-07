@@ -1,26 +1,28 @@
-import React from 'react';
-import {StyleSheet, Text} from 'react-native';
 import {
   Menu,
   MenuOption,
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {find} from 'lodash';
+import {StyleSheet, Text} from 'react-native';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from 'react';
+import {find} from 'lodash';
 import {fontSize} from 'common/styles/style';
 
 const TourneyChooser = props => {
   const {tourney, tourneys, updateTourney} = props;
-  const t = find(tourneys, {id: tourney});
-  const label = t && t.label ? t.label : '';
-  //console.log('label', label);
+  const t = find(tourneys, {name: tourney});
+  // console.log('t', t, tourney);
+  const label = t && t.name ? t.name : '';
+  // console.log('label', label);
+  // console.log('tourneys', tourneys);
 
-  const options = tourneys.map(t => {
+  const options = tourneys.map((lt, i) => {
     return (
-      <MenuOption value={t.id} key={t.key}>
-        <Text style={styles.tourneyOptionsText}>{t.label}</Text>
+      <MenuOption value={lt.name} key={i}>
+        <Text style={styles.tourneyOptionsText}>{lt.name}</Text>
       </MenuOption>
     );
   });
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   },
   tourneyTxt: {
     color: '#eee',
-    fontSize: fontSize + 4,
+    fontSize: fontSize + 2,
     fontWeight: 'bold',
   },
   tourneyOptionsContainer: {
@@ -61,6 +63,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   optionsContainer: {
-    width: '40%',
+    width: '60%',
   },
 });

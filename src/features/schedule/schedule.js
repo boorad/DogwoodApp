@@ -1,4 +1,3 @@
-import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Platform,
@@ -7,39 +6,23 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
+import React, {useContext} from 'react';
 import ScrollableTabView, {
   ScrollableTabBar,
 } from 'react-native-scrollable-tab-view';
-
 import {fontFamily, fontSize} from 'common/styles/style';
-
+import {format, parse, parseISO} from 'date-fns';
 import {headerColor, primaryColor} from 'common/styles/color';
 
+import Day from 'features/schedule/day';
 import Header from 'common/header';
-import {baseUrl} from 'common/config';
-import Day from './day';
-
-const url = `${baseUrl}/schedule`;
+import {TournamentContext} from '../tournament/TournamentContext';
+import {groupBy} from 'lodash';
 
 const ScheduleScreen = props => {
-  const [schedule, setSchedule] = useState();
+  const {selectedTournamentYear, selectedYear} = useContext(TournamentContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let response = await fetch(url, {
-          headers: {
-            'Cache-Control': 'no-cache',
-          },
-        });
-        let responseJson = await response.json();
-        setSchedule(responseJson);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+  // console.log('schedule', selectedTournamentYear?.events);
 
   const _renderTab = (
     name,
@@ -49,7 +32,9 @@ const ScheduleScreen = props => {
     onLayoutHandler,
   ) => {
     var st = [styles.tab, styles.schTab];
-    if (isTabActive) st.push(styles.activeTab);
+    if (isTabActive) {
+      st.push(styles.activeTab);
+    }
 
     return (
       <TouchableHighlight
@@ -65,11 +50,25 @@ const ScheduleScreen = props => {
   let title, content;
   const tabBarPosition = Platform.OS === 'ios' ? 'bottom' : 'top';
 
-  if (schedule) {
-    const {year, days} = schedule;
+  if (selectedTournamentYear?.events) {
+    const groupedByDate = groupBy(selectedTournamentYear.events, event => {
+      if (!event) {
+        return null;
+      }
+      const date = parse(event.start, 'yyyy-MM-dd HH:mm', new Date());
+      return format(date, 'yyyy-MM-dd');
+    });
+    const dates = Object.keys(groupedByDate);
+    const sortedDates = dates.sort(
+      (a, b) => new Date(a).getTime() - new Date(b).getTime(),
+    );
+    // console.log('sortedDates', sortedDates);
+
     title = (
       <View style={styles.title}>
-        <Text style={styles.titleText}>{year} Dogwood Invitational Week</Text>
+        <Text style={styles.titleText}>
+          {selectedYear} Dogwood Invitational Week
+        </Text>
       </View>
     );
     content = (
@@ -79,13 +78,27 @@ const ScheduleScreen = props => {
         renderTabBar={() => (
           <ScrollableTabBar
             style={styles.tabContainer}
-            underlineStyle={{backgroundColor: 'yellow'}}
+            underlineStyle={styles.activeTabUnderline}
             renderTab={_renderTab}
           />
         )}
         style={styles.tabView}>
-        {days.map((day, i) => {
-          const label = day.dow + '\n' + day.shortdate;
+        {sortedDates.map((date, i) => {
+          const eventsForDate = groupedByDate[date];
+          const sortedEvents = eventsForDate.sort((a, b) => {
+            if (!a || !b) {
+              return 0;
+            }
+            return new Date(a.start).getTime() - new Date(b.start).getTime();
+          });
+          const dow = format(parseISO(date), 'eee');
+          const shortdate = format(parseISO(date), 'M/d');
+          const label = dow + '\n' + shortdate;
+          const day = {
+            dow,
+            shortdate,
+            events: sortedEvents,
+          };
           return <Day tabLabel={label} i={i} key={i} day={day} />;
         })}
       </ScrollableTabView>
@@ -141,6 +154,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#00b0d6',
     borderColor: 'yellow',
     borderBottomWidth: 4,
+  },
+  activeTabUnderline: {
+    backgroundColor: 'yellow',
   },
   tabContainer: {
     //backgroundColor: primaryColor,

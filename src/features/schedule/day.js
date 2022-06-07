@@ -1,22 +1,25 @@
-import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-
 import {fontFamily, fontSize} from 'common/styles/style';
+import {format, parseISO} from 'date-fns';
+
+import React from 'react';
 
 const Event = props => {
   const {i, event} = props;
+  const eStart = format(parseISO(event.start), 'h:mm b');
+  const eEnd = event.end ? format(parseISO(event.end), 'h:mm b') : '';
 
   return (
     <View key={i} style={styles.eventContainer}>
       <View style={styles.eventRow}>
-        <Text style={styles.eventStart}>{event.start}</Text>
-        <Text style={styles.eventEnd}>{event.end}</Text>
+        <Text style={styles.eventStart}>{eStart}</Text>
+        <Text style={styles.eventEnd}>{eEnd}</Text>
         <Text style={styles.eventDescr} allowFontScaling={true}>
           {event.descr}
         </Text>
       </View>
       <View style={styles.eventRow}>
-        <Text style={styles.eventBlank}></Text>
+        <Text style={styles.eventBlank} />
         <Text style={styles.eventNotes} allowFontScaling={true}>
           {event.notes}
         </Text>
@@ -34,8 +37,8 @@ const Day = props => {
       <Text key={i} tablabel={label} style={[styles.tabContentTitle]}>
         {day.longdate}
       </Text>
-      {day.events.map((event, i) => {
-        return <Event key={i} event={event} />;
+      {day.events.map((event, idx) => {
+        return <Event key={idx} event={event} />;
       })}
     </ScrollView>
   );
