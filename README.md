@@ -51,9 +51,11 @@ After version bump, in the root of this project, type:
 
     yarn run build:ios
 
-In XCode, select Product -> Archive
+In XCode:
+ * choose "Any iOS Device" for build target
+ * select Product -> Archive
 
- * Validate
- * Upload to App Store
+    * Validate
+    * Upload to App Store
 
 In [App Store Connect](https://appstoreconnect.apple.com/apps/1250184426/appstore/ios/version/inflight), under My Apps, Dogwood, select "+ Version or Platform", type new version number in, and continue through to submit for review.

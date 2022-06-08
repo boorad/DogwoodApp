@@ -470,7 +470,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thedogwood;
 				PRODUCT_NAME = Dogwood;
 				PROVISIONING_PROFILE = "51b802f0-2dbd-4123-a1d7-5ad9a8533af4";
-				PROVISIONING_PROFILE_SPECIFIER = "Dogwood App";
+				PROVISIONING_PROFILE_SPECIFIER = "Dogwood Provisioning Profile";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -542,7 +542,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thedogwood;
 				PRODUCT_NAME = Dogwood;
 				PROVISIONING_PROFILE = "51b802f0-2dbd-4123-a1d7-5ad9a8533af4";
-				PROVISIONING_PROFILE_SPECIFIER = "Dogwood App";
+				PROVISIONING_PROFILE_SPECIFIER = "Dogwood Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -598,7 +598,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				"HEADER_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/../node_modules/react-native-splash-screen\n$(SRCROOT)/../node_modules/react-native-splash-screen/ios\n\n";
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(SRCROOT)/../node_modules/react-native-splash-screen\n$(SRCROOT)/../node_modules/react-native-splash-screen/ios\n\n",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
